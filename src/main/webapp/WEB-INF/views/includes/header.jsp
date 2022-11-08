@@ -55,7 +55,7 @@
 	<div class="row">
 		<div class="col-sm-4"></div>
 		<div class="col-sm-4">
-			<p class="text-center mt-2 h1 text-capitalize ">쇼핑몰</p>
+			<p class="text-center mt-2 h1 text-capitalize"><a class="text-secondary text-decoration-none" href="/">쇼핑몰</a></p>
 		</div>
 		<div class="col-sm-4"></div>
 	</div>
@@ -123,10 +123,10 @@
 					<a class="nav-link" class="dropdown-item" href="#">마이페이지</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" class="dropdown-item" href="#">로그인</a>
+					<a class="nav-link" class="dropdown-item" href="/member/login">로그인</a>
 				</li>
 				<li class="nav-item mr-1">
-					<a class="nav-link" class="dropdown-item" href="#">회원가입</a>
+					<a class="nav-link" class="dropdown-item" href="/member/join">회원가입</a>
 				</li>
 			</ul>
 		</div>

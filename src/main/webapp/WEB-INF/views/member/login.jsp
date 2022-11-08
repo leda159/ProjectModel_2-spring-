@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 </head>
 <body>
 <div class="container">
@@ -19,7 +19,7 @@
 					<div class="form-group">
 						<input type="password" name="userPassword" class="form-control" placeholder="비밀번호" maxlength="20">
 					</div>
-					<input type="submit" class="btn btn-secondary form-control" value="로그인" >
+					<input type="submit" class="btn btn-dark form-control" value="로그인" >
 				</form>
 			</div>
 		</div>
