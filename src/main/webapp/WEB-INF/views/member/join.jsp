@@ -21,7 +21,7 @@
 <div class="container">
 		<div class="col-lg-4" style="float: none; margin:100 auto;">
 			<div style="padding-top:20px;">
-				<form action="/member/join" method="post">
+				<form name="join_form" action="" method="post">
 				
 					<h3 style="text-align:center;">회원가입</h3>
 					
@@ -36,8 +36,22 @@
 					<div class="form-group">
 						<input type="text" name="memberName" class="form-control" placeholder="이름" maxlength="20">
 					</div>
-				    <div class="form-group">
-						<input type="text" name="memberEmail" class="form-control" placeholder="이메일" maxlength="20">
+				    <div class="form-group form-row">
+				    	<div class="col">
+							<input type="text" id="memberEmail1" class="form-control" name="memberEmail1"placeholder="메일 입력" maxlength="20">
+						</div>@
+						<div class="col">
+							<input type="text" id="memberEmail2" class="form-control" name="memberEmail2" maxlength="20">
+						</div>
+					</div>
+					<div class="form-group">
+						<select class="form-control" id="emailList" name="emailList" onchange="return  checkEmail()">
+							<option value="">선택</option>
+							<option value="">직접입력</option>
+							<option value="naver.com">naver.com</option>
+							<option value="nate.com">nate.com</option>
+							<option value="google.com">google.com</option>
+						</select>
 					</div>
 					<div class="form-group form-row">
 						<div class="col">
@@ -48,15 +62,18 @@
 						</div>	
 					</div>
 					<div class="form-group">
-						<input type="text" id="sample4_roadAddress" name="memberAddr1" class="form-control" value="" placeholder="도로명주소">
+						<input type="text" id="sample4_roadAddress" name="memberAddr1" class="form-control" placeholder="도로명주소">
 					</div>
 					<div class="form-group">
-						<input type="text" id="sample4_jibunAddress" name="memberAddr2" class="form-control" value="" placeholder="지번주소">
+						<input type="text" id="sample4_jibunAddress" name="memberAddr2" class="form-control" placeholder="지번주소">
 					</div>
 					<div class="form-group">
-						<input type="text" id="sample4_detailAddress" name="memberAddr3" class="form-control" value="" placeholder="상세주소">
+						<input type="text" id="sample4_detailAddress" name="memberAddr3" class="form-control" placeholder="상세주소">
 					</div>
-						<input type="submit" class="btn btn-dark form-control" value="가입하기" >
+					<div class="form-group">
+						<input type="text" id="sample4_extraAddress" name="memberAddr4"  class="form-control" placeholder="참고항목">
+					</div>
+						<input type="button" class=" join_button btn btn-dark" value="가입하기" >
 				</form>
 			</div>
 		</div>
@@ -121,32 +138,62 @@
 </script>
 <!-- 다음 API 끝 -->
 
-<script>
-	$(document).ready(function(){
 
-		//아이디 중복검사
-		$('.id_input').on("propertychange change keyup paste input", function(){
-			 //console.log("keyup 테스트");	 
-		var memberId = $('.id_input').val();// .id_input에 입력되는 값
-		var data = {memberId : memberId}	// '컨트롤에 넘길 데이터 이름' : '데이터(.id_input에 입력되는 값)'
+<script>
+function checkEmail(){
+	if(document.join_form.emailList.value !=""){
+		document.join_form.memberEmail2.value = document.join_form.emailList.value;
+	}else{
+		document.join_form.memberEmail2.value="";
+		document.join_form.memberEmail2.focus();
+	}
+}
+</script>
+
+<script>
+
+/* 유효성 검사 뱐수 */
+ 
+ var idCheck = false;      //아이디
+ var idckCheck = false;    //아이디 중복 검사
+ var pwCheck = false; 	   //비밀번호
+ var pwckCheck = false;    //비밀번호 일치 확인
+ var nameCheck = false;    //이름
+ var emailCheck = false;   //이메일
+ var addressCheck = false; //주소
+
+$(document).ready(function(){
+
+	//회원가입 버튼(회원가입 기능 작동)
+    $(".join_button").click(function(){
+        //$("#join_form").attr("action", "/member/join");
+        //$("#join_form").submit();
+    });
 	
-		$.ajax({
-			type : "post",
-			url : "/member/memberIdChk",
-			data : data,
-			success : function(result){
-				//console.log("성공 여부" + result);
-					if(result != 'fail'){
-						$('.id_input_re_1').css("display","inline-block");
-						$('.id_input_re_2').css("display", "none");				
-					} else {
-						$('.id_input_re_2').css("display","inline-block");
-						$('.id_input_re_1').css("display", "none");				
-					}
-				}// success 종료
-			}); // ajax 종료	 
-		});	// function 종료
-	});
+	
+	//아이디 중복검사
+	$('.id_input').on("propertychange change keyup paste input", function(){
+		 //console.log("keyup 테스트");	 
+	var memberId = $('.id_input').val();// .id_input에 입력되는 값
+	var data = {memberId : memberId}	// '컨트롤에 넘길 데이터 이름' : '데이터(.id_input에 입력되는 값)'
+
+	$.ajax({
+		type : "post",
+		url : "/member/memberIdChk",
+		data : data,
+		success : function(result){
+			//console.log("성공 여부" + result);
+				if(result != 'fail'){
+					$('.id_input_re_1').css("display","inline-block");
+					$('.id_input_re_2').css("display", "none");				
+				} else {
+					$('.id_input_re_2').css("display","inline-block");
+					$('.id_input_re_1').css("display", "none");				
+				}
+			}// success 종료
+		}); // ajax 종료	 
+	});	// function 종료
+});
 </script>
 
 <%@ include file = "../includes/footer.jsp" %>

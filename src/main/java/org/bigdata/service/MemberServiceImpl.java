@@ -12,6 +12,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberMapper membermapper;
 
+	
 	@Override
 	public void memberJoin(MemberVO member) throws Exception {
 		
@@ -23,12 +24,6 @@ public class MemberServiceImpl implements MemberService {
 	public int idCheck(String memberId) {
 	
 		return membermapper.idCheck(memberId);
-	}
-
-	@Override
-	public int mbidCheck(String memberId) {
-		
-		return membermapper.mbidCheck(memberId);
 	}
 
 }

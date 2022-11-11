@@ -6,8 +6,8 @@
  <mapper namespace="org.bigdata.mapper.MemberMapper">
  	<insert id="memberJoin">
 		insert into shopping_member values(#{memberId}, 
-		#{memberPassword},#{memberName}, #{memberEmail},#{memberAddr}, #{memberAddr1}, 
-		#{memberAddr2},#{memberAddr3}, 0, 100000, 5000,sysdate,sysdate)
+		#{memberPassword},#{memberName}, #{memberEmail1},#{memberEmail2},#{memberAddr}, #{memberAddr1}, 
+		#{memberAddr2},#{memberAddr3},#{memberAddr4}, 0, 100000, 5000,sysdate,sysdate)
 	</insert>
 	
 	<!-- 아이디 중복검사 -->

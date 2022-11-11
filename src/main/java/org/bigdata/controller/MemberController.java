@@ -60,10 +60,4 @@ public class MemberController {
 			
 	} // memberIdChkPOST() 종료	
 	
-	@RequestMapping("/mbidCheck.do")
-	public @ResponseBody int mbidCheck(String memberId) {
-		int result = memberservice.mbidCheck(memberId);
-		return result;
-	}
-
 }
