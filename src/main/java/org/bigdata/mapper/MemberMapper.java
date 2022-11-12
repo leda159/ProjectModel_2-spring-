@@ -10,5 +10,4 @@ public interface MemberMapper {
 	//아이디 중복검사
 	public int idCheck(String memberId);
 
-	public int mbidCheck(String memberId);
 }

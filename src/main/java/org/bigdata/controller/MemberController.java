@@ -45,7 +45,7 @@ public class MemberController {
 	@ResponseBody
 	public String memberIdChkPOST(String memberId) throws Exception{
 			
-		//log.info("memberIdChk() 진입");
+		
 		log.info("memberIdChk() 진입");
 		
 		int result = memberservice.idCheck(memberId);
