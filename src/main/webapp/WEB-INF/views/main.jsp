@@ -6,19 +6,19 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+				<div id="carouselExampleControls" class="carousel slide w-100 h-100 " data-ride="carousel">
 					<div class="carousel-inner mb-4">
-						<div class="carousel-item active">
-							<img src="/resources/images/image_1_1.jpg"
-								class="d-block w-100 h-100" alt="...">
+						<div class="carousel-item active" data-bs-interval="1000">
+							<img src="resources/images/a_1.jpg"
+								class="d-block" alt="...">
 						</div>
-						<div class="carousel-item">
-							<img src="/resources/images/image_1_2.jpg"
-								class="d-block w-100 h-100" alt="...">
+						<div class="carousel-item" data-bs-interval="1000">
+							<img src="resources/images/b_3.jpg"
+								class="d-block " alt="...">
 						</div>
-						<div class="carousel-item">
-							<img src="https://cdn.imweb.me/thumbnail/20210427/8aea286207beb.jpg" 
-								class="d-block w-100 h-100"alt="...">
+						<div class="carousel-item" data-bs-interval="1000">
+							<img src="resources/images/c_3.jpg" 
+								class="d-block "alt="...">
 						</div>
 					</div>
 					<button class="carousel-control-prev" type="button" data-target="#carouselExampleControls"
@@ -36,13 +36,13 @@
 		</div>
 	</div>	
 	<div class="container">
-		<div class="row">
+		<div class="row ml-4">
 			<div class="col mb-3">
 				<div class="card" style="width: 18rem;">
-					<img src="https://mblogthumb-phinf.pstatic.net/MjAxNzExMjlfMTUz/MDAxNTExOTMwOTUwNjc2.mudrWV4xiiD3lDbZHQRGhrKZKk52CfKthcSSXQCZlPIg.Mbw5GLJJJg-I6ZsZEW2HqHBxSLDuzM8BmwUY2fohVIIg.JPEG.librosofa/KakaoTalk_20171014_121451482.jpg?type=w800"
+					<img src="resources/images/a_3.jpg"
 						class="card-img-top" alt="...">
 					<div class="card-body">
-						<h5 class="card-title">쇼파</h5>
+						<h5 class="card-title">상의</h5>
 						<p class="card-text">설명....</p>
 						<a href="#" class="btn btn-outline-dark">구입</a>
 					</div>
@@ -50,10 +50,10 @@
 			</div>
 			<div class="col mb-3">
 				<div class="card" style="width: 18rem;">
-					<img src="https://gagusmart.co.kr/up/product/1211/big_201909191568889874.jpg" class="card-img-top"
+					<img src="resources/images/b_1.jpg" class="card-img-top"
 						alt="...">
 					<div class="card-body">
-						<h5 class="card-title">책상</h5>
+						<h5 class="card-title">하의</h5>
 						<p class="card-text">설명....</p>
 						<a href="#" class="btn btn-outline-dark">구입</a>
 					</div>
@@ -61,9 +61,9 @@
 			</div>
 			<div class="col mb-3">
 				<div class="card" style="width: 18rem;">
-					<img src="https://cdn.imweb.me/thumbnail/20210427/8aea286207beb.jpg" class="card-img-top" alt="...">
+					<img src="resources/images/c_1.jpg" class="card-img-top" alt="...">
 					<div class="card-body">
-						<h5 class="card-title">의자</h5>
+						<h5 class="card-title">신발</h5>
 						<p class="card-text">설명</p>
 						<a href="#" class="btn btn-outline-dark">구입</a>
 					</div>
@@ -71,9 +71,9 @@
 			</div>
 			<div class="col">
 				<div class="card" style="width: 18rem;">
-					<img src="https://cdn.imweb.me/thumbnail/20210427/8aea286207beb.jpg" class="card-img-top" alt="...">
+					<img src="resources/images/a_4.jpg" class="card-img-top" alt="...">
 					<div class="card-body">
-						<h5 class="card-title">의자</h5>
+						<h5 class="card-title">상의</h5>
 						<p class="card-text">설명</p>
 						<a href="#" class="btn btn-outline-dark">구입</a>
 					</div>
@@ -81,9 +81,9 @@
 			</div>
 			<div class="col">
 				<div class="card" style="width: 18rem;">
-					<img src="https://cdn.imweb.me/thumbnail/20210427/8aea286207beb.jpg" class="card-img-top" alt="...">
+					<img src="resources/images/b_4.jpg" class="card-img-top" alt="...">
 					<div class="card-body">
-						<h5 class="card-title">의자</h5>
+						<h5 class="card-title">하의</h5>
 						<p class="card-text">설명</p>
 						<a href="#" class="btn btn-outline-dark">구입</a>
 					</div>
@@ -91,9 +91,9 @@
 			</div>
 			<div class="col">
 				<div class="card" style="width: 18rem;">
-					<img src="https://cdn.imweb.me/thumbnail/20210427/8aea286207beb.jpg" class="card-img-top" alt="...">
+					<img src="resources/images/c_5.jpg" class="card-img-top" alt="...">
 					<div class="card-body">
-						<h5 class="card-title">의자</h5>
+						<h5 class="card-title">신발</h5>
 						<p class="card-text">설명</p>
 						<a href="#" class="btn btn-outline-dark">구입</a>
 					</div>

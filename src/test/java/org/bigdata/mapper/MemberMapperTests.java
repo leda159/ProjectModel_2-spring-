@@ -33,6 +33,7 @@ public class MemberMapperTests {
 	 membermapper.memberJoin(member); }
 	 
 
+	 //중복 아이디 확인 메서드
 	@Test
 	public void memberIdChk() throws Exception {
 		String id = "admin1111"; // 존재하는 아이디
@@ -40,4 +41,38 @@ public class MemberMapperTests {
 		membermapper.idCheck(id);
 		membermapper.idCheck(id2);
 	}
+	
+	//로그인 쿼리 mapper 메서드 테스트
+	@Test
+	public void memberLogin() throws Exception{
+		MemberVO member = new MemberVO();
+		
+		//올바른 아이디 비밀번호 입력 경우
+		//member.setMemberId("test");
+		//member.setMemberPassword("test");
+		
+		//올바르지 않은 아이디 비밀번호 입력 경우
+		member.setMemberId("test1111");
+		member.setMemberPassword("test1111");
+		
+		membermapper.memberLogin(member);
+		System.out.println("결과 값:" + membermapper.memberLogin(member));
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

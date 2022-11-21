@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page session="false" %>
 <html>
 <head>	
@@ -48,6 +49,19 @@
 	.card {
 		height: 100%;
 	}
+	
+	.carousel-inner > .carousel-item > img,
+    .carousel-inner > .carousel-item > a > img {
+     	width: 70%;
+      	margin-left: 250px;  
+    }  
+    
+  	.carousel-inner > .item > img,
+  	.carousel-inner > .item > a > img {
+      width: 60%;
+      margin: auto;
+  }
+
 </style>
 
 <body>
@@ -119,6 +133,8 @@
 					</form>
 				</li>
 			</ul>
+			<!-- 로그인 하지 않은 상태 -->
+			<c:if test="${session == null}">
 			<ul class="navbar-nav order-md-last mb-3">
 				<li class="nav-item mr-4">
 					<a class="nav-link" class="dropdown-item" href="#">마이페이지</a>
@@ -130,6 +146,22 @@
 					<a class="nav-link" class="dropdown-item" href="/member/join">회원가입</a>
 				</li>
 			</ul>
+			</c:if>
+			
+			<!-- 로그인한 상태 -->
+			<c:if test="${session != null }">
+			<ul class="navbar-nav order-md-last mb-3">
+				<li class="nav-item mr-4">
+					<span class="nav-link" class="dropdown-item">회원 : ${member.memberName}</span>
+				</li>
+				<li class="nav-item">
+					<span class="nav-link" class="dropdown-item">충전금액 :<fmt:formatNumber value="${member.money}" pattern="\#,###.##" /></span>
+				</li>
+				<li class="nav-item mr-1">
+					<span class="nav-link" class="dropdown-item">포인트 :<fmt:formatNumber value="${member.point}" pattern="#,###" /></span>
+				</li>
+			</ul>
+			</c:if>
 		</div>
 	</nav>
 </div>	
