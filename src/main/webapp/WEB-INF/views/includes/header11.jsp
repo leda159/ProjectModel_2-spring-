@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<%@ page session="false" %>
 <html>
 <head>	
 	<meta charset="UTF-8">
@@ -74,19 +74,9 @@
 		</div>
 		<div class="col-sm-4"></div>
 	</div>
-	<c:if test="${sessionScope.member  != null }">
-		<div class="row">
-			<div class="col-sm-2"></div>
-			<div class="col-sm-2"></div>
-			<div class="col-sm-2"></div>
-			<div class="col-sm-2"></div>
-			<div class="col-sm-2"></div>
-			<div class="col-sm-2">
-				<p class="text-center h5 text-secondary ml-5 ">${member.memberName} 회원님</p>		
-			</div>
-		</div>
-	</c:if>
+
 	<nav class="navbar navbar-expand-md navbar-light">
+		<div class="navbar-brand"></div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenuList"
 			aria-controls="navbarMenuList" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -144,12 +134,12 @@
 					</form>
 				</li>
 			</ul>
-		</div>
-		
-		<div class="collapse navbar-collapse justify-content-end" id="navbarMenuList">	
 			<!-- 로그인 하지 않은 상태 --> 
-			<c:if test="${sessionScope.member == null}">
-			<ul class="navbar-nav order-md-last">
+			<c:if test="${sessionScope.member.memberId == null}">
+			<ul class="navbar-nav order-md-last mb-3">
+				<li class="nav-item mr-4">
+					<a class="nav-link" class="dropdown-item" href="#">마이페이지</a>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link" class="dropdown-item" href="/member/login">로그인</a>
 				</li>
@@ -159,26 +149,21 @@
 			</ul>
  			</c:if>
 			<!-- 로그인한 상태 -->
-			<c:if test="${sessionScope.member  != null }">
-			<div>
-			<ul class="navbar-nav order-md-last row align-items-start">
+			<c:if test="${sessionScope.member.memberId  != null }">
+			<ul class="navbar-nav order-md-last mb-3">
 				<li class="nav-item">
-					<span class="nav-link" class="dropdown-item">잔여금액 : <fmt:formatNumber value="${member.money}" pattern="#,###.##" /></span>
+					<span class="nav-link" class="dropdown-item">회원 : ${member.memberName}</span>
 				</li>
-				<li class="nav-item mr-4">
-					<span class="nav-link" class="dropdown-item">포인트 : <fmt:formatNumber value="${member.point}" pattern="#,###" /></span>
-				</li>
-			</ul>
-			
-			<ul class="navbar-nav order-md-last row align-items-end justify-content-end mr-2 ">
 				<li class="nav-item">
-					<a class="nav-link" class="dropdown-item" href="#">마이페이지</a>
+					<span class="nav-link" class="dropdown-item">충전금액 :<fmt:formatNumber value="${member.money}" pattern="\#,###.##" /></span>
+				</li>
+				<li class="nav-item">
+					<span class="nav-link" class="dropdown-item">포인트 :<fmt:formatNumber value="${member.point}" pattern="#,###" /></span>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" class="dropdown-item" href="/member/logout.do">로그아웃</a>
 				</li>
 			</ul>
-			</div>			
 			</c:if>
 		</div>
 	</nav>
