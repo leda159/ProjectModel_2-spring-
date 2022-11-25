@@ -80,7 +80,7 @@ public class MemberController {
 	//MemberVO : 데이터를 전달받기 위해
 	//HttpServletRequest : 로그인 성공시 session에 회원 정보를 저장하기 위해
 	//RedirectAttributes : 로그인 실패시 리다이렉트 된 로그인 페이지에 실패를 의미하는 데이터를 전송하기 위해
-	@RequestMapping(value="login", method = RequestMethod.POST)
+	@RequestMapping(value="login.do", method = RequestMethod.POST)
 	public String loginPOST(HttpServletRequest request, 
 							MemberVO member,
 							RedirectAttributes rttr) throws Exception{
@@ -107,16 +107,16 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping(value="logout.do", method=RequestMethod.GET)
-	public String logoutMainGET(HttpServletRequest request) throws Exception{
+	@RequestMapping(value="logout.do", method=RequestMethod.POST)
+	@ResponseBody //ajax를 통해서 서버에 요청하는 방식이기 때문에 추가
+	public void logoutPOST(HttpServletRequest request) throws Exception{
 		
-		log.info("logoutMainGET 메서드 진입");
+		log.info("비동기 로그아웃 메서드 진입");
 		
 		HttpSession session = request.getSession();	
 		
 		session.invalidate();//세션 삭제
 		
-		return "redirect:/main";
 	}
 }
 

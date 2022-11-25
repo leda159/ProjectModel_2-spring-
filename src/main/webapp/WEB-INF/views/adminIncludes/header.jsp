@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page session="false" %>
+
 <html>
 <head>	
 	<meta charset="UTF-8">
@@ -74,55 +74,48 @@
 		</div>
 		<div class="col-sm-4"></div>
 	</div>
-
+	<c:if test="${sessionScope.member  != null }">
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-2"></div>
+			<div class="col-sm-2"></div>
+			<div class="col-sm-2"></div>
+			<div class="col-sm-2"></div>
+			<div class="col-sm-2">
+				<p class="text-right h5 text-secondary mr-4">관리자</p>		
+			</div>
+		</div>
+	</c:if>
 	<nav class="navbar navbar-expand-md navbar-light">
-		<div class="navbar-brand"></div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenuList"
 			aria-controls="navbarMenuList" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarMenuList">
-			<ul class="navbar-nav mr-5">
-				<li class="nav-item dropdown ">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-						data-toggle="dropdown" aria-expanded="false">
-						상품 목록
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">상의</a>
-						<a class="dropdown-item" href="#">하의</a>
-						<a class="dropdown-item" href="#">신발</a>
-					</div>
-				</li>
-				<li class="nav-item dropdown ">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-						data-toggle="dropdown" aria-expanded="false">
-						이벤트
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">신상품</a>
-						<a class="dropdown-item" href="#">베스트 상품</a>
-						<a class="dropdown-item" href="#">세일 상품</a>
-					</div>
-				</li>
-				<li class="nav-item dropdown ">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-						data-toggle="dropdown" aria-expanded="false">
-						게시판
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">Q&A</a>
-						<a class="dropdown-item" href="#">공지사항</a>
-					</div>
-				</li>
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+      			  <a class="nav-link" href="#">회원 관리 <span class="sr-only">(current)</span></a>
+     			</li>
 			</ul>
 			<ul class="navbar-nav mr-auto">
-				<li>
-					<a class="" href="#"><i class="bi bi-suit-heart-fill mr-4 text-danger"></i></a>
-					<a class="" href="#"><i class="bi bi-cart mr-4 text-dark"></i></a>
-					<a class="" href="#"><i class="bi bi-truck text-dark"></i></a>
-					
-				</li>
+				<li class="nav-item">
+      			  <a class="nav-link" href="#">상품 등록 <span class="sr-only">(current)</span></a>
+     			</li>
+			</ul>
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+      			  <a class="nav-link" href="#">상품 목록 <span class="sr-only">(current)</span></a>
+     			</li>
+			</ul>
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+      			  <a class="nav-link" href="#">구상중..<span class="sr-only">(current)</span></a>
+     			</li>
+			</ul>
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+      			  <a class="nav-link" href="#">구상중..<span class="sr-only">(current)</span></a>
+     			</li>
 			</ul>
 		</div>
 		<div class="collapse navbar-collapse justify-content-end" id="navbarMenuList">
@@ -134,12 +127,12 @@
 					</form>
 				</li>
 			</ul>
+		</div>
+		
+		<div class="collapse navbar-collapse justify-content-end" id="navbarMenuList">	
 			<!-- 로그인 하지 않은 상태 --> 
-			<c:if test="${sessionScope.member.memberId == null}">
-			<ul class="navbar-nav order-md-last mb-3">
-				<li class="nav-item mr-4">
-					<a class="nav-link" class="dropdown-item" href="#">마이페이지</a>
-				</li>
+			<c:if test="${sessionScope.member == null}">
+			<ul class="navbar-nav order-md-last">
 				<li class="nav-item">
 					<a class="nav-link" class="dropdown-item" href="/member/login">로그인</a>
 				</li>
@@ -147,26 +140,44 @@
 					<a class="nav-link" class="dropdown-item" href="/member/join">회원가입</a>
 				</li>
 			</ul>
- 			</c:if>
+ 			</c:if>	
 			<!-- 로그인한 상태 -->
-			<c:if test="${sessionScope.member.memberId  != null }">
-			<ul class="navbar-nav order-md-last mb-3">
+			<c:if test="${sessionScope.member  != null }">
+			<div>
+			<ul class="navbar-nav order-md-last row align-items-end ">
+			<!-- 관리자 접속 -->
+				<c:if test="${member.adminCk == 1}">
 				<li class="nav-item">
-					<span class="nav-link" class="dropdown-item">회원 : ${member.memberName}</span>
+					<a class="nav-link" class="dropdown-item" href="/main">메인 페이지</a>
 				</li>
-				<li class="nav-item">
-					<span class="nav-link" class="dropdown-item">충전금액 :<fmt:formatNumber value="${member.money}" pattern="\#,###.##" /></span>
-				</li>
-				<li class="nav-item">
-					<span class="nav-link" class="dropdown-item">포인트 :<fmt:formatNumber value="${member.point}" pattern="#,###" /></span>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" class="dropdown-item" href="/member/logout.do">로그아웃</a>
-				</li>
+				</c:if>
+				
 			</ul>
+			</div>			
 			</c:if>
 		</div>
 	</nav>
 </div>	
 	<hr>
 	<!-- 헤더 끝 -->
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

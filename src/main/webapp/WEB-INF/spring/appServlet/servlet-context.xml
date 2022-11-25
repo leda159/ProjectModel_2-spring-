@@ -23,6 +23,23 @@
 	
 	<context:component-scan base-package="org.bigdata.controller" />
 	
-	
+	<!-- 인터셉터 적용 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/login.do" />
+			<beans:bean id="loginInterceptor" class="org.bigdata.interceptor.LoginInterceptor"></beans:bean>
+		</interceptor>
+		<interceptor>
+			<mapping path="/admin/**" />
+			<beans:bean id="AdminInterceptor" class="org.bigdata.interceptor.AdminInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>
+
+
+
+
+
+
+

@@ -82,7 +82,7 @@
 			<div class="col-sm-2"></div>
 			<div class="col-sm-2"></div>
 			<div class="col-sm-2">
-				<p class="text-center h5 text-secondary ml-5 ">${member.memberName} 회원님</p>		
+				<p class="text-right h5 text-secondary mr-4">${member.memberName} 회원님</p>		
 			</div>
 		</div>
 	</c:if>
@@ -157,7 +157,7 @@
 					<a class="nav-link" class="dropdown-item" href="/member/join">회원가입</a>
 				</li>
 			</ul>
- 			</c:if>
+ 			</c:if>	
 			<!-- 로그인한 상태 -->
 			<c:if test="${sessionScope.member  != null }">
 			<div>
@@ -165,17 +165,22 @@
 				<li class="nav-item">
 					<span class="nav-link" class="dropdown-item">잔여금액 : <fmt:formatNumber value="${member.money}" pattern="#,###.##" /></span>
 				</li>
-				<li class="nav-item mr-4">
+				<li class="nav-item mr-3">
 					<span class="nav-link" class="dropdown-item">포인트 : <fmt:formatNumber value="${member.point}" pattern="#,###" /></span>
 				</li>
 			</ul>
-			
-			<ul class="navbar-nav order-md-last row align-items-end justify-content-end mr-2 ">
+			<ul class="navbar-nav order-md-last row align-items-end ">
+			<!-- 관리자 접속 -->
+				<c:if test="${member.adminCk == 1}">
+				<li class="nav-item">
+					<a class="nav-link" class="dropdown-item" href="/admin/adminMain">관리자 페이지</a>
+				</li>
+				</c:if>
 				<li class="nav-item">
 					<a class="nav-link" class="dropdown-item" href="#">마이페이지</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" class="dropdown-item" href="/member/logout.do">로그아웃</a>
+				<li class="navitem">
+					<a class="nav-link" class="dropdown-item" id="gnb_logout" href="/member/logout.do">로그아웃</a>
 				</li>
 			</ul>
 			</div>			
@@ -185,3 +190,36 @@
 </div>	
 	<hr>
 	<!-- 헤더 끝 -->
+	
+	
+<script>
+	//비동기 로그아웃 버튼 작동 (화면이동 없이 로그아웃 기능)
+	$("#gnb_logout").click(function(){
+		//alert("버튼 작동");
+		$.ajax({
+			type:"POST",
+			url:"/member/logout.do",
+			success:function(data){
+				//alert("로그아웃 성공");
+				document.location.reload();//새로고침
+			}
+		});//ajax
+	});//로그아웃 버튼 작동 끝
+</script>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
