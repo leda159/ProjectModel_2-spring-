@@ -26,8 +26,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberservice;
 	
-	@Autowired
-	private BCryptPasswordEncoder pwEncoder;
+	
 
 	//로그인 페이지 이동
 	@RequestMapping(value = "/login",method = RequestMethod.GET)

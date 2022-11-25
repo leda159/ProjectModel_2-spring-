@@ -8,5 +8,3 @@
 </h1>
 	<!-- 바디 끝 -->
 <%@ include file="../adminIncludes/footer.jsp" %>
-</body>
-</html>

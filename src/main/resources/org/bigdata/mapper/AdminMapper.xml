@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="org.bigdata.mapper.AdminMapper">
+    
+    <insert id="productCoat">
+    	insert into shopping_coat(coatId,coatName,coatPrice,coatStock,coatDiscount,coatContents)
+    				values(#{coatId},#{coatName},#{coatPrice},#{coatStock},#{coatDiscount},#{coatContents})
+    </insert>
+    
+    <insert id="productPants">
+    	insert into shopping_pants(pantsId,pantsName,pantsPrice,pantsStock,pantsDiscount,pantsContents)
+    				values(#{pantsId},#{pantsName},#{pantsPrice},#{pantsStock},#{pantsDiscount},#{pantsContents})
+    </insert>
+    
+    <insert id="productShoes">
+    	insert into shopping_shoes(shoesId,shoesName,shoesPrice,shoesStock,shoesDiscount,shoesContents)
+    				values(#{shoesId},#{shoesName},#{shoesPrice},#{shoesStock},#{shoesDiscount},#{shoesContents})
+    </insert>							  
+    
+    </mapper>
