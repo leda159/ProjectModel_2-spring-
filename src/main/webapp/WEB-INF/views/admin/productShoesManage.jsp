@@ -28,7 +28,7 @@
 			if(result == ''){
 				return;
 			}
-			alert("상품'" + psResult +"'을 등록했습니다.");
+			alert("신발'" + psResult +"'을 등록했습니다.");
 		}
 	});
 </script>

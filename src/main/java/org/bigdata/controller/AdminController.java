@@ -38,7 +38,7 @@ public class AdminController {
 	  @RequestMapping(value="/productCoatManage", method=RequestMethod.GET) public
 	  void productCoatManageGET() throws Exception{
 	  
-	  log.info("상품 등록 페이지 접속"); }
+	  log.info("상의 등록 페이지 접속"); }
 	  
 	  
 	  //상의 등록페이지 접속
@@ -67,7 +67,7 @@ public class AdminController {
 	  @RequestMapping(value="/productPantsManage", method=RequestMethod.GET) public
 	  void productPantsManageGET() throws Exception{
 	  
-	  log.info("상품 등록 페이지 접속"); }
+	  log.info("하의 등록 페이지 접속"); }
 	  
 	  
 	  //하의 관리 페이지 접속
@@ -83,17 +83,18 @@ public class AdminController {
 	  
 	  adminService.productPants(pants);
 	  
-	  rttr.addFlashAttribute("productCoatPOST_result",pants.getPantsName());
+	  rttr.addFlashAttribute("productPantsPOST_result",pants.getPantsName());
 	  
-	  return "redirect:/admin/productPantsManage"; }
+	  return "redirect:/admin/productPantsManage"; 
 	  
-	 
+	  }
+	  
 	 
 	// 신발 관리 페이지 접속
 	@RequestMapping(value = "/productShoesManage", method = RequestMethod.GET)
 	public void productShoesManageGET() throws Exception {
 
-		log.info("상품 등록 페이지 접속");
+		log.info("신발 등록 페이지 접속");
 	}
 
 	// 신발 등록

@@ -28,7 +28,7 @@
 			if(result == ''){
 				return;
 			}
-			alert("상품'" + pcResult +"'을 등록했습니다.");
+			alert("상의'" + pcResult +"'을 등록했습니다.");
 		}
 	});
 </script>

@@ -60,6 +60,28 @@
   	.carousel-inner > .item > a > img {
       width: 60%;
       margin: auto;
+       
+  }
+  .ck_coat{
+  
+  	display: none;
+  	padding-top: 10px;
+  	text-align: center;
+  	color : red;
+  }
+    .ck_pants{
+  
+  	display: none;
+  	padding-top: 10px;
+  	text-align: center;
+  	color : red;
+  }
+    .ck_shoes{
+  
+  	display: none;
+  	padding-top: 10px;
+  	text-align: center;
+  	color : red;
   }
 
 </style>
@@ -92,27 +114,37 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarMenuList">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item">
-      			  <a class="nav-link" href="#">회원 관리 <span class="sr-only">(current)</span></a>
+			<ul class="navbar-nav ml-3">
+				<li class="nav-item dropdown">
+      			  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+						data-toggle="dropdown" aria-expanded="false">상품 등록</a>
+      			  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="/admin/productCoat">상의</a>
+						<a class="dropdown-item" href="/admin/productPants">하의</a>
+						<a class="dropdown-item" href="/admin/productShoes">신발</a>
+					</div>
+     			</li>
+				<li class="nav-item dropdown">
+      			  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+						data-toggle="dropdown" aria-expanded="false">상품 목록</a>
+      			  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="#">상의</a>
+						<a class="dropdown-item" href="#">하의</a>
+						<a class="dropdown-item" href="#">신발</a>
+					</div>
      			</li>
 			</ul>
-			<ul class="navbar-nav mr-auto">
+			<ul class="navbar-nav ml-3">
 				<li class="nav-item">
-      			  <a class="nav-link" href="#">상품 등록 <span class="sr-only">(current)</span></a>
+      			  <a class="nav-link" href="#">회원 관리</a>
      			</li>
 			</ul>
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item">
-      			  <a class="nav-link" href="#">상품 목록 <span class="sr-only">(current)</span></a>
-     			</li>
-			</ul>
-			<ul class="navbar-nav mr-auto">
+			<ul class="navbar-nav ml-3">
 				<li class="nav-item">
       			  <a class="nav-link" href="#">구상중..<span class="sr-only">(current)</span></a>
      			</li>
 			</ul>
-			<ul class="navbar-nav mr-auto">
+			<ul class="navbar-nav ml-3">
 				<li class="nav-item">
       			  <a class="nav-link" href="#">구상중..<span class="sr-only">(current)</span></a>
      			</li>

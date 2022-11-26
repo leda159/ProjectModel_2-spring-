@@ -18,6 +18,7 @@
     <insert id="productShoes">
     	insert into shopping_shoes(shoesId,shoesName,shoesPrice,shoesStock,shoesDiscount,shoesContents)
     				values(#{shoesId},#{shoesName},#{shoesPrice},#{shoesStock},#{shoesDiscount},#{shoesContents})
-    </insert>							  
+    </insert>
+    						  
     
     </mapper>

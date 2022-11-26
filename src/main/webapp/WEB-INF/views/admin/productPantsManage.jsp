@@ -28,7 +28,7 @@
 			if(result == ''){
 				return;
 			}
-			alert("상품'" + ppResult +"'을 등록했습니다.");
+			alert("하의'" + ppResult +"'을 등록했습니다.");
 		}
 	});
 </script>

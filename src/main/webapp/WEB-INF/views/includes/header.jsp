@@ -93,7 +93,7 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarMenuList">
 			<ul class="navbar-nav mr-5">
-				<li class="nav-item dropdown ">
+				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
 						data-toggle="dropdown" aria-expanded="false">
 						상품 목록
