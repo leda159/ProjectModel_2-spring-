@@ -90,6 +90,44 @@
   	font-weight: 500;
   }
 
+/* 페이지 버튼 인터페이스 */ 
+.pageMaker_wrap{
+	text-align: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+.pageMaker{
+    list-style: none;
+    display: inline-block;
+}	
+.pageMaker_button {
+    float: left;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 10px;
+}
+.active{
+	border : 2px solid black;
+	font-weight:400;
+
+}
+
+.pageMaker_button a:link {color: black;}
+.pageMaker_button a:visited {color: black;}
+.pageMaker_button a:active {color: black;}
+.pageMaker_button a:hover {color: black;}
+	{
+    color: #ccc;
+}
+
+.table_empty{
+	height:50px;
+	text-align: center;
+	margin: 200px 0 215px 0px;
+	font-size: 25px;
+}
+
 </style>
 
 <body>

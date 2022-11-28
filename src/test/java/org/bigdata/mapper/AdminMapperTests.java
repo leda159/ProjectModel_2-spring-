@@ -75,16 +75,16 @@ public class AdminMapperTests {
 			
 			Criteria cri = new Criteria();
 			
-			/* 검색조건 */
-			cri.setKeyword("1");
+			// 검색조건 
+			//cri.setKeyword("3");
 			
-			/* 검색 리스트 */
-			List list = mapper.productCoatGetList(cri);
-			for(int i = 0; i < list.size(); i++) {
-				System.out.println("result......." + i + " : " + list.get(i));
-			}
+			// 검색 리스트 
+			//List list = mapper.productCoatGetList(cri);
+			//for(int i = 0; i < list.size(); i++) {
+			//	System.out.println("result......." + i + " : " + list.get(i));
+			//}
 			
-			/* 상품 총 갯수 */
+			// 상품 총 갯수 
 			int result = mapper.productCoatGetTotal(cri);
 			System.out.println("resutl.........." + result);
 			

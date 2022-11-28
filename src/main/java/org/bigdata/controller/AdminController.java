@@ -45,16 +45,16 @@ public class AdminController {
 	  
 		  log.info("상의 등록 페이지 접속"); 
 
-		  List list = adminService.productCoatGetList(cri);
+		  List coatList = adminService.productCoatGetList(cri);
 	  
-		  if(!list.isEmpty()) {
-			  model.addAttribute("coat",list);
+		  if(!coatList.isEmpty()) {
+			  model.addAttribute("coatList",coatList);
 		  }else{
-			  model.addAttribute("listCheck","empty");
+			  model.addAttribute("coatListCheck","empty");
 			  return;
 		  }
 	  
-		  //페이지 인터페이스 데이터
+		  //페이지 이동 인터페이스 데이터
 		  model.addAttribute("pageMaker", new PageDTO(cri, adminService.productCoatGetTotal(cri)));
 	  
 	  }

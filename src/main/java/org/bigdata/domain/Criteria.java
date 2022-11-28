@@ -1,5 +1,7 @@
 package org.bigdata.domain;
 
+import org.springframework.web.util.UriComponentsBuilder;
+
 import lombok.Data;
 
 @Data
@@ -34,7 +36,6 @@ public class Criteria {
 		//검색 조건에 따라 배열에 값을 대입
 		return type == null? new String[] {}:type.split("");
 	}
-	
 }
 
 

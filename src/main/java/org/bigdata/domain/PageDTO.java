@@ -13,12 +13,14 @@ public class PageDTO {
 	private boolean prev,next;
 	//총 게시물 건수
 	private int total;
+	//현재 페이지 번호(pageNum) , 행 표시 수(amount), 검색 키워드(keyword), 검색 종류(type)
 	private Criteria cri;
 	
 	public PageDTO(Criteria cri,int total) {
 		
 		this.cri = cri;
 		this.total = total;
+		
 		//cri.getPageNum()?현재 작업중인 하단 페이지
 		this.endPage = (int)(Math.ceil(cri.getPageNum() / 10.0)) * 10;
 		this.startPage = this.endPage - 9;

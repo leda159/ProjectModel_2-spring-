@@ -18,12 +18,23 @@
 			select coatId,coatName,coatPrice,coatStock,coatDiscount,coatContents,regdate,updatedate
 			  from (select /*+ INDEX_DESC(shopping_coat pk_coat) */
 			               rownum rn,coatId,coatName,coatPrice,coatStock,coatDiscount,coatContents,regdate,updatedate
-			          from shopping_coat
-			         where rownum <= #{pageNum} * #{amount}
-			         )
-			 where rn > (#{pageNum} -1) * #{amount}         
+			     from shopping_coat
+			     where 
+			
+		]]> 
+		 		<if test="keyword != null">
+	      			 coatName like '%' || #{keyword} || '%' and
+	      		</if>
+	      
+	    <![CDATA[	
+	   			 rownum <= #{pageNum} * #{amount}
+			     )
+			 where rn > (#{pageNum} -1) * #{amount}
+	               
 		]]>
 	</select>
+  
+  
   
 	<!-- 상의 총 개수 -->
 	<select id="productCoatGetTotal" resultType="int">
