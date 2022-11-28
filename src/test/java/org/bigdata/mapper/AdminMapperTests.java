@@ -1,6 +1,9 @@
 package org.bigdata.mapper;
 
+import java.util.List;
+
 import org.bigdata.domain.CoatVO;
+import org.bigdata.domain.Criteria;
 import org.bigdata.domain.PantsVO;
 import org.bigdata.domain.ShoesVO;
 import org.junit.Ignore;
@@ -64,6 +67,28 @@ public class AdminMapperTests {
 			
 			mapper.productShoes(shoes);
 			log.info(shoes);
+		}
+		
+		
+		@Test
+		public void goodsGetListTest() {
+			
+			Criteria cri = new Criteria();
+			
+			/* 검색조건 */
+			cri.setKeyword("1");
+			
+			/* 검색 리스트 */
+			List list = mapper.productCoatGetList(cri);
+			for(int i = 0; i < list.size(); i++) {
+				System.out.println("result......." + i + " : " + list.get(i));
+			}
+			
+			/* 상품 총 갯수 */
+			int result = mapper.productCoatGetTotal(cri);
+			System.out.println("resutl.........." + result);
+			
+			
 		}
 
 }

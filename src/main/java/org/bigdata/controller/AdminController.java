@@ -1,6 +1,10 @@
 package org.bigdata.controller;
 
+import java.util.List;
+
 import org.bigdata.domain.CoatVO;
+import org.bigdata.domain.Criteria;
+import org.bigdata.domain.PageDTO;
 import org.bigdata.domain.PantsVO;
 import org.bigdata.domain.ShoesVO;
 import org.bigdata.service.AdminService;
@@ -8,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,11 +39,25 @@ public class AdminController {
 	}
 
 	
-	  //상의 관리 페이지 접속
-	  @RequestMapping(value="/productCoatManage", method=RequestMethod.GET) public
-	  void productCoatManageGET() throws Exception{
+	  //상의 관리(리스트) 페이지 접속
+	  @RequestMapping(value="/productCoatManage", method=RequestMethod.GET) 
+	  public void productCoatManageGET(Criteria cri, Model model) throws Exception{
 	  
-	  log.info("상의 등록 페이지 접속"); }
+		  log.info("상의 등록 페이지 접속"); 
+
+		  List list = adminService.productCoatGetList(cri);
+	  
+		  if(!list.isEmpty()) {
+			  model.addAttribute("coat",list);
+		  }else{
+			  model.addAttribute("listCheck","empty");
+			  return;
+		  }
+	  
+		  //페이지 인터페이스 데이터
+		  model.addAttribute("pageMaker", new PageDTO(cri, adminService.productCoatGetTotal(cri)));
+	  
+	  }
 	  
 	  
 	  //상의 등록페이지 접속
@@ -46,7 +65,7 @@ public class AdminController {
 	  
 	  }
 	  
-	  //상의 등록페이지
+	  //상의 등록
 	  @PostMapping("/productCoat") public String productCoatPOST(CoatVO
 	  coat,RedirectAttributes rttr) {
 	  
@@ -56,10 +75,11 @@ public class AdminController {
 	  
 	  rttr.addFlashAttribute("productCoatPOST_result",coat.getCoatName());
 	  
-	  return "redirect:/admin/productCoatManage"; }
+	  return "redirect:/admin/productCoatManage"; 
 	  
+	  }
 	  
-	  
+
 	  
 	  
 	  

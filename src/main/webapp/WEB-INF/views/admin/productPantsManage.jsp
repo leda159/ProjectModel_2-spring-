@@ -11,7 +11,7 @@
 
 <div class="container pantsManage">
 	<div class="col pantsManage_subject">
-			<h3 style="text-align:center;">상품 관리</h3>
+			<h3 style="text-align:center;">하의 상품관리</h3>
 	</div>
 </div>
 <%@ include file="../adminIncludes/footer.jsp" %>

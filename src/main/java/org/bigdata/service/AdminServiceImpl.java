@@ -1,6 +1,9 @@
 package org.bigdata.service;
 
+import java.util.List;
+
 import org.bigdata.domain.CoatVO;
+import org.bigdata.domain.Criteria;
 import org.bigdata.domain.PantsVO;
 import org.bigdata.domain.ShoesVO;
 import org.bigdata.mapper.AdminMapper;
@@ -21,9 +24,26 @@ public class AdminServiceImpl implements AdminService {
 	public void productCoat(CoatVO coat) {
 		
 		log.info("Service productCoat");
-		adminMapper.productCoat(coat);
-		
+		adminMapper.productCoat(coat);	
 	}
+
+	//상의 리스트
+	@Override
+	public List<CoatVO> productCoatGetList(Criteria cri) {
+		log.info("productCoatGetList메소드 실행");
+		return adminMapper.productCoatGetList(cri);
+	}
+
+	//상의 총 갯수
+	@Override
+	public int productCoatGetTotal(Criteria cri) {
+		log.info("productCoatGetTotal메소드 실행");
+		return adminMapper.productCoatGetTotal(cri);
+	}
+	
+	
+	
+	
 
 	//하의 등록
 	@Override

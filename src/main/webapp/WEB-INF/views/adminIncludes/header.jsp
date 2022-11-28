@@ -83,6 +83,12 @@
   	text-align: center;
   	color : red;
   }
+  
+  .step_val{
+  	display: block;
+  	padding-top: 5px;
+  	font-weight: 500;
+  }
 
 </style>
 
@@ -128,9 +134,9 @@
       			  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
 						data-toggle="dropdown" aria-expanded="false">상품 목록</a>
       			  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">상의</a>
-						<a class="dropdown-item" href="#">하의</a>
-						<a class="dropdown-item" href="#">신발</a>
+						<a class="dropdown-item" href="/admin/productCoatManage">상의</a>
+						<a class="dropdown-item" href="/admin/productPantsManage">하의</a>
+						<a class="dropdown-item" href="/admin/productShoesManage">신발</a>
 					</div>
      			</li>
 			</ul>

@@ -29,8 +29,11 @@
 						<span class="ck_coat ck_coatS">상의 재고를 입력해 주세요.</span>
 					</div>
 					<div class="form-group coatDiscount">
-						<input type="text" name="coatDiscount" class=" id_input form-control" placeholder="상의 할인율"  maxlength="20">
-						<span class="ck_coat ck_coatD">상의 할인율을 입력해 주세요.</span>
+						<!-- 할인율 값 -->
+						<input type="hidden" id="coatDiscount" name="coatDiscount" value="0">
+						<!-- 할인율 정수를 입력할 input -->
+						<input id="coatDiscount_interface" class="id_input form-control" maxlength="2" value="0">
+						<span class="step_val">할인 가격:<span class="span_discount"></span></span>
 					</div>
 					<div class="form-group coatContents">
 						<input type="text" name="coatContents" class=" id_input form-control" placeholder="상의 내용"  maxlength="20">
@@ -70,7 +73,7 @@
 		let coatName = $("input[name='coatName']").val();
 		let coatPrice = $("input[name='coatPrice']").val();
 		let coatStock = $("input[name='coatStock']").val();
-		let coatDiscount = $("input[name='coatDiscount']").val();
+		let coatDiscount = $("coatDiscount_interface").val();
 		let coatContents = $("input[name='coatContents']").val();
 		
 		//빈칸 체크
@@ -107,13 +110,6 @@
 			ck_coatStock = false;
 		}
 		
-		if(coatDiscount){
-			$(".ck_coatD").css('display','none');
-			ck_coatDiscount = true;
-		} else {
-			$(".ck_coatD").css('display','block');
-			ck_coatDiscount = false;
-		}	
 		
 		if(coatContents){
 			$(".ck_coatC").css('display','none');
@@ -124,8 +120,7 @@
 		}	
 		
 		
-		if(ck_coatId && ck_coatName && ck_coatPrice && ck_coatStock && 
-		   ck_coatDiscount && ck_coatContents){
+		if(ck_coatId && ck_coatName && ck_coatPrice && ck_coatStock && ck_coatContents){
 			
 			//alert('통과');
 			productCoat.submit(); 
@@ -143,6 +138,42 @@
 		location.href="/admin/productCoatManage"
 	});
 	
+	
+	//할인율 input 처리
+	$("#coatDiscount_interface").on("propertychange change keyup paste input",function(){
+		
+		let userInput = $("#coatDiscount_interface");
+		let discountInput = $("input[name='coatDiscount']");
+		
+		let discountRate = userInput.val();     //사용자가 입력할 할인값
+		let sendDiscountRate = discountRate / 100;// 서버에 전송할 할인값
+		
+		let productCoatPrice = $("input[name='coatPrice']").val(); //원가
+		let discountCoatPrice = productCoatPrice * (1 - sendDiscountRate); //할인가격
+		
+		
+			$(".span_discount").html(discountCoatPrice);
+			discountInput.val(sendDiscountRate);
+	
+	});
+	
+	
+	//상품가격 , 상품 할인율 순으로 입력을 했다가 다시 상품가격을 수정하는 경우 > 할인 가격을 바로 볼 수 있도록 처리
+	$("#coatPrice").on("change",function(){
+		
+		let userInput = $("#coatDiscount_interface");
+		let discountInput = $("input[name='coatDiscount']");
+		
+		let discountRate = userInput.val();     //사용자가 입력할 할인값
+		let sendDiscountRate = discountRate / 100;// 서버에 전송할 할인값
+		
+		let productCoatPrice = $("input[name='coatPrice']").val(); //원가
+		let discountCoatPrice = productCoatPrice * (1 - sendDiscountRate); //할인가격
+		
+		
+			$(".span_discount").html(discountCoatPrice);
+		
+	});
 	
 	
 </script>

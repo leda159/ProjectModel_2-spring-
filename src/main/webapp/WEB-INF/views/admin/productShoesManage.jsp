@@ -11,7 +11,7 @@
 
 <div class="container shoesManage">
 	<div class="col shoesManage_subject">
-			<h3 style="text-align:center;">상품 관리</h3>
+			<h3 style="text-align:center;">신발 상품관리</h3>
 	</div>
 </div>
 <%@ include file="../adminIncludes/footer.jsp" %>
