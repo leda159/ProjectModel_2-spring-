@@ -92,7 +92,35 @@ public class AdminController {
 		  
 	  }
 	  
+	  //상의 정보 수정
+	  @PostMapping("/productCoatUpdate")
+	  public String productCoatUpdatePost(CoatVO coat, RedirectAttributes rttr) {
+		  
+		  log.info("productCoatUpdatePost메서드 실행" + coat);
+		  
+		  int result = adminService.productCoatUpdate(coat);
+		  
+		  rttr.addFlashAttribute("update_result",result);
+		  
+		  return"redirect:/admin/productCoatManage";
+	  }
+	  
+	  //상의 정보 삭제
+	  @PostMapping("/productCoatDelete")
+	  public String productCoatDeletePost(int coatId, RedirectAttributes rttr) {
+		  
+		  log.info("productCoatUpdatePost메서드 실행" + coatId);
+		  
+		  int result = adminService.productCoatDelete(coatId);
+		  
+		  rttr.addFlashAttribute("delete_result",result);
+		  
+		  return"redirect:/admin/productCoatManage";
+	  }
+	  
 
+	  
+	  
 	  
 	  
 	  

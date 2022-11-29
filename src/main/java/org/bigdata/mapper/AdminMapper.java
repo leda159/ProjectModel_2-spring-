@@ -22,6 +22,11 @@ public interface AdminMapper {
 	//상의 조회
 	public CoatVO productGetDetail(int coatId);
 	
+	//상의 수정
+	public int productCoatUpdate(CoatVO coat);
+	
+	//상의 삭제
+	public int productCoatDelete(int coatId); 
 	
 	
 	

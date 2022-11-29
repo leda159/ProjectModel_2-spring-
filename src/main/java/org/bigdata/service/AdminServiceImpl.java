@@ -50,6 +50,22 @@ public class AdminServiceImpl implements AdminService {
 		return adminMapper.productGetDetail(coatId);
 	}
 	
+	//상의 수정
+	@Override
+	public int productCoatUpdate(CoatVO coat) {
+		log.info("productCoatUpdate메서드 실행");
+		return adminMapper.productCoatUpdate(coat);
+	}
+	
+	//상의 삭제
+	@Override
+	public int productCoatDelete(int coatId) {
+		log.info("productCoatDelete메서드 실행");
+		return adminMapper.productCoatDelete(coatId);
+	}
+	
+	
+	
 	
 	
 	
@@ -69,6 +85,8 @@ public class AdminServiceImpl implements AdminService {
 		log.info("Service ProductShoes");
 		adminMapper.productShoes(shoes);
 	}
+
+
 
 
 

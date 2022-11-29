@@ -43,9 +43,9 @@
 						<label>상의 수정일</label>
 						<input type="text" name="updateDate" class="form-control" value='<fmt:formatDate value="${productInfo.updateDate}" pattern="yyyy-MM-dd" />' readonly>
 					</div>
-					 <button class="btn btn-outline-dark CoatList_btn" id="CoatListBtn">상의 목록</button>
 					 <button class="btn btn-outline-dark CoatUpdate_btn" id="CoatUpdateBtn">수정</button>
-					                  <!-- 페이징 처리 끝 -->
+					 <button class="btn btn-outline-dark CoatList_btn" id="CoatListBtn">상의 목록</button>
+					                
 				<!-- 현재페이지번호와 보여지는 행수를 hidden 처리 -->
                 <form id="actionForm" action="/admin/productCoatManage" method="get">
                 	<input type="hidden" name="pageNum" value="${cri.pageNum}">

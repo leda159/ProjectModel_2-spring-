@@ -39,6 +39,11 @@
 						<input id="coatDiscount_interface" class="id_input form-control" maxlength="2" value="0">
 						<span class="step_val">할인 가격:<span class="span_discount"></span></span>
 					</div>
+					
+					<div class="form-group coatImage mt-5">
+						<label>상의 이미지</label>
+						<input type="file" id="coatFileImage" name="coatFileImage" class=" id_input form-control">
+					</div>					
 					<input type="button" id="register_button" class="btn btn-dark" value="등록" >
 					<input type="button" id="cancel_button" class="btn btn-dark" value="취소" >
 				</form>

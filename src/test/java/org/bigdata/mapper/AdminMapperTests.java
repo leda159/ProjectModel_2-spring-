@@ -101,6 +101,35 @@ public class AdminMapperTests {
 			
 			
 		}
+		
+		//상의 수정
+		@Test
+		public void productCoatUpdateTset() {
+			
+			CoatVO coat = new CoatVO();
+			
+			coat.setCoatId(1145);
+			coat.setCoatName("테스트");
+			coat.setCoatPrice(100000);
+			coat.setCoatStock(10);
+			coat.setCoatDiscount(0.50);
+			coat.setCoatContents("테스트");
+			
+			mapper.productCoatUpdate(coat);
+		}
+		
+		//상의 삭제
+		@Test
+		public void productCoatDeleteTset() {
+			
+			int coatId =2168;
+			
+			int result = mapper.productCoatDelete(coatId);
+			
+			if(result == 1) {
+				log.info("삭제 성공");
+			}
+		}
 
 }
 

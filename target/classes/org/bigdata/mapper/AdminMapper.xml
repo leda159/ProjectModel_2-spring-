@@ -15,6 +15,24 @@
  	<select id="productGetDetail" resultType="org.bigdata.domain.CoatVO">
  		select * from shopping_coat where coatId = #{coatId}
  	</select>
+ 	
+ 	<!--상의 상품 수정하기  -->
+ 	<update id="productCoatUpdate">
+ 	
+ 		update shopping_coat set 
+ 					coatName = #{coatName},
+ 					coatPrice = #{coatPrice},
+ 					coatStock = #{coatStock},
+ 					coatDiscount = #{coatDiscount},
+ 					coatContents = #{coatContents},
+ 					updateDate = sysdate
+ 			where coatId = ${coatId}
+ 	</update>
+ 	
+ 	<!-- 상의 상품 삭제하기  -->
+ 	<delete id="productCoatDelete">
+ 		delete from shopping_coat where coatId = #{coatId}
+ 	</delete>
  
     <!--페이징 처리 적용 상의 리스트 -->
     <select id="productCoatGetList"
