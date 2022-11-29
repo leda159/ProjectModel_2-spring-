@@ -19,6 +19,9 @@ public interface AdminMapper {
 	//상의 상품 총 개수
 	public int productCoatGetTotal(Criteria cri);
 	
+	//상의 조회
+	public CoatVO productGetDetail(int coatId);
+	
 	
 	
 	

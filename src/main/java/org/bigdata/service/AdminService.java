@@ -15,6 +15,8 @@ public interface AdminService {
 	public List<CoatVO> productCoatGetList(Criteria cri);
 	//상의 총 개수
 	public int productCoatGetTotal(Criteria cri);
+	//상의 조회
+	public CoatVO productCoatGetDetail(int coatId);
 	
 	
 	

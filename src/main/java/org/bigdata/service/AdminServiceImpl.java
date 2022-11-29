@@ -43,6 +43,13 @@ public class AdminServiceImpl implements AdminService {
 		return adminMapper.productCoatGetTotal(cri);
 	}
 	
+	//상의 조회
+	@Override
+	public CoatVO productCoatGetDetail(int coatId) {
+		log.info("productCoatGetDetail메서드 실행" + coatId);
+		return adminMapper.productGetDetail(coatId);
+	}
+	
 	
 	
 	
@@ -62,5 +69,7 @@ public class AdminServiceImpl implements AdminService {
 		log.info("Service ProductShoes");
 		adminMapper.productShoes(shoes);
 	}
+
+
 
 }

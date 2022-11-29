@@ -1,7 +1,5 @@
 package org.bigdata.mapper;
 
-import java.util.List;
-
 import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.PantsVO;
@@ -71,7 +69,7 @@ public class AdminMapperTests {
 		
 		
 		@Test
-		public void goodsGetListTest() {
+		public void productGetListTest() {
 			
 			Criteria cri = new Criteria();
 			
@@ -87,6 +85,19 @@ public class AdminMapperTests {
 			// 상품 총 갯수 
 			int result = mapper.productCoatGetTotal(cri);
 			System.out.println("resutl.........." + result);
+			
+			
+		}
+		
+		//상품 조회 페이지
+		@Test
+		public void productGetDetailTest() {
+			
+			int coatId = 1004;
+			
+			CoatVO result = mapper.productGetDetail(coatId);
+			
+			System.out.println("상품 조회 데이터 : " + result);
 			
 			
 		}

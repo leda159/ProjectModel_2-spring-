@@ -1,0 +1,109 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
+<%@ include file="../adminIncludes/header.jsp" %>
+
+<!-- 상의 조회 페이지 -->
+
+
+<div class="container">
+		<div class="col-lg-4" style="float: none; margin:100 auto;">
+			<div style="padding-top:20px;">
+				<h3 style="text-align:center;">상의 조회</h3>
+					<div class="form-group coatId">
+						<label>상의 ID</label>
+						<input type="text" name="coatId" value='<c:out value="${productInfo.coatId}" />' class=" id_input form-control" readonly>
+					</div>
+					<div class="form-group coatName">
+						<label>상의 이름</label>
+						<input type="text" name="coatName" value='<c:out value="${productInfo.coatName}" />'  class=" id_input form-control" readonly>
+					</div>
+					<div class="form-group coatContents">
+						<label>상의 내용</label>
+						<input type="text" name="coatContents" value='<c:out value="${productInfo.coatContents}" />'  class=" id_input form-control" readonly>
+					</div>
+					<div class="form-group coatPrice">
+						<label>상의 가격</label>
+						<input type="text" name="coatPrice" value='<c:out value="${productInfo.coatPrice}" />'  class=" id_input form-control" readonly>
+					</div>
+					<div class="form-group coatStock">
+						<label>상의 재고</label>
+						<input type="text" name="coatStock" value='<c:out value="${productInfo.coatStock}" />'  class=" id_input form-control" readonly>
+					</div>
+					<div class="form-group coatDiscount">
+						<label>상의 할인율</label>
+						<input type="text" id="coat_Discount" name="coatDiscount" class=" id_input form-control" readonly>
+					</div>
+					<div class="form-group">
+						<label>상의 등록일</label> 
+						<input type="text" name="regDate" class="form-control" value='<fmt:formatDate value="${productInfo.regDate}" pattern="yyyy-MM-dd" />' readonly>
+					</div>
+					<div class="form-group">
+						<label>상의 수정일</label>
+						<input type="text" name="updateDate" class="form-control" value='<fmt:formatDate value="${productInfo.updateDate}" pattern="yyyy-MM-dd" />' readonly>
+					</div>
+					 <button class="btn btn-outline-dark CoatList_btn" id="CoatListBtn">상의 목록</button>
+					 <button class="btn btn-outline-dark CoatUpdate_btn" id="CoatUpdateBtn">수정</button>
+					                  <!-- 페이징 처리 끝 -->
+				<!-- 현재페이지번호와 보여지는 행수를 hidden 처리 -->
+                <form id="actionForm" action="/admin/productCoatManage" method="get">
+                	<input type="hidden" name="pageNum" value="${cri.pageNum}">
+                    <input type="hidden" name="amount" value="${cri.amount}">
+                    <input type="hidden" name="keyword" value="${cri.keyword}">	  
+                </form>  
+			</div>
+		</div>
+	</div>
+<%@ include file="../adminIncludes/footer.jsp" %>
+
+
+<script>
+$(document).ready(function(){
+		
+	//할인율 값 삽입
+	let coatDiscount = '<c:out value="${productInfo.coatDiscount}"/>' * 100;
+	$("#coat_Discount").attr("value", coatDiscount + " %");
+	
+	
+	//목록 이동 버튼
+	$("#CoatListBtn").on("click", function(e){
+		
+		e.preventDefault();
+		$("#actionForm").submit();
+	});
+	
+	//수정 페이지 이동 버튼 
+	$("#CoatUpdateBtn").on("click" ,function(e){
+		
+		e.preventDefault();
+		
+		let addInput = '<input type="hidden" name="coatId" value="${productInfo.coatId}">';
+		$("#actionForm").append(addInput);
+		$("#actionForm").attr("action" , "/admin/productCoatUpdate");
+		$("#actionForm").submit();
+	});	
+});	
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

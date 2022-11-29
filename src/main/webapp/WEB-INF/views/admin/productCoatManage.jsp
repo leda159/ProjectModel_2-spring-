@@ -127,8 +127,6 @@
 		searchForm.submit();
 		
 	});
-	
-
 
 	//페이지 이동 버튼
 	$(".pageMaker_button a").on("click",function(e){
@@ -136,9 +134,19 @@
 			
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 			
-		actionForm.submit();
-			
+		actionForm.submit();	
 	});	
+	
+	//조회 페이지 이동
+	$(".move").on("click",function(e){
+		
+		e.preventDefault();
+		
+		actionForm.append("<input type='hidden' name='coatId' value='"+$(this).attr("href")+"'>");
+		actionForm.attr("action","/admin/productCoatDetail");
+		actionForm.submit();
+		
+	});
 </script>
 
 

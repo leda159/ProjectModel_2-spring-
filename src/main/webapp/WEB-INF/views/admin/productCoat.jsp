@@ -13,19 +13,23 @@
 					<h3 style="text-align:center;">상의 등록</h3>
 					
 					<div class="form-group coatId">
-						<input type="text" name="coatId" class=" id_input form-control" placeholder="상의 ID" maxlength="20">
+						<input type="text" name="coatId" class=" id_input form-control" placeholder="상의 ID">
 						<span class="ck_coat ck_coatI">상의 ID를 입력해 주세요.</span>
 					</div>
 					<div class="form-group coatName">
-						<input type="text" name="coatName" class=" id_input form-control" placeholder="상의 이름" maxlength="20">
+						<input type="text" name="coatName" class=" id_input form-control" placeholder="상의 이름">
 						<span class="ck_coat ck_coatN">상의 이름을 입력해 주세요.</span>
 					</div>
+					<div class="form-group coatContents">
+						<input type="text" name="coatContents" class=" id_input form-control" placeholder="상의 내용">
+						<span class="ck_coat ck_coatC">상의 내용을 입력해 주세요.</span>
+					</div>
 					<div class="form-group coatPrice">
-						<input type="text" name="coatPrice" class=" id_input form-control" placeholder="상의 가격" maxlength="20">
+						<input type="text" name="coatPrice" class=" id_input form-control" placeholder="상의 가격">
 						<span class="ck_coat ck_coatP">상의 가격을 입력해 주세요.</span>
 					</div>
 					<div class="form-group coatStock">
-						<input type="text" name="coatStock" class=" id_input form-control" placeholder="상의 재고" maxlength="20">
+						<input type="text" name="coatStock" class=" id_input form-control" placeholder="상의 재고">
 						<span class="ck_coat ck_coatS">상의 재고를 입력해 주세요.</span>
 					</div>
 					<div class="form-group coatDiscount">
@@ -34,10 +38,6 @@
 						<!-- 할인율 정수를 입력할 input -->
 						<input id="coatDiscount_interface" class="id_input form-control" maxlength="2" value="0">
 						<span class="step_val">할인 가격:<span class="span_discount"></span></span>
-					</div>
-					<div class="form-group coatContents">
-						<input type="text" name="coatContents" class=" id_input form-control" placeholder="상의 내용"  maxlength="20">
-						<span class="ck_coat ck_coatC">상의 내용을 입력해 주세요.</span>
 					</div>
 					<input type="button" id="register_button" class="btn btn-dark" value="등록" >
 					<input type="button" id="cancel_button" class="btn btn-dark" value="취소" >

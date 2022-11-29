@@ -79,6 +79,19 @@ public class AdminController {
 	  
 	  }
 	  
+	  //상의 조회 , 수정 페이지
+	  @GetMapping({"/productCoatDetail" , "/productCoatUpdate"})
+	  public void productCoatDetailGet(int coatId, Criteria cri, Model model) {
+		  
+		  log.info("productCoatDetailGet 메서드" + coatId);
+		  
+		  //목록 페이지 조건 정보
+		  model.addAttribute("cri",cri);
+		  //조회 페이지 정보
+		  model.addAttribute("productInfo", adminService.productCoatGetDetail(coatId));
+		  
+	  }
+	  
 
 	  
 	  
