@@ -2,6 +2,36 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../adminIncludes/header.jsp" %>
 
+<style type="text/css">
+	#result_card img{
+		max-width: 100%;
+	    height: auto;
+	    display: block;
+	    padding: 5px;
+	    margin-top: 10px;
+	    margin: auto;	
+	}
+	#result_card {
+		position: relative;
+	}
+	.imgDeleteBtn{
+	    position: absolute;
+	    top: 0;
+	    right: 5%;
+	    background-color: black;
+	    color: wheat;
+	    font-weight: 900;
+	    width: 30px;
+	    height: 30px;
+	    border-radius: 50%;
+	    line-height: 26px;
+	    text-align: center;
+	    border: none;
+	    display: block;
+	    cursor: pointer;	
+	}
+	
+</style>
 <!-- 상의 등록 페이지 -->
 
 
@@ -50,6 +80,12 @@
 						<label for="formFile" class="form-label">상의 이미지</label>
 						<input type="file" class="form-control" id="formFile" name="uploadFile">
 					</div>
+					<div id="uploadResult">
+						<!-- <div id="result_card">
+							<div class="imgDeleteBtn">x</div>
+							<img src="/display?fileName=test.jpg">
+						</div> -->
+					</div> 
 					
 					
 					<input type="button" id="register_button" class="btn btn-dark mt-3" value="등록" >
@@ -218,6 +254,10 @@
 			dataType : 'json',
 			success : function(result){
 				console.log(result);
+			showUploadImage(result);
+			},
+			error : function(result){
+				alert("이미지 파일이 아닙니다.");
 			}
 		});
 	}); 
@@ -239,6 +279,29 @@
 		}
 		return true;
 	}
+	
+ 	//이미지 출력
+	function showUploadImage(uploadResultArr){
+		
+		//전달받은 데이터 검증
+		if(!uploadResultArr || uploadResultArr.length == 0){
+			return
+		}
+		
+		let uploadResult = $("#uploadResult");
+		let obj = uploadResultArr[0];
+		let str = "";		
+		let fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName);
+		//									  (obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uploadPath + "_" + obj.fileName);
+		
+		str += "<div id='result_card'>";
+		str += "<img src='/display?fileName="+ fileCallPath +"'>";
+		str += "<div class='imgDeleteBtn'>x</div>";
+		str += "</div>";		
+		
+		uploadResult.append(str);
+			
+	} 
 	
 	
 </script>

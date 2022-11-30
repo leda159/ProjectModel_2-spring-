@@ -2,6 +2,8 @@ package org.bigdata.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,7 +11,6 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
-
 
 import org.bigdata.domain.AttachImageVO;
 import org.bigdata.domain.CoatVO;
@@ -21,11 +22,13 @@ import org.bigdata.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,8 +57,7 @@ public class AdminController {
 
 		log.info("관리자 페이지로 이동");
 	}
-
-	
+		
 	  //상의 관리(리스트) 페이지 접속
 	  @RequestMapping(value="/productCoatManage", method=RequestMethod.GET) 
 	  public void productCoatManageGET(Criteria cri, Model model) throws Exception{
@@ -136,11 +138,29 @@ public class AdminController {
 	  }
 	  
 	  //상의 파일 업로드
-
 	  @PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	  public ResponseEntity<List<AttachImageVO>> uploadAjaxActionPost(MultipartFile[] uploadFile) {
 		  
 		  log.info("uploadAjaxActionPost메서드 실행");
+		  
+		  //이미지 파일 체크
+		  for(MultipartFile multipartFile : uploadFile) {
+			  
+			  File checkfile = new File(multipartFile.getOriginalFilename());
+			  String type = null;
+			  
+			  try {
+				type = Files.probeContentType(checkfile.toPath()); 
+				log.info("MIME TYPE : " + type);
+			  }catch(IOException e) {
+				  e.printStackTrace();
+			  }
+			  
+			  if(!type.startsWith("image")) {
+				  List<AttachImageVO> list = null;
+				  return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+			  }
+		  }
 		  String uploadFolder = "C:\\upload";
 		  
 		  //날짜 폴더 경로
@@ -185,30 +205,11 @@ public class AdminController {
 			  try {
 				  multipartFile.transferTo(saveFile);
 				  
-				  //썸네이 생성(ImageIO)
+				  //썸네일 생성(ImageIO)
 				  File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
 				  
 				  BufferedImage bo_image = ImageIO.read(saveFile);
 				  
-					/*
-					 * //비율 
-					 * double ratio = 3;
-					 * 
-					 * //넓이 높이 
-					 * int width = (int)(bo_image.getWidth() / ratio); 
-					 * int height = (int)(bo_image.getHeight() / ratio);
-					 * 
-					 * BufferedImage bt_image = new BufferedImage(width,height,
-					 * BufferedImage.TYPE_3BYTE_BGR);
-					 * 
-					 * Graphics2D graphic = bt_image.createGraphics();
-					 * 
-					 * graphic.drawImage(bo_image, 0, 0, width, height, null);
-					 * 
-					 * ImageIO.write(bt_image, "jpg", thumbnailFile);
-					 */
-				  
-				  //방법2
 				  double ratio = 3;
 				  
 				  //넓이 높이 
