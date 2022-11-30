@@ -1,7 +1,17 @@
 package org.bigdata.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
+import javax.imageio.ImageIO;
+
+
+import org.bigdata.domain.AttachImageVO;
 import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.PageDTO;
@@ -11,19 +21,26 @@ import org.bigdata.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 @RequestMapping("/admin")
 @Log4j
+@AllArgsConstructor
 public class AdminController {
 
 	private static final Logger log = LoggerFactory.getLogger(AdminController.class);
@@ -116,6 +133,102 @@ public class AdminController {
 		  rttr.addFlashAttribute("delete_result",result);
 		  
 		  return"redirect:/admin/productCoatManage";
+	  }
+	  
+	  //상의 파일 업로드
+
+	  @PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	  public ResponseEntity<List<AttachImageVO>> uploadAjaxActionPost(MultipartFile[] uploadFile) {
+		  
+		  log.info("uploadAjaxActionPost메서드 실행");
+		  String uploadFolder = "C:\\upload";
+		  
+		  //날짜 폴더 경로
+		  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		  
+		  Date date = new Date();
+		  
+		  String str = sdf.format(date);
+		  
+		  String datePath = str.replace("-",File.separator);
+		  
+		  //폴더 생성
+		  File uploadPath = new File(uploadFolder, datePath);
+		  
+		  if(uploadPath.exists() == false) {
+			  uploadPath.mkdirs();
+		  }
+		  
+		  //이미지 정보를 담는 객체
+		  List<AttachImageVO> list = new ArrayList();
+		  
+		  for(MultipartFile multipartFile : uploadFile) {
+			  
+			  //이미지 정보 객체
+			  AttachImageVO vo = new AttachImageVO();
+			  
+			  //파일 이름
+			  String uploadFileName = multipartFile.getOriginalFilename();
+			  vo.setFileName(uploadFileName);
+			  vo.setUploadPath(datePath);
+			  
+			  //uuid(고유 번호) 적용 파일 이름
+			  String uuid = UUID.randomUUID().toString();
+			  vo.setUuid(datePath);
+			  
+			  uploadFileName = uuid + "_" + uploadFileName;
+			  
+			  //파일 위치, 파일 이름을 합친 File 객체
+			  File saveFile = new File(uploadPath, uploadFileName);
+			  
+			  //파일 저장
+			  try {
+				  multipartFile.transferTo(saveFile);
+				  
+				  //썸네이 생성(ImageIO)
+				  File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
+				  
+				  BufferedImage bo_image = ImageIO.read(saveFile);
+				  
+					/*
+					 * //비율 
+					 * double ratio = 3;
+					 * 
+					 * //넓이 높이 
+					 * int width = (int)(bo_image.getWidth() / ratio); 
+					 * int height = (int)(bo_image.getHeight() / ratio);
+					 * 
+					 * BufferedImage bt_image = new BufferedImage(width,height,
+					 * BufferedImage.TYPE_3BYTE_BGR);
+					 * 
+					 * Graphics2D graphic = bt_image.createGraphics();
+					 * 
+					 * graphic.drawImage(bo_image, 0, 0, width, height, null);
+					 * 
+					 * ImageIO.write(bt_image, "jpg", thumbnailFile);
+					 */
+				  
+				  //방법2
+				  double ratio = 3;
+				  
+				  //넓이 높이 
+				  int width = (int)(bo_image.getWidth() / ratio); 
+				  int height = (int)(bo_image.getHeight() / ratio);
+				  
+				  Thumbnails.of(saveFile)
+				  .size(width, height)
+				  .toFile(thumbnailFile);
+				  
+			  }catch(Exception e){
+				  e.printStackTrace();
+			  }
+			  list.add(vo);
+			  
+		  }//for
+		  
+		  ResponseEntity<List<AttachImageVO>> result = new ResponseEntity<List<AttachImageVO>>(list,HttpStatus.OK);
+		  
+		  return result;
 	  }
 	  
 

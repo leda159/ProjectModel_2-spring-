@@ -7,45 +7,53 @@
 
 <div class="container">
 		<div class="col-lg-4" style="float: none; margin:100 auto;">
-			<div style="padding-top:20px;">
+			<div style="padding-top:10px;">
 				<form action="/admin/productCoat" name="productCoat" id="productCoat" method="post">
 				
 					<h3 style="text-align:center;">상의 등록</h3>
 					
-					<div class="form-group coatId">
-						<input type="text" name="coatId" class=" id_input form-control" placeholder="상의 ID">
+					<div class="form-group mt-2 coatId">
+						<label class="">&nbsp;상의 ID</label>
+						<input type="text" name="coatId" class=" id_input form-control" placeholder="상의 ID를 입력해 주세요.">
 						<span class="ck_coat ck_coatI">상의 ID를 입력해 주세요.</span>
 					</div>
 					<div class="form-group coatName">
-						<input type="text" name="coatName" class=" id_input form-control" placeholder="상의 이름">
+						<label class="mt-2">&nbsp;상의 이름</label>
+						<input type="text" name="coatName" class=" id_input form-control" placeholder="상의 이름을 입력해 주세요.">
 						<span class="ck_coat ck_coatN">상의 이름을 입력해 주세요.</span>
 					</div>
 					<div class="form-group coatContents">
-						<input type="text" name="coatContents" class=" id_input form-control" placeholder="상의 내용">
+						<label class="mt-2">&nbsp;상의 내용</label>
+						<input type="text" name="coatContents" class=" id_input form-control" placeholder="상의 내용을 입력해 주세요.">
 						<span class="ck_coat ck_coatC">상의 내용을 입력해 주세요.</span>
 					</div>
 					<div class="form-group coatPrice">
-						<input type="text" name="coatPrice" class=" id_input form-control" placeholder="상의 가격">
+						<label class="mt-2">&nbsp;상의 가격</label>
+						<input type="text" name="coatPrice" class=" id_input form-control" placeholder="상의 가격을 입력해 주세요.">
 						<span class="ck_coat ck_coatP">상의 가격을 입력해 주세요.</span>
 					</div>
 					<div class="form-group coatStock">
-						<input type="text" name="coatStock" class=" id_input form-control" placeholder="상의 재고">
+						<label class="mt-2">&nbsp;상의 재고</label>
+						<input type="text" name="coatStock" class=" id_input form-control" placeholder="상의 재고를 입력해 주세요.">
 						<span class="ck_coat ck_coatS">상의 재고를 입력해 주세요.</span>
 					</div>
 					<div class="form-group coatDiscount">
 						<!-- 할인율 값 -->
-						<input type="hidden" id="coatDiscount" name="coatDiscount" value="0">
+						<label class="mt-2">&nbsp;상의 할인율</label>
+						<input type="hidden" id="coatDiscount" name="coatDiscount" >
 						<!-- 할인율 정수를 입력할 input -->
-						<input id="coatDiscount_interface" class="id_input form-control" maxlength="2" value="0">
-						<span class="step_val">할인 가격:<span class="span_discount"></span></span>
+						<input id="coatDiscount_interface" class="id_input form-control" maxlength="2" placeholder="할인율을 입력해 주세요."  >
+						<span class="step_val text-secondary">&nbsp; 할인 가격 : <span class="span_discount"></span></span>
 					</div>
 					
-					<div class="form-group coatImage mt-5">
-						<label>상의 이미지</label>
-						<input type="file" id="coatFileImage" name="coatFileImage" class=" id_input form-control">
-					</div>					
-					<input type="button" id="register_button" class="btn btn-dark" value="등록" >
-					<input type="button" id="cancel_button" class="btn btn-dark" value="취소" >
+					<div class="form-group  mt-5">
+						<label for="formFile" class="form-label">상의 이미지</label>
+						<input type="file" class="form-control" id="formFile" name="uploadFile">
+					</div>
+					
+					
+					<input type="button" id="register_button" class="btn btn-dark mt-3" value="등록" >
+					<input type="button" id="cancel_button" class="btn btn-dark mt-3 ml-2" value="취소" >
 				</form>
 			</div>
 		</div>
@@ -180,9 +188,60 @@
 		
 	});
 	
+	//이미지 업로드
+	$("input[type='file']").on("change",function(e){
+		
+		let formData = new FormData();
+		let fileInput = $('input[name="uploadFile"]');
+		let fileList = fileInput[0].files;
+		let fileObj = fileList[0];
+
+		
+		if(!fileCheck(fileObj.name, fileObj.size)){
+			return false;
+		}
+		
+		formData.append("uploadFile", fileObj);
+		
+		//input태그에 multiple 있는 경우
+		
+		//for(let i=0; i<fileList.length; i++){
+		//	formData.append("uploadFile", fileList[i])
+		//}
+		
+		$.ajax({
+			url:'/admin/uploadAjaxAction',
+			processData : false,
+			contentType : false,
+			data : formData,
+			type : 'POST',
+			dataType : 'json',
+			success : function(result){
+				console.log(result);
+			}
+		});
+	}); 
+	
+	//파일 업로드 유효성 검사
+	let regex = new RegExp("(.*?)\.(jpg|png|jpeg)$");
+	let maxSize = 1048576; //1MB
+	
+	function fileCheck(fileName, fileSize){
+		
+		if(fileSize >= maxSize){
+			alert("파일 사이즈 초과");
+			return false;
+		}
+		
+		if(!regex.test(fileName)){
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
 	
 </script>
-
 
 
 
