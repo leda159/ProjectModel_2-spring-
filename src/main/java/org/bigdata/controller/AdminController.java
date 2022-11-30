@@ -57,7 +57,8 @@ public class AdminController {
 
 		log.info("관리자 페이지로 이동");
 	}
-		
+	
+	
 	  //상의 관리(리스트) 페이지 접속
 	  @RequestMapping(value="/productCoatManage", method=RequestMethod.GET) 
 	  public void productCoatManageGET(Criteria cri, Model model) throws Exception{
@@ -150,18 +151,27 @@ public class AdminController {
 			  String type = null;
 			  
 			  try {
+				  
 				type = Files.probeContentType(checkfile.toPath()); 
+				
 				log.info("MIME TYPE : " + type);
+				
 			  }catch(IOException e) {
+				  
 				  e.printStackTrace();
 			  }
 			  
 			  if(!type.startsWith("image")) {
+				  
 				  List<AttachImageVO> list = null;
+				  
 				  return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
 			  }
 		  }
+		  
+		  
 		  String uploadFolder = "C:\\upload";
+		  
 		  
 		  //날짜 폴더 경로
 		  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -172,12 +182,15 @@ public class AdminController {
 		  
 		  String datePath = str.replace("-",File.separator);
 		  
+		  
 		  //폴더 생성
+		  // C:\ upload\2022\11\30
 		  File uploadPath = new File(uploadFolder, datePath);
 		  
 		  if(uploadPath.exists() == false) {
 			  uploadPath.mkdirs();
 		  }
+		  
 		  
 		  //이미지 정보를 담는 객체
 		  List<AttachImageVO> list = new ArrayList();
@@ -194,7 +207,7 @@ public class AdminController {
 			  
 			  //uuid(고유 번호) 적용 파일 이름
 			  String uuid = UUID.randomUUID().toString();
-			  vo.setUuid(datePath);
+			  vo.setUuid(uuid);
 			  
 			  uploadFileName = uuid + "_" + uploadFileName;
 			  

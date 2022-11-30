@@ -292,7 +292,7 @@
 		let obj = uploadResultArr[0];
 		let str = "";		
 		let fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName);
-		//									  (obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uploadPath + "_" + obj.fileName);
+		//		이렇게 나옵니다...				(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uploadPath + "_" + obj.fileName);
 		
 		str += "<div id='result_card'>";
 		str += "<img src='/display?fileName="+ fileCallPath +"'>";
