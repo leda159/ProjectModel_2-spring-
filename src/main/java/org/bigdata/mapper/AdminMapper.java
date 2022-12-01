@@ -2,6 +2,7 @@ package org.bigdata.mapper;
 
 import java.util.List;
 
+import org.bigdata.domain.CoatAttachImageVO;
 import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.MemberVO;
@@ -20,13 +21,16 @@ public interface AdminMapper {
 	public int productCoatGetTotal(Criteria cri);
 	
 	//상의 조회
-	public CoatVO productGetDetail(int coatId);
+	public CoatVO productGetDetail(int coatNumber);
 	
 	//상의 수정
 	public int productCoatUpdate(CoatVO coat);
 	
 	//상의 삭제
-	public int productCoatDelete(int coatId); 
+	public int productCoatDelete(int coatNumber); 
+	
+	//상의 이미지 등록
+	public void productCoatImage(CoatAttachImageVO vo);
 	
 	
 	

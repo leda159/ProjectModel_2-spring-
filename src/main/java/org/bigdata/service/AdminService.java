@@ -19,13 +19,13 @@ public interface AdminService {
 	public int productCoatGetTotal(Criteria cri);
 	
 	//상의 조회
-	public CoatVO productCoatGetDetail(int coatId);
+	public CoatVO productCoatGetDetail(int coatNumber);
 	
 	//상의 수정
 	public int productCoatUpdate(CoatVO coat);
 	
 	//상의 삭제
-	public int productCoatDelete(int coatId); 
+	public int productCoatDelete(int coatNumber); 
 	
 	
 	

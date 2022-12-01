@@ -60,11 +60,10 @@
 				<form action="/admin/productCoat" name="productCoat" id="productCoat" method="post">
 				
 					<h3 style="text-align:center;">상의 등록</h3>
-					
-					<div class="form-group mt-2 coatId">
-						<label class="">&nbsp;상의 ID</label>
-						<input type="text" name="coatId" class=" id_input form-control" placeholder="상의 ID를 입력해 주세요.">
-						<span class="ck_coat ck_coatI">상의 ID를 입력해 주세요.</span>
+					<div class="form-group coatKey">
+						<label class="mt-2">&nbsp;상의 ID</label>
+						<input type="text" name="coatKey" class=" id_input form-control" placeholder="상의 ID를 입력해 주세요.">
+						<span class="ck_coat ck_coatK">상의 ID를 입력해 주세요.</span>
 					</div>
 					<div class="form-group coatName">
 						<label class="mt-2">&nbsp;상의 이름</label>
@@ -129,7 +128,7 @@
 		 
 		//체크 변수
 		
-		let ck_coatId = false;
+		let ck_coatKey = false;
 		let ck_coatName = false;
 		let ck_coatPrice = false;
 		let ck_coatStock = false;
@@ -138,7 +137,7 @@
 		
 		//체크 대상 변수
 		
-		let coatId = $("input[name='coatId']").val();
+		let coatKey = $("input[name='coatKey']").val();
 		let coatName = $("input[name='coatName']").val();
 		let coatPrice = $("input[name='coatPrice']").val();
 		let coatStock = $("input[name='coatStock']").val();
@@ -147,12 +146,13 @@
 		
 		//빈칸 체크
 		
-		if(coatId){
-			$(".ck_coatI").css('display','none');
-			ck_coatId = true;
+		
+		if(coatKey){
+			$(".ck_coatK").css('display','none');
+			ck_coatKey = true;
 		} else {
-			$(".ck_coatI").css('display','block');
-			ck_coatId = false;
+			$(".ck_coatK").css('display','block');
+			ck_coatKey = false;
 		}
 		
 		if(coatName){
@@ -189,7 +189,7 @@
 		}	
 		
 		
-		if(ck_coatId && ck_coatName && ck_coatPrice && ck_coatStock && ck_coatContents){
+		if(ck_coatKey &&ck_coatName && ck_coatPrice && ck_coatStock && ck_coatContents){
 			
 			//alert('통과');
 			productCoat.submit(); 
@@ -323,6 +323,9 @@
 		str += "<div id='result_card'>";
 		str += "<img src='/display?fileName="+ fileCallPath +"'>";
 		str += "<div class='imgDeleteBtn' data-file='"+ fileCallPath +"'>x</div>";
+		str +="<input type='hidden' name='imageList[0].fileName' value='"+ obj.fileName +"'>";
+		str +="<input type='hidden' name='imageList[0].uuid' value='"+ obj.fileName +"'>";
+		str +="<input type='hidden' name='imageList[0].uploadPath' value='"+ obj.fileName +"'>";
 		str += "</div>";		
 		
 		uploadResult.append(str);

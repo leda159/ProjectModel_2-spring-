@@ -14,7 +14,8 @@ public class CoatAttachImageVO {
 	//파일 이름
 	private String fileName;
 	
-	//상의 id
-	private int coatId;
+	//상의 번호
+	private int coatNumber;
+
 	
 }

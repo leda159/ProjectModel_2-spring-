@@ -1,5 +1,6 @@
 package org.bigdata.mapper;
 
+import org.bigdata.domain.CoatAttachImageVO;
 import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.PantsVO;
@@ -26,7 +27,7 @@ public class AdminMapperTests {
 	public void productCoatTest() throws Exception{
 		CoatVO coat = new CoatVO();
 		
-		coat.setCoatId(4);
+		coat.setCoatNumber(4);
 		coat.setCoatName("상의 이름");
 		coat.setCoatPrice(10000);
 		coat.setCoatStock(10);
@@ -93,9 +94,9 @@ public class AdminMapperTests {
 		@Test
 		public void productGetDetailTest() {
 			
-			int coatId = 1004;
+			int coatNumber = 1004;
 			
-			CoatVO result = mapper.productGetDetail(coatId);
+			CoatVO result = mapper.productGetDetail(coatNumber);
 			
 			System.out.println("상품 조회 데이터 : " + result);
 			
@@ -108,7 +109,7 @@ public class AdminMapperTests {
 			
 			CoatVO coat = new CoatVO();
 			
-			coat.setCoatId(1145);
+			coat.setCoatNumber(1145);
 			coat.setCoatName("테스트");
 			coat.setCoatPrice(100000);
 			coat.setCoatStock(10);
@@ -122,13 +123,27 @@ public class AdminMapperTests {
 		@Test
 		public void productCoatDeleteTset() {
 			
-			int coatId =2168;
+			int coatNumber =2168;
 			
-			int result = mapper.productCoatDelete(coatId);
+			int result = mapper.productCoatDelete(coatNumber);
 			
 			if(result == 1) {
 				log.info("삭제 성공");
 			}
+		}
+		
+		//상의 이미지 등록
+		@Test
+		public void productCoatImageTest() {
+			
+			CoatAttachImageVO vo = new CoatAttachImageVO();
+			
+			vo.setCoatNumber(1);
+			vo.setFileName("1");
+			vo.setUploadPath("1");
+			vo.setUuid("1");
+			
+			mapper.productCoatImage(vo);
 		}
 
 }

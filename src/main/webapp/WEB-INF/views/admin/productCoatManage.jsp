@@ -19,6 +19,7 @@
 			<table width="100%" class="table table-striped table-bordered table-hover" id="dataList">
 				<thead>
 				<tr>
+                	<th class="text-center">Number</th>
                 	<th class="text-center">상의 ID</th>
                     <th class="text-center">상의 이름</th>
                     <th class="text-center">상의 설명</th>
@@ -30,8 +31,9 @@
                	</thead>  
 			   	<c:forEach var="coatList" items="${coatList}">
 				<tr>
-                  	<td class="text-center"><c:out value="${coatList.coatId}"/></td>
-                    <td class="text-center"><a class="move" href='<c:out value="${coatList.coatId}"/>'><c:out value="${coatList.coatName}"/></a></td>
+                  	<td class="text-center"><c:out value="${coatList.coatNumber}"/></td>
+                    <td class="text-center"><a class="move" href='<c:out value="${coatList.coatNumber}"/>'><c:out value="${coatList.coatName}"/></a></td>
+                    <td class="text-center"><c:out value="${coatList.coatKey}"/></td>
                     <td class="text-center"><c:out value="${coatList.coatContents}"/></td>
                     <td class="text-center"><c:out value="${coatList.coatPrice}"/></td>
                     <td class="text-center"><c:out value="${coatList.coatStock}"/></td>
@@ -153,7 +155,7 @@
 		
 		e.preventDefault();
 		
-		actionForm.append("<input type='hidden' name='coatId' value='"+$(this).attr("href")+"'>");
+		actionForm.append("<input type='hidden' name='coatNumber' value='"+$(this).attr("href")+"'>");
 		actionForm.attr("action","/admin/productCoatDetail");
 		actionForm.submit();
 		

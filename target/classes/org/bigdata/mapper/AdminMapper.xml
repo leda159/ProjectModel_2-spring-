@@ -7,40 +7,47 @@
     
     <!-- 상의 등록  -->
     <insert id="productCoat" >
-    	insert into shopping_coat(coatId,coatName,coatPrice,coatStock,coatDiscount,coatContents,regDate)
-    				values(seq_coat.nextval,#{coatName},#{coatPrice},#{coatStock},#{coatDiscount},#{coatContents},sysdate)
+    	insert into shopping_coat(coatNumber,coatKey,coatName,coatPrice,coatStock,coatDiscount,coatContents,regDate)
+    				values(seq_coatkey.nextval,#{coatKey},#{coatName},#{coatPrice},#{coatStock},#{coatDiscount},#{coatContents},sysdate)
+    </insert>
+    
+    <!-- 상의 이미지 등록 -->
+    <insert id="productCoatImage">
+    	insert into shopping_coatImage(coatNumber,fileName,uploadPath,uuid)
+    		values(#{coatNumber},#{fileName},#{uploadPath},#{uuid})
     </insert>
  
  	<!-- 상의 상품 상세보기 -->
  	<select id="productGetDetail" resultType="org.bigdata.domain.CoatVO">
- 		select * from shopping_coat where coatId = #{coatId}
+ 		select * from shopping_coat where coatNumber = #{coatNumber}
  	</select>
  	
  	<!--상의 상품 수정하기  -->
  	<update id="productCoatUpdate">
  	
  		update shopping_coat set 
+ 					coatKey = #{coatKey},
  					coatName = #{coatName},
  					coatPrice = #{coatPrice},
  					coatStock = #{coatStock},
  					coatDiscount = #{coatDiscount},
  					coatContents = #{coatContents},
  					updateDate = sysdate
- 			where coatId = ${coatId}
+ 			where coatNumber = ${coatNumber}
  	</update>
  	
  	<!-- 상의 상품 삭제하기  -->
  	<delete id="productCoatDelete">
- 		delete from shopping_coat where coatId = #{coatId}
+ 		delete from shopping_coat where coatNumber = #{coatNumber}
  	</delete>
  
     <!--페이징 처리 적용 상의 리스트 -->
     <select id="productCoatGetList"
 			resultType="org.bigdata.domain.CoatVO">
 		<![CDATA[
-			select coatId,coatName,coatPrice,coatStock,coatDiscount,coatContents,regdate,updatedate
+			select coatNumber,coatKey,coatName,coatPrice,coatStock,coatDiscount,coatContents,regdate,updatedate
 			  from (select /*+ INDEX_DESC(shopping_coat pk_coat) */
-			               rownum rn,coatId,coatName,coatPrice,coatStock,coatDiscount,coatContents,regdate,updatedate
+			               rownum rn,coatNumber,coatKey,coatName,coatPrice,coatStock,coatDiscount,coatContents,regdate,updatedate
 			     from shopping_coat
 			     where 
 			

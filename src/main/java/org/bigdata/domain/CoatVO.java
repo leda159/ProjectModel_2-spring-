@@ -1,16 +1,17 @@
 package org.bigdata.domain;
 
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.List;
 
 import lombok.Data;
 
 @Data
 public class CoatVO {
 
-	//상의 아이디
-	private int coatId;
+	//상의 번호
+	private int coatNumber;
+	//상의 상품번호
+	private int coatKey;
 	//상의 이름
 	private String coatName;
 	//상의 가격
@@ -28,6 +29,7 @@ public class CoatVO {
 	//@JsonFormat(pattern="yyyy-MM-dd" ,timezone="Asia/Seoul")
 	private Date updateDate;
 	
-	private CoatAttachImageVO imageVO;
+	//이미지 정보
+	private List<CoatAttachImageVO> imageVO;
 	
 }

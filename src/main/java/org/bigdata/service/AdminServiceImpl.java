@@ -45,9 +45,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	//상의 조회
 	@Override
-	public CoatVO productCoatGetDetail(int coatId) {
-		log.info("productCoatGetDetail메서드 실행" + coatId);
-		return adminMapper.productGetDetail(coatId);
+	public CoatVO productCoatGetDetail(int coatNumber) {
+		log.info("productCoatGetDetail메서드 실행" + coatNumber);
+		return adminMapper.productGetDetail(coatNumber);
 	}
 	
 	//상의 수정
@@ -59,9 +59,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	//상의 삭제
 	@Override
-	public int productCoatDelete(int coatId) {
+	public int productCoatDelete(int coatNumber) {
 		log.info("productCoatDelete메서드 실행");
-		return adminMapper.productCoatDelete(coatId);
+		return adminMapper.productCoatDelete(coatNumber);
 	}
 	
 	

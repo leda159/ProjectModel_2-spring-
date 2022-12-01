@@ -102,14 +102,14 @@ public class AdminController {
 	  
 	  //상의 조회 , 수정 페이지
 	  @GetMapping({"/productCoatDetail" , "/productCoatUpdate"})
-	  public void productCoatDetailGet(int coatId, Criteria cri, Model model) {
+	  public void productCoatDetailGet(int coatNumber, Criteria cri, Model model) {
 		  
-		  log.info("productCoatDetailGet 메서드" + coatId);
+		  log.info("productCoatDetailGet 메서드" + coatNumber);
 		  
 		  //목록 페이지 조건 정보
 		  model.addAttribute("cri",cri);
 		  //조회 페이지 정보
-		  model.addAttribute("productInfo", adminService.productCoatGetDetail(coatId));
+		  model.addAttribute("productInfo", adminService.productCoatGetDetail(coatNumber));
 		  
 	  }
 	  
@@ -128,11 +128,11 @@ public class AdminController {
 	  
 	  //상의 정보 삭제
 	  @PostMapping("/productCoatDelete")
-	  public String productCoatDeletePost(int coatId, RedirectAttributes rttr) {
+	  public String productCoatDeletePost(int coatNumber, RedirectAttributes rttr) {
 		  
-		  log.info("productCoatUpdatePost메서드 실행" + coatId);
+		  log.info("productCoatUpdatePost메서드 실행" + coatNumber);
 		  
-		  int result = adminService.productCoatDelete(coatId);
+		  int result = adminService.productCoatDelete(coatNumber);
 		  
 		  rttr.addFlashAttribute("delete_result",result);
 		  
