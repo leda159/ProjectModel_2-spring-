@@ -28,4 +28,6 @@ public class CoatVO {
 	//@JsonFormat(pattern="yyyy-MM-dd" ,timezone="Asia/Seoul")
 	private Date updateDate;
 	
+	private CoatAttachImageVO imageVO;
+	
 }

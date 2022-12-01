@@ -16,8 +16,9 @@
 	}
 	.imgDeleteBtn{
 	    position: absolute;
-	    top: 0;
+	    top: 5%;
 	    right: 5%;
+	    
 	    background-color: black;
 	    color: wheat;
 	    font-weight: 900;
@@ -31,6 +32,24 @@
 	    cursor: pointer;	
 	}
 	
+	.btn-upload {
+  		width: 150px;
+  		height: 30px;
+ 		background: #fff;
+  		border: 1px solid rgb(77,77,77);
+  		border-radius: 10px;
+  		font-weight: 500;
+  		cursor: pointer;
+  		display: flex;
+  		align-items: center;
+ 		justify-content: center;
+	}
+
+	#formFile {
+  		display: none;
+	}	
+
+
 </style>
 <!-- 상의 등록 페이지 -->
 
@@ -76,12 +95,13 @@
 						<span class="step_val text-secondary">&nbsp; 할인 가격 : <span class="span_discount"></span></span>
 					</div>
 					
-					<div class="form-group  mt-5">
-						<label for="formFile" class="form-label">상의 이미지</label>
-						<input type="file" class="form-control" id="formFile" name="uploadFile">
-					</div>
-					<div id="uploadResult">
-						<!-- <div id="result_card">
+						<label for="formFile" style="margin-top: 20px;">
+							<div class="btn-upload">이미지 등록</div>
+						</label>
+						<input type="file" id="formFile" name="uploadFile">
+						
+					<div class="filebox" id="uploadResult">
+				  <!-- <div id="result_card">
 							<div class="imgDeleteBtn">x</div>
 							<img src="/display?fileName=test.jpg">
 						</div> -->
@@ -227,6 +247,12 @@
 	//이미지 업로드
 	$("input[type='file']").on("change",function(e){
 		
+		//이미지 존재시 삭제
+		if($(".imgDeleteBtn").length > 0){
+			
+			deleteFile();
+		}
+		
 		let formData = new FormData();
 		let fileInput = $('input[name="uploadFile"]');
 		let fileList = fileInput[0].files;
@@ -292,16 +318,48 @@
 		let obj = uploadResultArr[0];
 		let str = "";		
 		let fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName);
-		//		이렇게 나옵니다...				(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uploadPath + "_" + obj.fileName);
+		
 		
 		str += "<div id='result_card'>";
 		str += "<img src='/display?fileName="+ fileCallPath +"'>";
-		str += "<div class='imgDeleteBtn'>x</div>";
+		str += "<div class='imgDeleteBtn' data-file='"+ fileCallPath +"'>x</div>";
 		str += "</div>";		
 		
 		uploadResult.append(str);
 			
 	} 
+ 	
+ 	//이미지 삭제 버튼 동작
+ 	$("#uploadResult").on("click",".imgDeleteBtn", function(e){
+ 		
+ 		deleteFile();
+ 	});
+ 	
+ 	//파일 삭제 메서드
+ 	function deleteFile(){
+ 		
+ 		let targetFile = $(".imgDeleteBtn").data("file");
+ 		let targetDiv = $("#result_card");
+ 		
+ 		$.ajax({
+ 			url : '/admin/deleteFile',
+ 			data : {fileName : targetFile},
+ 			dataType : 'text',
+ 			type : 'POST',
+ 			success : function(result){
+ 				console.log(result);
+ 				
+ 				targetDiv.remove();
+ 				$("input[type='file']").val("");
+ 			},
+ 			
+ 			error : function(result){
+ 				console.log(result);
+ 				
+ 				alert("파일을 삭제하지 못하였습니다.")
+ 			}
+ 		});
+ 	}
 	
 	
 </script>

@@ -3,6 +3,7 @@ package org.bigdata.controller;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
-import org.bigdata.domain.AttachImageVO;
+import org.bigdata.domain.CoatAttachImageVO;
 import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.PageDTO;
@@ -138,9 +139,9 @@ public class AdminController {
 		  return"redirect:/admin/productCoatManage";
 	  }
 	  
-	  //상의 파일 업로드
+	  //파일 업로드
 	  @PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	  public ResponseEntity<List<AttachImageVO>> uploadAjaxActionPost(MultipartFile[] uploadFile) {
+	  public ResponseEntity<List<CoatAttachImageVO>> uploadAjaxActionPost(MultipartFile[] uploadFile) {
 		  
 		  log.info("uploadAjaxActionPost메서드 실행");
 		  
@@ -163,7 +164,7 @@ public class AdminController {
 			  
 			  if(!type.startsWith("image")) {
 				  
-				  List<AttachImageVO> list = null;
+				  List<CoatAttachImageVO> list = null;
 				  
 				  return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
 			  }
@@ -193,12 +194,12 @@ public class AdminController {
 		  
 		  
 		  //이미지 정보를 담는 객체
-		  List<AttachImageVO> list = new ArrayList();
+		  List<CoatAttachImageVO> list = new ArrayList();
 		  
 		  for(MultipartFile multipartFile : uploadFile) {
 			  
 			  //이미지 정보 객체
-			  AttachImageVO vo = new AttachImageVO();
+			  CoatAttachImageVO vo = new CoatAttachImageVO();
 			  
 			  //파일 이름
 			  String uploadFileName = multipartFile.getOriginalFilename();
@@ -230,7 +231,7 @@ public class AdminController {
 				  int height = (int)(bo_image.getHeight() / ratio);
 				  
 				  Thumbnails.of(saveFile)
-				  .size(width, height)
+				  .size(300, 400)
 				  .toFile(thumbnailFile);
 				  
 			  }catch(Exception e){
@@ -240,9 +241,40 @@ public class AdminController {
 			  
 		  }//for
 		  
-		  ResponseEntity<List<AttachImageVO>> result = new ResponseEntity<List<AttachImageVO>>(list,HttpStatus.OK);
+		  ResponseEntity<List<CoatAttachImageVO>> result = new ResponseEntity<List<CoatAttachImageVO>>(list,HttpStatus.OK);
 		  
 		  return result;
+	  }
+	  
+	  //이미지 파일 삭제
+	  @PostMapping("/deleteFile")
+	  public ResponseEntity<String> deleteFile(String fileName){
+		  log.info("deleteFile 메서드 실행" +fileName);
+		  
+		  File file = null;
+		  
+		  try{
+			  //썸네일 파일 삭제
+			  file = new File("c:\\upload\\" + URLDecoder.decode(fileName,"UTF-8"));
+			  file.delete();
+			  
+			  
+			  //원본 파일 삭제
+			  String originFileName = file.getAbsolutePath().replace("s_","");
+			  
+			  log.info("originFileName :" +originFileName);
+			  
+			  file = new File(originFileName);
+			  file.delete();
+			  
+		  }catch(Exception e) {
+			  
+			  e.printStackTrace();
+			  return new ResponseEntity<String>("fali", HttpStatus.NOT_IMPLEMENTED);
+			  
+		  }//catch
+		  
+		  return new ResponseEntity<String>("success", HttpStatus.OK);
 	  }
 	  
 

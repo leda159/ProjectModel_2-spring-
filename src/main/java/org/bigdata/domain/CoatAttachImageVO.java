@@ -3,7 +3,7 @@ package org.bigdata.domain;
 import lombok.Data;
 
 @Data
-public class AttachImageVO {
+public class CoatAttachImageVO {
 
 	//경로
 	private String uploadPath;
