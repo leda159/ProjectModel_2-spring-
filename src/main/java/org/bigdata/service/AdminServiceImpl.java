@@ -47,7 +47,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public CoatVO productCoatGetDetail(int coatNumber) {
 		log.info("productCoatGetDetail메서드 실행" + coatNumber);
-		return adminMapper.productGetDetail(coatNumber);
+		return adminMapper.productCoatGetDetail(coatNumber);
 	}
 	
 	//상의 수정
@@ -77,6 +77,45 @@ public class AdminServiceImpl implements AdminService {
 		log.info("Service productPants");
 		adminMapper.productPants(pants);
 	}
+	
+	//하의 리스트
+	@Override
+	public List<PantsVO> productPantsGetList(Criteria cri) {
+		log.info("productPantsGetList메소드 실행");
+		return adminMapper.productPantsGetList(cri);
+	}
+
+	//하의 총 갯수
+	@Override
+	public int productPantsGetTotal(Criteria cri) {
+		log.info("productPantsGetTotal메소드 실행");
+		return adminMapper.productPantsGetTotal(cri);
+	}
+	
+	//하의 조회
+	@Override
+	public PantsVO productPantsGetDetail(int pantsNumber) {
+		log.info("productPantsGetDetail메서드 실행" + pantsNumber);
+		return adminMapper.productPantsGetDetail(pantsNumber);
+	}
+	
+	//하의 수정
+	@Override
+	public int productPantsUpdate(PantsVO pants) {
+		log.info("productPantsUpdate메서드 실행");
+		return adminMapper.productPantsUpdate(pants);
+	}
+	
+	//하의 삭제
+	@Override
+	public int productPantsDelete(int pantsNumber) {
+		log.info("productPantsDelete메서드 실행");
+		return adminMapper.productPantsDelete(pantsNumber);
+	}	
+	
+	
+	
+	
 
 	//신발 등록
 	@Override
@@ -86,7 +125,40 @@ public class AdminServiceImpl implements AdminService {
 		adminMapper.productShoes(shoes);
 	}
 
+	//신발 리스트
+	@Override
+	public List<ShoesVO> productShoesGetList(Criteria cri) {
+		log.info("productShoesGetList메소드 실행");
+		return adminMapper.productShoesGetList(cri);
+	}
 
+	//신발 총 갯수
+	@Override
+	public int productShoesGetTotal(Criteria cri) {
+		log.info("productShoesGetTotal메소드 실행");
+		return adminMapper.productShoesGetTotal(cri);
+	}
+	
+	//신발 조회
+	@Override
+	public ShoesVO productShoesGetDetail(int shoesNumber) {
+		log.info("productShoesGetDetail메서드 실행" + shoesNumber);
+		return adminMapper.productShoesGetDetail(shoesNumber);
+	}
+	
+	//신발 수정
+	@Override
+	public int productShoesUpdate(ShoesVO shoes) {
+		log.info("productShoesUpdate메서드 실행");
+		return adminMapper.productShoesUpdate(shoes);
+	}
+	
+	//신발 삭제
+	@Override
+	public int productShoesDelete(int shoesNumber) {
+		log.info("productShoesDelete메서드 실행");
+		return adminMapper.productShoesDelete(shoesNumber);
+	}	
 
 
 

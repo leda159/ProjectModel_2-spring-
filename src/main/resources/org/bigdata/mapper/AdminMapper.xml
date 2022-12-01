@@ -18,7 +18,7 @@
     </insert>
  
  	<!-- 상의 상품 상세보기 -->
- 	<select id="productGetDetail" resultType="org.bigdata.domain.CoatVO">
+ 	<select id="productCoatGetDetail" resultType="org.bigdata.domain.CoatVO">
  		select * from shopping_coat where coatNumber = #{coatNumber}
  	</select>
  	
@@ -80,15 +80,181 @@
     
     
     
+    
+    
+    
+    
+    <!-- 하의 등록 -->
     <insert id="productPants">
-    	insert into shopping_pants(pantsId,pantsName,pantsPrice,pantsStock,pantsDiscount,pantsContents)
-    				values(seq_pants.nextval,#{pantsId},#{pantsName},#{pantsPrice},#{pantsStock},#{pantsDiscount},#{pantsContents})
+    	insert into shopping_pants(pantsNumber,pantsKey,pantsName,pantsPrice,pantsStock,pantsDiscount,pantsContents,regDate)
+    				values(seq_pantskey.nextval,#{pantsKey},#{pantsName},#{pantsPrice},#{pantsStock},#{pantsDiscount},#{pantsContents},sysdate)
     </insert>
     
+    
+<!--       하의 이미지 등록
+    <insert id="productPantsImage">
+    	insert into shopping_pantsImage(pantsNumber,fileName,uploadPath,uuid)
+    		values(#{pantsNumber},#{fileName},#{uploadPath},#{uuid})
+    </insert> -->
+ 
+ 	<!-- 하의 상품 상세보기 -->
+ 	<select id="productPantsGetDetail" resultType="org.bigdata.domain.PantsVO">
+ 		select * from shopping_pants where pantsNumber = #{pantsNumber}
+ 	</select>
+ 	
+ 	<!--하의 상품 수정하기  -->
+ 	<update id="productPantsUpdate">
+ 	
+ 		update shopping_pants set 
+ 					pantsKey = #{pantsKey},
+ 					pantsName = #{pantsName},
+ 					pantsPrice = #{pantsPrice},
+ 					pantsStock = #{pantsStock},
+ 					pantsDiscount = #{pantsDiscount},
+ 					pantsContents = #{pantsContents},
+ 					updateDate = sysdate
+ 			where pantsNumber = ${pantsNumber}
+ 	</update>
+ 	
+ 	<!-- 하의 상품 삭제하기  -->
+ 	<delete id="productPantsDelete">
+ 		delete from shopping_pants where pantsNumber = #{pantsNumber}
+ 	</delete>
+ 
+    <!--페이징 처리 적용 하의 리스트 -->
+    <select id="productPantsGetList"
+			resultType="org.bigdata.domain.PantsVO">
+		<![CDATA[
+			select pantsNumber,patnsKey,patnsName,patnsPrice,patnsStock,patnsDiscount,patnsContents,regdate,updatedate
+			  from (select /*+ INDEX_DESC(shopping_pants pk_pants) */
+			               rownum rn,patnsNumber,patnsKey,patnsName,patnsPrice,patnsStock,patnsDiscount,patnsContents,regdate,updatedate
+			     from shopping_patns
+			     where 
+			
+		]]> 
+		 		<if test="keyword != null">
+	      			 patnsName like '%' || #{keyword} || '%' and
+	      		</if>
+	      
+	    <![CDATA[	
+	   			 rownum <= #{pageNum} * #{amount}
+			     )
+			 where rn > (#{pageNum} -1) * #{amount}
+	               
+		]]>
+	</select>
+  
+  
+	<!-- 하의 총 개수 -->
+	<select id="productPatnsGetTotal" resultType="int">
+		select count(*) 
+	      from shopping_patns
+	      
+	      <if test="keyword != null">
+	      	where patnsName like '%' || #{keyword} || '%'
+	      </if>
+	</select>
+	     
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    <!-- 신발 등록 -->
     <insert id="productShoes">
-    	insert into shopping_shoes(shoesId,shoesName,shoesPrice,shoesStock,shoesDiscount,shoesContents)
-    				values(seq_shoes.nextval,#{shoesId},#{shoesName},#{shoesPrice},#{shoesStock},#{shoesDiscount},#{shoesContents})
+    	insert into shopping_shoes(shoesNumber,shoesKey,shoesName,shoesPrice,shoesStock,shoesDiscount,shoesContents,regDate)
+    				values(seq_shoesKey.nextval,#{shoesKey},#{shoesName},#{shoesPrice},#{shoesStock},#{shoesDiscount},#{shoesContents},sysdate)
     </insert>
+    
+<!--       신발 이미지 등록
+    <insert id="productShoesImage">
+    	insert into shopping_shoesImage(shoesNumber,fileName,uploadPath,uuid)
+    		values(#{shoesNumber},#{fileName},#{uploadPath},#{uuid})
+    </insert> -->
+ 
+ 	<!-- 신발 상품 상세보기 -->
+ 	<select id="productShoesGetDetail" resultType="org.bigdata.domain.ShoesVO">
+ 		select * from shopping_shoes where shoesNumber = #{shoesNumber}
+ 	</select>
+ 	
+ 	<!--신발 상품 수정하기  -->
+ 	<update id="productShoesUpdate">
+ 	
+ 		update shopping_shoes set 
+ 					shoesKey = #{shoesKey},
+ 					shoesName = #{shoesName},
+ 					shoesPrice = #{shoesPrice},
+ 					shoesStock = #{shoesStock},
+ 					shoesDiscount = #{shoesDiscount},
+ 					shoesContents = #{shoesContents},
+ 					updateDate = sysdate
+ 			where shoesNumber = ${shoesNumber}
+ 	</update>
+ 	
+ 	<!-- 신발 상품 삭제하기  -->
+ 	<delete id="productShoesDelete">
+ 		delete from shopping_shoes where shoesNumber = #{shoesNumber}
+ 	</delete>
+ 
+    <!--페이징 처리 적용 신발 리스트 -->
+    <select id="productShoesGetList"
+			resultType="org.bigdata.domain.ShoesVO">
+		<![CDATA[
+			select shoesNumber,shoesKey,shoesName,shoesPrice,shoesStock,shoesDiscount,shoesContents,regdate,updatedate
+			  from (select /*+ INDEX_DESC(shopping_shoes pk_shoes) */
+			               rownum rn,shoesNumber,shoesKey,shoesName,shoesPrice,shoesStock,shoesDiscount,shoesContents,regdate,updatedate
+			     from shopping_shoes
+			     where 
+			
+		]]> 
+		 		<if test="keyword != null">
+	      			 shoesName like '%' || #{keyword} || '%' and
+	      		</if>
+	      
+	    <![CDATA[	
+	   			 rownum <= #{pageNum} * #{amount}
+			     )
+			 where rn > (#{pageNum} -1) * #{amount}
+	               
+		]]>
+	</select>
+  
+  
+	<!-- 신발 총 개수 -->
+	<select id="productShoesGetTotal" resultType="int">
+		select count(*) 
+	      from shopping_shoes
+	      
+	      <if test="keyword != null">
+	      	where shoesName like '%' || #{keyword} || '%'
+	      </if>
+	</select>    
     						  
     
     </mapper>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

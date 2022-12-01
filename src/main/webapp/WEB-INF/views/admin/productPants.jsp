@@ -13,8 +13,8 @@
 					<h3 style="text-align:center;">하의 등록</h3>
 					
 					<div class="form-group pantsId">
-						<input type="text" name="pantsId" class=" id_input form-control" placeholder="하의 ID" maxlength="20">
-						<span class="ck_pants ck_pantsI">하의 ID를 입력해 주세요.</span>
+						<input type="text" name="pantsKey" class=" id_input form-control" placeholder="하의 ID" maxlength="20">
+						<span class="ck_pants ck_pantsK">하의 ID를 입력해 주세요.</span>
 					</div>
 					<div class="form-group pantsName">
 						<input type="text" name="pantsName" class=" id_input form-control" placeholder="하의 이름" maxlength="20">
@@ -76,12 +76,12 @@
 		
 		//빈칸 체크
 		
-		if(pantsId){
-			$(".ck_pantsI").css('display','none');
-			ck_pantsId = true;
+		if(pantsKey){
+			$(".ck_pantsK").css('display','none');
+			ck_pantsKey = true;
 		} else {
-			$(".ck_pantsI").css('display','block');
-			ck_pantsId = false;
+			$(".ck_pantsK").css('display','block');
+			ck_pantsKey = false;
 		}
 		
 		if(pantsName){
@@ -125,7 +125,7 @@
 		}	
 		
 		
-		if(ck_pantsId && ck_pantsName && ck_pantsPrice && ck_pantsStock && 
+		if(ck_pantsKey && ck_pantsName && ck_pantsPrice && ck_pantsStock && 
 		   ck_pantsDiscount && ck_pantsContents){
 			
 			//alert('통과');

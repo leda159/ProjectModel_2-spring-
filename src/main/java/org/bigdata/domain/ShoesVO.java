@@ -1,6 +1,7 @@
 package org.bigdata.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -23,5 +24,6 @@ public class ShoesVO {
 	private Date regDate;
 	//수정 날짜
 	private Date updateDate;
-	
+	//이미지 정보
+	private List<CoatAttachImageVO> imageVO;
 }

@@ -44,7 +44,7 @@
 						<input id="coatDiscount_interface" class="id_input form-control">
 						<span class="step_val">할인 가격:<span class="span_discount"></span></span>
 					</div>
-					<input type="hidden" name="coatId" value="${productInfo.coatNumber}">
+					<input type="hidden" name="coatNumber" value="${productInfo.coatNumber}">
 				</form>
 					<button class="btn btn-outline-dark CoatUpdate_btn" id="CoatUpdateBtn">수정</button>
 					<button class="btn btn-outline-dark CoatDelete_btn" id="CoatDeleteBtn">삭제</button>

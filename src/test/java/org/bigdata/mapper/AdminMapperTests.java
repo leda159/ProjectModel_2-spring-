@@ -96,7 +96,7 @@ public class AdminMapperTests {
 			
 			int coatNumber = 1004;
 			
-			CoatVO result = mapper.productGetDetail(coatNumber);
+			CoatVO result = mapper.productCoatGetDetail(coatNumber);
 			
 			System.out.println("상품 조회 데이터 : " + result);
 			

@@ -279,6 +279,7 @@ public class AdminController {
 	  
 
 	  
+//////////////////////////////////////////////////////////////////	  
 	  
 	  
 	  
@@ -309,7 +310,59 @@ public class AdminController {
 	  
 	  }
 	  
-	 
+	  //하의 조회 , 수정 페이지
+	  @GetMapping({"/productPantsDetail" , "/productPantsUpdate"})
+	  public void productPantsDetailGet(int pantsNumber, Criteria cri, Model model) {
+		  
+		  log.info("productPantsDetailGet 메서드" + pantsNumber);
+		  
+		  //목록 페이지 조건 정보
+		  model.addAttribute("cri",cri);
+		  //조회 페이지 정보
+		  model.addAttribute("productInfo", adminService.productPantsGetDetail(pantsNumber));
+		  
+	  }
+	  
+	  //하의 정보 수정
+	  @PostMapping("/productPantsUpdate")
+	  public String productPantsUpdatePost(PantsVO pants, RedirectAttributes rttr) {
+		  
+		  log.info("productPantsUpdatePost메서드 실행" + pants);
+		  
+		  int result = adminService.productPantsUpdate(pants);
+		  
+		  rttr.addFlashAttribute("update_result",result);
+		  
+		  return"redirect:/admin/productPantsManage";
+	  }
+	  
+	  //하의 정보 삭제
+	  @PostMapping("/productPantsDelete")
+	  public String productPantsDeletePost(int pantsNumber, RedirectAttributes rttr) {
+		  
+		  log.info("productPantsUpdatePost메서드 실행" + pantsNumber);
+		  
+		  int result = adminService.productPantsDelete(pantsNumber);
+		  
+		  rttr.addFlashAttribute("delete_result",result);
+		  
+		  return"redirect:/admin/productPantsManage";
+	  }	  
+
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+//////////////////////////////////////////////////////////////////////////////	  
+	  
+	  
 	// 신발 관리 페이지 접속
 	@RequestMapping(value = "/productShoesManage", method = RequestMethod.GET)
 	public void productShoesManageGET() throws Exception {
@@ -334,4 +387,75 @@ public class AdminController {
 
 		return "redirect:/admin/productShoesManage";
 	}
+	
+	  //하의 조회 , 수정 페이지
+	  @GetMapping({"/productShoesDetail" , "/productShoesUpdate"})
+	  public void productShoesDetailGet(int shoesNumber, Criteria cri, Model model) {
+		  
+		  log.info("productShoesDetailGet 메서드" + shoesNumber);
+		  
+		  //목록 페이지 조건 정보
+		  model.addAttribute("cri",cri);
+		  //조회 페이지 정보
+		  model.addAttribute("productInfo", adminService.productShoesGetDetail(shoesNumber));
+		  
+	  }
+	  
+	  //하의 정보 수정
+	  @PostMapping("/productPantsUpdate")
+	  public String productShoesUpdatePost(ShoesVO shoes, RedirectAttributes rttr) {
+		  
+		  log.info("productShoesUpdatePost메서드 실행" + shoes);
+		  
+		  int result = adminService.productShoesUpdate(shoes);
+		  
+		  rttr.addFlashAttribute("update_result",result);
+		  
+		  return"redirect:/admin/productShoesManage";
+	  }
+	  
+	  //하의 정보 삭제
+	  @PostMapping("/productShoesDelete")
+	  public String productShoesDeletePost(int shoesNumber, RedirectAttributes rttr) {
+		  
+		  log.info("productShoesUpdatePost메서드 실행" + shoesNumber);
+		  
+		  int result = adminService.productShoesDelete(shoesNumber);
+		  
+		  rttr.addFlashAttribute("delete_result",result);
+		  
+		  return"redirect:/admin/productShoesManage";
+	  }	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

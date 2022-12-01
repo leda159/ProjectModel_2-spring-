@@ -32,6 +32,60 @@ public interface AdminService {
 	
 	//하의 등록
 	public void productPants(PantsVO pants);
+	//하의 리스트
+	public List<PantsVO> productPantsGetList(Criteria cri);
+	
+	//하의 총 개수
+	public int productPantsGetTotal(Criteria cri);
+	
+	//하의 조회
+	public PantsVO productPantsGetDetail(int pantsNumber);
+	
+	//하의 수정
+	public int productPantsUpdate(PantsVO pants);
+	
+	//하의 삭제
+	public int productPantsDelete(int pantsNumber); 	
+	
+	
+	
+	
+	
 	//신발 등록
 	public void ProductShoes(ShoesVO shoes);
+	
+	//신발 리스트
+	public List<ShoesVO> productShoesGetList(Criteria cri);
+	
+	//신발 총 개수
+	public int productShoesGetTotal(Criteria cri);
+	
+	//신발 조회
+	public ShoesVO productShoesGetDetail(int shoesNumber);
+	
+	//신발 수정
+	public int productShoesUpdate(ShoesVO shoes);
+	
+	//신발 삭제
+	public int productShoesDelete(int shoesNumber); 	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

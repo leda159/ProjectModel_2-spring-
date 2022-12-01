@@ -6,7 +6,9 @@ import org.bigdata.domain.CoatAttachImageVO;
 import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.MemberVO;
+import org.bigdata.domain.PantsAttachImageVO;
 import org.bigdata.domain.PantsVO;
+import org.bigdata.domain.ShoesAttachImageVO;
 import org.bigdata.domain.ShoesVO;
 
 public interface AdminMapper {
@@ -21,7 +23,7 @@ public interface AdminMapper {
 	public int productCoatGetTotal(Criteria cri);
 	
 	//상의 조회
-	public CoatVO productGetDetail(int coatNumber);
+	public CoatVO productCoatGetDetail(int coatNumber);
 	
 	//상의 수정
 	public int productCoatUpdate(CoatVO coat);
@@ -37,10 +39,54 @@ public interface AdminMapper {
 	
 	//하의 등록
 	public void productPants(PantsVO pants);
+
+	//하의 상품 리스트
+	public List<PantsVO> productPantsGetList(Criteria cri);
+	
+	//하의 상품 총 개수
+	public int productPantsGetTotal(Criteria cri);
+	
+	//하의 조회
+	public PantsVO productPantsGetDetail(int pantsNumber);
+	
+	//하의 수정
+	public int productPantsUpdate(PantsVO pants);
+	
+	//하의 삭제
+	public int productPantsDelete(int pantsNumber); 
+	
+	//하의 이미지 등록
+	public void productPantsImage(PantsAttachImageVO vo);	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//신발 등록
 	public void productShoes(ShoesVO shoes);
 	
+	//신발 상품 리스트
+	public List<ShoesVO> productShoesGetList(Criteria cri);
+	
+	//신발 상품 총 개수
+	public int productShoesGetTotal(Criteria cri);
+	
+	//신발 조회
+	public ShoesVO productShoesGetDetail(int shoesNumber);
+	
+	//신발 수정
+	public int productShoesUpdate(ShoesVO shoes);
+	
+	//신발 삭제
+	public int productShoesDelete(int shoesNumber); 
+	
+	//신발 이미지 등록
+	public void productShoesImage(ShoesAttachImageVO vo);	
 	
 
 }
