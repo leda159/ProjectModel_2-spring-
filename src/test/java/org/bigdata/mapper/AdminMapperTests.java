@@ -42,7 +42,7 @@ public class AdminMapperTests {
 		public void productPantsTest() throws Exception{
 			PantsVO pants = new PantsVO();
 			
-			pants.setPantsId(1);
+			
 			pants.setPantsName("하의 이름");
 			pants.setPantsPrice(10000);
 			pants.setPantsStock(10);
@@ -57,7 +57,7 @@ public class AdminMapperTests {
 		public void productShoesTest() throws Exception{
 			ShoesVO shoes = new ShoesVO();
 			
-			shoes.setShoesId(4);
+			
 			shoes.setShoesName("신발 이름");
 			shoes.setShoesPrice(10000);
 			shoes.setShoesStock(10);

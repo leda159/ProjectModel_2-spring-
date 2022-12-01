@@ -44,12 +44,9 @@
   		align-items: center;
  		justify-content: center;
 	}
-
 	#formFile {
   		display: none;
 	}	
-
-
 </style>
 <!-- 상의 등록 페이지 -->
 
@@ -199,7 +196,6 @@
 		}
 		
 	});
-
 	
 	//취소 버튼
 	$("#cancel_button").click(function(){
@@ -257,7 +253,6 @@
 		let fileInput = $('input[name="uploadFile"]');
 		let fileList = fileInput[0].files;
 		let fileObj = fileList[0];
-
 		
 		if(!fileCheck(fileObj.name, fileObj.size)){
 			return false;
@@ -366,24 +361,3 @@
 	
 	
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

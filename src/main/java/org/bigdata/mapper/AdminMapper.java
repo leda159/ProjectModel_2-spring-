@@ -6,9 +6,7 @@ import org.bigdata.domain.CoatAttachImageVO;
 import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.MemberVO;
-import org.bigdata.domain.PantsAttachImageVO;
 import org.bigdata.domain.PantsVO;
-import org.bigdata.domain.ShoesAttachImageVO;
 import org.bigdata.domain.ShoesVO;
 
 public interface AdminMapper {
@@ -55,8 +53,6 @@ public interface AdminMapper {
 	//하의 삭제
 	public int productPantsDelete(int pantsNumber); 
 	
-	//하의 이미지 등록
-	public void productPantsImage(PantsAttachImageVO vo);	
 	
 	
 	
@@ -85,8 +81,6 @@ public interface AdminMapper {
 	//신발 삭제
 	public int productShoesDelete(int shoesNumber); 
 	
-	//신발 이미지 등록
-	public void productShoesImage(ShoesAttachImageVO vo);	
 	
 
 }

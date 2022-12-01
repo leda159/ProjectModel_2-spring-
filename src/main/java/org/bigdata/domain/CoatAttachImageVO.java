@@ -16,6 +16,10 @@ public class CoatAttachImageVO {
 	
 	//상의 번호
 	private int coatNumber;
-
 	
+	//하의 번호
+	private int pantsNumber;
+	
+	//신발 번호
+	private int shoesNumber;
 }

@@ -21,30 +21,30 @@ import lombok.extern.log4j.Log4j;
 public class MainController {
 
 	//로그인 페이지 이동
-		@RequestMapping(value = "/main",method = RequestMethod.GET)
-		public void loginGET() {
-			log.info("메인 화면 이동");
-		}
+	@RequestMapping(value = "/main",method = RequestMethod.GET)
+	public void loginGET() {
+		log.info("메인 화면 이동");
+	}
+	
+	
+	@GetMapping("/display")
+	public ResponseEntity<byte[]> getImage(String fileName){
 		
+		log.info("getImage메서드 실행 " + fileName);
+		File file = new File("c:\\upload\\" + fileName);
 		
-		@GetMapping("/display")
-		public ResponseEntity<byte[]> getImage(String fileName){
+		ResponseEntity<byte[]> result = null;
+		
+		try {
+			HttpHeaders header = new HttpHeaders();
 			
-			log.info("getImage메서드 실행 " + fileName);
-			File file = new File("c:\\upload\\" + fileName);
+			header.add("Content-type", Files.probeContentType(file.toPath()));
 			
-			ResponseEntity<byte[]> result = null;
-			
-			try {
-				HttpHeaders header = new HttpHeaders();
-				
-				header.add("Content-type", Files.probeContentType(file.toPath()));
-				
-				result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),
-													header,HttpStatus.OK);
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
-			return result;
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),
+												header,HttpStatus.OK);
+		}catch(IOException e) {
+			e.printStackTrace();
 		}
+		return result;
+	}
 }

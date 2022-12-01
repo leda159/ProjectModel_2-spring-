@@ -11,7 +11,7 @@
     				values(seq_coatkey.nextval,#{coatKey},#{coatName},#{coatPrice},#{coatStock},#{coatDiscount},#{coatContents},sysdate)
     </insert>
     
-    <!-- 상의 이미지 등록 -->
+    <!--  이미지 등록 -->
     <insert id="productCoatImage">
     	insert into shopping_coatImage(coatNumber,fileName,uploadPath,uuid)
     		values(#{coatNumber},#{fileName},#{uploadPath},#{uuid})
@@ -91,11 +91,6 @@
     </insert>
     
     
-<!--       하의 이미지 등록
-    <insert id="productPantsImage">
-    	insert into shopping_pantsImage(pantsNumber,fileName,uploadPath,uuid)
-    		values(#{pantsNumber},#{fileName},#{uploadPath},#{uuid})
-    </insert> -->
  
  	<!-- 하의 상품 상세보기 -->
  	<select id="productPantsGetDetail" resultType="org.bigdata.domain.PantsVO">
@@ -125,15 +120,15 @@
     <select id="productPantsGetList"
 			resultType="org.bigdata.domain.PantsVO">
 		<![CDATA[
-			select pantsNumber,patnsKey,patnsName,patnsPrice,patnsStock,patnsDiscount,patnsContents,regdate,updatedate
+			select pantsNumber,pantsKey,pantsName,pantsPrice,pantsStock,pantsDiscount,pantsContents,regdate,updatedate
 			  from (select /*+ INDEX_DESC(shopping_pants pk_pants) */
-			               rownum rn,patnsNumber,patnsKey,patnsName,patnsPrice,patnsStock,patnsDiscount,patnsContents,regdate,updatedate
-			     from shopping_patns
+			               rownum rn,pantsNumber,pantsKey,pantsName,pantsPrice,pantsStock,pantsDiscount,pantsContents,regdate,updatedate
+			     from shopping_pants
 			     where 
 			
 		]]> 
 		 		<if test="keyword != null">
-	      			 patnsName like '%' || #{keyword} || '%' and
+	      			 pantsName like '%' || #{keyword} || '%' and
 	      		</if>
 	      
 	    <![CDATA[	
@@ -146,12 +141,12 @@
   
   
 	<!-- 하의 총 개수 -->
-	<select id="productPatnsGetTotal" resultType="int">
+	<select id="productPantsGetTotal" resultType="int">
 		select count(*) 
-	      from shopping_patns
+	      from shopping_pants
 	      
 	      <if test="keyword != null">
-	      	where patnsName like '%' || #{keyword} || '%'
+	      	where pantsName like '%' || #{keyword} || '%'
 	      </if>
 	</select>
 	     

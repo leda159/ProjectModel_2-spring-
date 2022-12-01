@@ -8,8 +8,10 @@ import lombok.Data;
 @Data
 public class PantsVO {
 
+	//하의 번호
+	private int pantsNumber;
 	//하의 아이디
-	private int pantsId;
+	private int pantsKey;
 	//하의 이름
 	private String pantsName;
 	//하의 가격
@@ -24,6 +26,5 @@ public class PantsVO {
 	private Date regDate;
 	//수정 날짜
 	private Date updateDate;
-	//이미지 정보
-	private List<CoatAttachImageVO> imageVO;
+	
 }

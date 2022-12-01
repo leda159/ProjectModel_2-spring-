@@ -280,18 +280,34 @@ public class AdminController {
 
 	  
 //////////////////////////////////////////////////////////////////	  
+
+
+	
 	  
 	  
 	  
+	  //하의 관리(리스트) 페이지 접속
+	  @RequestMapping(value="/productPantsManage", method=RequestMethod.GET) 
+	  public void productPantsManageGET(Criteria cri, Model model) throws Exception{
 	  
-	  //하의 관리 페이지 접속
-	  @RequestMapping(value="/productPantsManage", method=RequestMethod.GET) public
-	  void productPantsManageGET() throws Exception{
+	  log.info("하의 등록 페이지 접속"); 
+
+	  List pantsList = adminService.productPantsGetList(cri);
 	  
-	  log.info("하의 등록 페이지 접속"); }
+	  if(!pantsList.isEmpty()) {
+		  model.addAttribute("pantsList",pantsList);
+	  }else{
+		  model.addAttribute("pantsListCheck","empty");
+		  return;
+	  }
+  
+	  //페이지 이동 인터페이스 데이터
+	  model.addAttribute("pageMaker", new PageDTO(cri, adminService.productPantsGetTotal(cri)));	  
+	  
+	  }
 	  
 	  
-	  //하의 관리 페이지 접속
+	  //하의 등록 페이지 접속
 	  @GetMapping("/productPants") public void productPants() {
 	  
 	  }
@@ -402,7 +418,7 @@ public class AdminController {
 	  }
 	  
 	  //하의 정보 수정
-	  @PostMapping("/productPantsUpdate")
+	  @PostMapping("/productShoesUpdate")
 	  public String productShoesUpdatePost(ShoesVO shoes, RedirectAttributes rttr) {
 		  
 		  log.info("productShoesUpdatePost메서드 실행" + shoes);
@@ -427,9 +443,6 @@ public class AdminController {
 		  return"redirect:/admin/productShoesManage";
 	  }	
 }
-
-
-
 
 
 

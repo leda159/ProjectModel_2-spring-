@@ -8,8 +8,10 @@ import lombok.Data;
 @Data
 public class ShoesVO {
 
+	//신발 번호
+	private int shoesNumber;
 	//신발 아이디
-	private int shoesId;
+	private int shoesKey;
 	//신발 이름
 	private String shoesName;
 	//신발 가격
@@ -24,6 +26,5 @@ public class ShoesVO {
 	private Date regDate;
 	//수정 날짜
 	private Date updateDate;
-	//이미지 정보
-	private List<CoatAttachImageVO> imageVO;
+	
 }

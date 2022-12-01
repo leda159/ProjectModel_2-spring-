@@ -2,7 +2,55 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../adminIncludes/header.jsp" %>
 
-<!-- 신발 등록 페이지 -->
+<style type="text/css">
+	#result_card img{
+		max-width: 100%;
+	    height: auto;
+	    display: block;
+	    padding: 5px;
+	    margin-top: 10px;
+	    margin: auto;	
+	}
+	#result_card {
+		position: relative;
+	}
+	.imgDeleteBtn{
+	    position: absolute;
+	    top: 5%;
+	    right: 5%;
+	    
+	    background-color: black;
+	    color: wheat;
+	    font-weight: 900;
+	    width: 30px;
+	    height: 30px;
+	    border-radius: 50%;
+	    line-height: 26px;
+	    text-align: center;
+	    border: none;
+	    display: block;
+	    cursor: pointer;	
+	}
+	
+	.btn-upload {
+  		width: 150px;
+  		height: 30px;
+ 		background: #fff;
+  		border: 1px solid rgb(77,77,77);
+  		border-radius: 10px;
+  		font-weight: 500;
+  		cursor: pointer;
+  		display: flex;
+  		align-items: center;
+ 		justify-content: center;
+	}
+
+	#formFile {
+  		display: none;
+	}	
+
+
+</style>
 
 
 <div class="container">
@@ -12,27 +60,33 @@
 				
 					<h3 style="text-align:center;">신발 등록</h3>
 					
-					<div class="form-group shoesId">
+					<div class="form-group shoesKey">
+						<label class="mt-2">&nbsp;신발 ID</label>
 						<input type="text" name="shoesId" class=" id_input form-control" placeholder="신발 ID" maxlength="20">
 						<span class="ck_shoes ck_shoesI">신발 ID를 입력해 주세요.</span>
 					</div>
 					<div class="form-group shoesName">
+						<label class="mt-2">&nbsp;신발 이름</label>
 						<input type="text" name="shoesName" class=" id_input form-control" placeholder="신발 이름" maxlength="20">
 						<span class="ck_shoes ck_shoesN">신발 이름을 입력해 주세요.</span>
 					</div>
 					<div class="form-group shoesPrice">
+						<label class="mt-2">&nbsp;신발 가격</label>
 						<input type="text" name="shoesPrice" class=" id_input form-control" placeholder="신발 가격" maxlength="20">
 						<span class="ck_shoes ck_shoesP">신발 가격을 입력해 주세요.</span>
 					</div>
 					<div class="form-group shoesStock">
+						<label class="mt-2">&nbsp;신발 재고</label>
 						<input type="text" name="shoesStock" class=" id_input form-control" placeholder="신발 재고" maxlength="20">
 						<span class="ck_shoes ck_shoesS">신발 재고를 입력해 주세요.</span>
 					</div>
 					<div class="form-group shoesDiscount">
+						<label class="mt-2">&nbsp;신발 할인율</label>
 						<input type="text" name="shoesDiscount" class=" id_input form-control" placeholder="신발 할인율"  maxlength="20">
 						<span class="ck_shoes ck_shoesD">신발 할인율을 입력해 주세요.</span>
 					</div>
 					<div class="form-group shoesContents">
+						<label class="mt-2">&nbsp;신발 내용</label>
 						<input type="text" name="shoesContents" class=" id_input form-control" placeholder="신발 내용"  maxlength="20">
 						<span class="ck_shoes ck_shoesC">신발 내용을 입력해 주세요.</span>
 					</div>
