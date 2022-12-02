@@ -61,34 +61,35 @@
 					<h3 style="text-align:center;">신발 등록</h3>
 					
 					<div class="form-group shoesKey">
-						<label class="mt-2">&nbsp;신발 ID</label>
-						<input type="text" name="shoesId" class=" id_input form-control" placeholder="신발 ID" maxlength="20">
-						<span class="ck_shoes ck_shoesI">신발 ID를 입력해 주세요.</span>
+						<label class="mt-2">&nbsp;신발 코드</label>
+						<input type="text" name="shoesKey" class=" id_input form-control" placeholder="신발 코드를 입력해 주세요.">
+						<span class="ck_shoes ck_shoesK">신발 코드를 입력해 주세요.</span>
 					</div>
 					<div class="form-group shoesName">
 						<label class="mt-2">&nbsp;신발 이름</label>
-						<input type="text" name="shoesName" class=" id_input form-control" placeholder="신발 이름" maxlength="20">
+						<input type="text" name="shoesName" class=" id_input form-control" placeholder="신발 이름을 입력해 주세요.">
 						<span class="ck_shoes ck_shoesN">신발 이름을 입력해 주세요.</span>
+					</div>
+					<div class="form-group shoesContents">
+						<label class="mt-2">&nbsp;신발 내용</label>
+						<input type="text" name="shoesContents" class=" id_input form-control" placeholder="신발 내용을 입력해 주세요">
+						<span class="ck_shoes ck_shoesC">신발 내용을 입력해 주세요.</span>
 					</div>
 					<div class="form-group shoesPrice">
 						<label class="mt-2">&nbsp;신발 가격</label>
-						<input type="text" name="shoesPrice" class=" id_input form-control" placeholder="신발 가격" maxlength="20">
+						<input type="text" name="shoesPrice" class=" id_input form-control" placeholder="신발 가격을 입력해 주세요.">
 						<span class="ck_shoes ck_shoesP">신발 가격을 입력해 주세요.</span>
 					</div>
 					<div class="form-group shoesStock">
 						<label class="mt-2">&nbsp;신발 재고</label>
-						<input type="text" name="shoesStock" class=" id_input form-control" placeholder="신발 재고" maxlength="20">
+						<input type="text" name="shoesStock" class=" id_input form-control" placeholder="신발 재고를 입력해 주세요.">
 						<span class="ck_shoes ck_shoesS">신발 재고를 입력해 주세요.</span>
 					</div>
 					<div class="form-group shoesDiscount">
 						<label class="mt-2">&nbsp;신발 할인율</label>
-						<input type="text" name="shoesDiscount" class=" id_input form-control" placeholder="신발 할인율"  maxlength="20">
-						<span class="ck_shoes ck_shoesD">신발 할인율을 입력해 주세요.</span>
-					</div>
-					<div class="form-group shoesContents">
-						<label class="mt-2">&nbsp;신발 내용</label>
-						<input type="text" name="shoesContents" class=" id_input form-control" placeholder="신발 내용"  maxlength="20">
-						<span class="ck_shoes ck_shoesC">신발 내용을 입력해 주세요.</span>
+						<input type="hidden" name="shoesDiscount" class=" id_input form-control">
+						<input id="shoesDiscount_interface" class="id_input form-control" maxlength="2" placeholder="할인율을 입력해 주세요."  >
+						<span class="step_val text-secondary">&nbsp; 할인 가격 : <span class="span_discount"></span></span>
 					</div>
 					<input type="button" id="register_button" class="btn btn-dark" value="등록" >
 					<input type="button" id="cancel_button" class="btn btn-dark" value="취소" >
@@ -111,7 +112,7 @@
 		
 		//체크 변수
 		
-		let ck_shoesId = false;
+		let ck_shoesKey = false;
 		let ck_shoesName = false;
 		let ck_shoesPrice = false;
 		let ck_shoesStock = false;
@@ -120,7 +121,7 @@
 		
 		//체크 대상 변수
 		
-		let shoesId = $("input[name='shoesId']").val();
+		let shoesKey = $("input[name='shoesKey']").val();
 		let shoesName = $("input[name='shoesName']").val();
 		let shoesPrice = $("input[name='shoesPrice']").val();
 		let shoesStock = $("input[name='shoesStock']").val();
@@ -129,12 +130,12 @@
 		
 		//빈칸 체크
 		
-		if(shoesId){
-			$(".ck_shoesI").css('display','none');
-			ck_shoesId = true;
+		if(shoesKey){
+			$(".ck_shoesK").css('display','none');
+			ck_shoesKey = true;
 		} else {
-			$(".ck_shoesI").css('display','block');
-			ck_shoesId = false;
+			$(".ck_shoesK").css('display','block');
+			ck_shoesKey = false;
 		}
 		
 		if(shoesName){
@@ -178,7 +179,7 @@
 		}	
 		
 		
-		if(ck_shoesId && ck_shoesName && ck_shoesPrice && ck_shoesStock && 
+		if(ck_shoesKey && ck_shoesName && ck_shoesPrice && ck_shoesStock && 
 		   ck_shoesDiscount && ck_shoesContents){
 			
 			//alert('통과');
@@ -196,6 +197,41 @@
 		location.href="/admin/productShoesManage"
 	});
 	
+	//할인율 input 처리
+	$("#shoesDiscount_interface").on("propertychange change keyup paste input",function(){
+		
+		let userInput = $("#shoesDiscount_interface");
+		let discountInput = $("input[name='shoesDiscount']");
+		
+		let discountRate = userInput.val();     //사용자가 입력할 할인값
+		let sendDiscountRate = discountRate / 100;// 서버에 전송할 할인값
+		
+		let productShoesPrice = $("input[name='shoesPrice']").val(); //원가
+		let discountShoesPrice = productShoesPrice * (1 - sendDiscountRate); //할인가격
+		
+		
+			$(".span_discount").html(discountShoesPrice);
+			discountInput.val(sendDiscountRate);
+	
+	});
+	
+	
+	//상품가격 , 상품 할인율 순으로 입력을 했다가 다시 상품가격을 수정하는 경우 > 할인 가격을 바로 볼 수 있도록 처리
+	$("#shoesPrice").on("change",function(){
+		
+		let userInput = $("#shoesDiscount_interface");
+		let discountInput = $("input[name='shoesDiscount']");
+		
+		let discountRate = userInput.val();     //사용자가 입력할 할인값
+		let sendDiscountRate = discountRate / 100;// 서버에 전송할 할인값
+		
+		let productShoesPrice = $("input[name='shoesPrice']").val(); //원가
+		let discountShoesPrice = productShoesPrice * (1 - sendDiscountRate); //할인가격
+		
+		
+			$(".span_discount").html(discountShoesPrice);
+		
+	});
 	
 </script>
 

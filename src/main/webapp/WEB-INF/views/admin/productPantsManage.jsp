@@ -20,8 +20,8 @@
 				<thead>
 				<tr>
                 	<th class="text-center">Number</th>
-                	<th class="text-center">하의 ID</th>
-                    <th class="text-center">하의 이름</th>
+                	<th class="text-center">하의 이름</th>
+                    <th class="text-center">하의 코드</th>
                     <th class="text-center">하의 설명</th>
                     <th class="text-center">가격</th>
                     <th class="text-center">재고</th>

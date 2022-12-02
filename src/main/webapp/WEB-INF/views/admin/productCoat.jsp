@@ -58,7 +58,7 @@
 				
 					<h3 style="text-align:center;">상의 등록</h3>
 					<div class="form-group coatKey">
-						<label class="mt-2">&nbsp;상의 ID</label>
+						<label class="mt-2">&nbsp;상의 코드</label>
 						<input type="text" name="coatKey" class=" id_input form-control" placeholder="상의 ID를 입력해 주세요.">
 						<span class="ck_coat ck_coatK">상의 ID를 입력해 주세요.</span>
 					</div>

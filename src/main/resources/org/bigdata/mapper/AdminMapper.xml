@@ -13,7 +13,7 @@
     
     <!--  이미지 등록 -->
     <insert id="productCoatImage">
-    	insert into shopping_coatImage(coatNumber,fileName,uploadPath,uuid)
+    	insert into shopping_Image(coatNumber,fileName,uploadPath,uuid)
     		values(#{coatNumber},#{fileName},#{uploadPath},#{uuid})
     </insert>
  

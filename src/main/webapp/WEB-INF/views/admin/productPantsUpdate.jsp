@@ -17,7 +17,7 @@
 						<input type="text" name="pantsNumber" value='<c:out value="${productInfo.pantsNumber}" />'  class=" id_input form-control" readonly="readonly" >
 					</div>
 					<div class="form-group pantsKey">
-						<label>하의 ID</label>
+						<label>하의 코드</label>
 						<input type="text" name="pantsKey" value='<c:out value="${productInfo.pantsKey}" />'  class=" id_input form-control">
 					</div>
 					<div class="form-group pantsName">

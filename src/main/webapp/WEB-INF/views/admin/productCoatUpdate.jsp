@@ -17,7 +17,7 @@
 						<input type="text" name="coatNumber" value='<c:out value="${productInfo.coatNumber}" />'  class=" id_input form-control" readonly="readonly" >
 					</div>
 					<div class="form-group coatKey">
-						<label>상의 ID</label>
+						<label>상의 코드</label>
 						<input type="text" name="coatKey" value='<c:out value="${productInfo.coatKey}" />'  class=" id_input form-control">
 					</div>
 					<div class="form-group coatName">

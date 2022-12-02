@@ -13,7 +13,7 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
-import org.bigdata.domain.CoatAttachImageVO;
+import org.bigdata.domain.AttachImageVO;
 import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.PageDTO;
@@ -58,7 +58,11 @@ public class AdminController {
 
 		log.info("관리자 페이지로 이동");
 	}
+
 	
+	
+	
+///////////////////////////////////// 상의 상품 ///////////////////////////////////////////////////////	
 	
 	  //상의 관리(리스트) 페이지 접속
 	  @RequestMapping(value="/productCoatManage", method=RequestMethod.GET) 
@@ -141,7 +145,7 @@ public class AdminController {
 	  
 	  //파일 업로드
 	  @PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	  public ResponseEntity<List<CoatAttachImageVO>> uploadAjaxActionPost(MultipartFile[] uploadFile) {
+	  public ResponseEntity<List<AttachImageVO>> uploadAjaxActionPost(MultipartFile[] uploadFile) {
 		  
 		  log.info("uploadAjaxActionPost메서드 실행");
 		  
@@ -164,7 +168,7 @@ public class AdminController {
 			  
 			  if(!type.startsWith("image")) {
 				  
-				  List<CoatAttachImageVO> list = null;
+				  List<AttachImageVO> list = null;
 				  
 				  return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
 			  }
@@ -194,12 +198,12 @@ public class AdminController {
 		  
 		  
 		  //이미지 정보를 담는 객체
-		  List<CoatAttachImageVO> list = new ArrayList();
+		  List<AttachImageVO> list = new ArrayList();
 		  
 		  for(MultipartFile multipartFile : uploadFile) {
 			  
 			  //이미지 정보 객체
-			  CoatAttachImageVO vo = new CoatAttachImageVO();
+			  AttachImageVO vo = new AttachImageVO();
 			  
 			  //파일 이름
 			  String uploadFileName = multipartFile.getOriginalFilename();
@@ -241,7 +245,7 @@ public class AdminController {
 			  
 		  }//for
 		  
-		  ResponseEntity<List<CoatAttachImageVO>> result = new ResponseEntity<List<CoatAttachImageVO>>(list,HttpStatus.OK);
+		  ResponseEntity<List<AttachImageVO>> result = new ResponseEntity<List<AttachImageVO>>(list,HttpStatus.OK);
 		  
 		  return result;
 	  }
@@ -279,7 +283,7 @@ public class AdminController {
 	  
 
 	  
-//////////////////////////////////////////////////////////////////	  
+////////////////////////////// 하의 상품 ////////////////////////////////////////////////////////	  
 
 
 	
@@ -366,32 +370,41 @@ public class AdminController {
 	  }	  
 
 	  
+
 	  
 	  
 	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-//////////////////////////////////////////////////////////////////////////////	  
+//////////////////////////////////// 신발 상품 //////////////////////////////////////////	  
 	  
 	  
 	// 신발 관리 페이지 접속
 	@RequestMapping(value = "/productShoesManage", method = RequestMethod.GET)
-	public void productShoesManageGET() throws Exception {
+	public void productShoesManageGET(Criteria cri, Model model) throws Exception {
 
 		log.info("신발 등록 페이지 접속");
-	}
+		
+		 List shoesList = adminService.productShoesGetList(cri);
+		  
+		  if(!shoesList.isEmpty()) {
+			  model.addAttribute("shoesList",shoesList);
+		  }else{
+			  model.addAttribute("shoesListCheck","empty");
+			  return;
+		  }
+	  
+		  //페이지 이동 인터페이스 데이터
+		  model.addAttribute("pageMaker", new PageDTO(cri, adminService.productPantsGetTotal(cri)));	  
+		  
+		  }
+	
 
-	// 신발 등록
+	// 신발 등록페이지 접속
 	@GetMapping("/productShoes")
 	public void productShoes() {
 
 	}
 
+	//신발 등록
 	@PostMapping("/productShoes")
 	public String productShoesPOST(ShoesVO shoes, RedirectAttributes rttr) {
 
@@ -404,7 +417,7 @@ public class AdminController {
 		return "redirect:/admin/productShoesManage";
 	}
 	
-	  //하의 조회 , 수정 페이지
+	  //신발 조회 , 수정 페이지
 	  @GetMapping({"/productShoesDetail" , "/productShoesUpdate"})
 	  public void productShoesDetailGet(int shoesNumber, Criteria cri, Model model) {
 		  
@@ -417,24 +430,26 @@ public class AdminController {
 		  
 	  }
 	  
-	  //하의 정보 수정
+	  //신발 정보 수정
 	  @PostMapping("/productShoesUpdate")
 	  public String productShoesUpdatePost(ShoesVO shoes, RedirectAttributes rttr) {
 		  
 		  log.info("productShoesUpdatePost메서드 실행" + shoes);
 		  
-		  int result = adminService.productShoesUpdate(shoes);
+		  int result = adminService.productShoesUpdate(shoes); //여기가 안됨
+		  
+		  log.info("result..................."+result); //0
 		  
 		  rttr.addFlashAttribute("update_result",result);
 		  
 		  return"redirect:/admin/productShoesManage";
 	  }
 	  
-	  //하의 정보 삭제
+	  //신발 정보 삭제
 	  @PostMapping("/productShoesDelete")
 	  public String productShoesDeletePost(int shoesNumber, RedirectAttributes rttr) {
 		  
-		  log.info("productShoesUpdatePost메서드 실행" + shoesNumber);
+		  log.info("productShoesDeletePost메서드 실행" + shoesNumber);
 		  
 		  int result = adminService.productShoesDelete(shoesNumber);
 		  

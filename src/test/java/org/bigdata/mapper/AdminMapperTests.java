@@ -1,6 +1,6 @@
 package org.bigdata.mapper;
 
-import org.bigdata.domain.CoatAttachImageVO;
+import org.bigdata.domain.AttachImageVO;
 import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.PantsVO;
@@ -136,7 +136,7 @@ public class AdminMapperTests {
 		@Test
 		public void productCoatImageTest() {
 			
-			CoatAttachImageVO vo = new CoatAttachImageVO();
+			AttachImageVO vo = new AttachImageVO();
 			
 			vo.setCoatNumber(1);
 			vo.setFileName("1");

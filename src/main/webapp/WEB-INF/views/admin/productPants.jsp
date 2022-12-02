@@ -61,15 +61,20 @@
 					<h3 style="text-align:center;">하의 등록</h3>
 					
 					<div class="form-group pantsKey">
-						<label class="mt-2">&nbsp;하의 ID</label>
-						<input type="text" name="pantsKey" class=" id_input form-control" placeholder="하의 ID를 입력해 주세요.">
-						<span class="ck_pants ck_pantsK">하의 ID를 입력해 주세요.</span>
+						<label class="mt-2">&nbsp;하의 코드</label>
+						<input type="text" name="pantsKey" class=" id_input form-control" placeholder="하의 코드를 입력해 주세요.">
+						<span class="ck_pants ck_pantsK">하의 코드를 입력해 주세요.</span>
 					</div>
 					<div class="form-group pantsName">
 						<label class="mt-2">&nbsp;하의 이름</label>
 						<input type="text" name="pantsName" class=" id_input form-control" placeholder="하의 이름을 입력해 주세요.">
 						<span class="ck_pants ck_pantsN">하의 이름을 입력해 주세요.</span>
 					</div>
+					<div class="form-group pantsContents">
+						<label class="mt-2">&nbsp;하의 내용</label>
+						<input type="text" name="pantsContents" class=" id_input form-control" placeholder="하의 내용을 입력해 주세요.">
+						<span class="ck_pants ck_pantsC">하의 내용을 입력해 주세요.</span>
+					</div>					
 					<div class="form-group pantsPrice">
 						<label class="mt-2">&nbsp;하의 가격</label>
 						<input type="text" name="pantsPrice" class=" id_input form-control" placeholder="하의 가격을 입력해 주세요.">
@@ -79,11 +84,6 @@
 						<label class="mt-2">&nbsp;하의 재고</label>
 						<input type="text" name="pantsStock" class=" id_input form-control" placeholder="하의 재고를 입력해 주세요.">
 						<span class="ck_pants ck_pantsS">하의 재고를 입력해 주세요.</span>
-					</div>
-					<div class="form-group pantsContents">
-						<label class="mt-2">&nbsp;하의 내용</label>
-						<input type="text" name="pantsContents" class=" id_input form-control" placeholder="하의 내용을 입력해 주세요.">
-						<span class="ck_pants ck_pantsC">하의 내용을 입력해 주세요.</span>
 					</div>
 					<div class="form-group pantsDiscount">
 						<!-- 할인율 값 -->

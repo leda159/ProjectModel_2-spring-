@@ -26,5 +26,7 @@ public class PantsVO {
 	private Date regDate;
 	//수정 날짜
 	private Date updateDate;
+	//이미지 정보
+	private List<AttachImageVO> imageVO;
 	
 }
