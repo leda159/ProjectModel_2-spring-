@@ -23,19 +23,24 @@ public class AdminMapperTests {
 	private AdminMapper mapper;
 	
 	//상의등록
-	@Ignore
+	@Test
 	public void productCoatTest() throws Exception{
 		CoatVO coat = new CoatVO();
 		
-		coat.setCoatNumber(4);
+		coat.setCoatKey(4);
 		coat.setCoatName("상의 이름");
 		coat.setCoatPrice(10000);
 		coat.setCoatStock(10);
 		coat.setCoatDiscount(0.30);
 		coat.setCoatContents("상의 소개");
 		
+		log.info("before CoatVO : " + coat);
+		
 		mapper.productCoat(coat);
-		log.info(coat);
+		
+		log.info("afger CoatVO : " + coat);
+		
+		
 	}
 		//하의 등록
 		@Test
@@ -134,14 +139,14 @@ public class AdminMapperTests {
 		
 		//상의 이미지 등록
 		@Test
-		public void productCoatImageTest() {
+		public void productImageTest() {
 			
 			AttachImageVO vo = new AttachImageVO();
 			
-			vo.setCoatNumber(1);
-			vo.setFileName("1");
-			vo.setUploadPath("1");
-			vo.setUuid("1");
+			vo.setCoatNumber(297);
+			vo.setFileName("test");
+			vo.setUploadPath("test");
+			vo.setUuid("test");
 			
 			mapper.productCoatImage(vo);
 		}

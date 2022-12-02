@@ -7,12 +7,22 @@
     
     <!-- 상의 등록  -->
     <insert id="productCoat" >
+    
+    	<selectKey resultType="int" keyProperty="coatNumber" order="AFTER">
+    	
+    		select SEQ_COATKEY.currval from dual
+    		
+    	</selectKey>
+
+    	
+    	
     	insert into shopping_coat(coatNumber,coatKey,coatName,coatPrice,coatStock,coatDiscount,coatContents,regDate)
     				values(seq_coatkey.nextval,#{coatKey},#{coatName},#{coatPrice},#{coatStock},#{coatDiscount},#{coatContents},sysdate)
     </insert>
     
     <!--  이미지 등록 -->
     <insert id="productCoatImage">
+        
     	insert into shopping_Image(coatNumber,fileName,uploadPath,uuid)
     		values(#{coatNumber},#{fileName},#{uploadPath},#{uuid})
     </insert>

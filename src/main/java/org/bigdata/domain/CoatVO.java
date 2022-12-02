@@ -30,6 +30,6 @@ public class CoatVO {
 	private Date updateDate;
 	
 	//이미지 정보
-	private List<AttachImageVO> imageVO;
+	private List<AttachImageVO> imageList;
 	
 }

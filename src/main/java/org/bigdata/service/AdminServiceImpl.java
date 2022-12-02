@@ -27,6 +27,16 @@ public class AdminServiceImpl implements AdminService {
 		
 		log.info("Service productCoat");
 		adminMapper.productCoat(coat);	
+		
+		if(coat.getImageList() == null || coat.getImageList().size() <= 0) {
+			return;
+		}
+		
+		coat.getImageList().forEach(attach ->{
+			
+			attach.setCoatNumber(coat.getCoatNumber());
+			adminMapper.productCoatImage(attach);
+		});
 	}
 
 	//상의 리스트
