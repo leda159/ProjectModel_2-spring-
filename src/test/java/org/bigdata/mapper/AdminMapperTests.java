@@ -143,10 +143,10 @@ public class AdminMapperTests {
 			
 			AttachImageVO vo = new AttachImageVO();
 			
-			vo.setCoatNumber(297);
-			vo.setFileName("test");
-			vo.setUploadPath("test");
-			vo.setUuid("test");
+			vo.setCoatNumber(302);
+			vo.setFileName("test300");
+			vo.setUploadPath("test3000");
+			vo.setUuid("test30002");
 			
 			mapper.productCoatImage(vo);
 		}

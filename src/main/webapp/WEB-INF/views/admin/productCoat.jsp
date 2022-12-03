@@ -123,8 +123,8 @@
 		
 		e.preventDefault();
 		 
-		//체크 변수
 		
+		//체크 변수
 		let ck_coatKey = false;
 		let ck_coatName = false;
 		let ck_coatPrice = false;
@@ -132,8 +132,8 @@
 		let ck_coatDiscount = false;
 		let ck_coatContents = false;
 		
-		//체크 대상 변수
 		
+		//체크 대상 변수
 		let coatKey = $("input[name='coatKey']").val();
 		let coatName = $("input[name='coatName']").val();
 		let coatPrice = $("input[name='coatPrice']").val();
@@ -141,9 +141,8 @@
 		let coatDiscount = $("coatDiscount_interface").val();
 		let coatContents = $("input[name='coatContents']").val();
 		
+		
 		//빈칸 체크
-		
-		
 		if(coatKey){
 			$(".ck_coatK").css('display','none');
 			ck_coatKey = true;
@@ -319,8 +318,8 @@
 		str += "<img src='/display?fileName="+ fileCallPath +"'>";
 		str += "<div class='imgDeleteBtn' data-file='"+ fileCallPath +"'>x</div>";
 		str +="<input type='hidden' name='imageList[0].fileName' value='"+ obj.fileName +"'>";
-		str +="<input type='hidden' name='imageList[0].uuid' value='"+ obj.fileName +"'>";
-		str +="<input type='hidden' name='imageList[0].uploadPath' value='"+ obj.fileName +"'>";
+		str +="<input type='hidden' name='imageList[0].uuid' value='"+ obj.uuid +"'>";
+		str +="<input type='hidden' name='imageList[0].uploadPath' value='"+ obj.uploadPath +"'>";
 		str += "</div>";		
 		
 		uploadResult.append(str);

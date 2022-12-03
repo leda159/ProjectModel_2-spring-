@@ -45,17 +45,17 @@ public class AdminServiceTests {
 		AttachImageVO image2 = new AttachImageVO();
 
 		
-		image1.setFileName("test image1");
-		image1.setUploadPath("test image1");
-		image1.setUuid("test111");
+		image1.setFileName("testImage1");
+		image1.setUploadPath("testImage1");
+		image1.setUuid("test11114");
 		
-		image2.setFileName("test image1");
-		image2.setUploadPath("test image1");
-		image2.setUuid("test111");
+		image2.setFileName("testImage222");
+		image2.setUploadPath("testmage2223");
+		image2.setUuid("test22224");
 		
 		
 		imageList.add(image1);
-		//imageList.add(image2);
+		imageList.add(image2);
 		
 		coat.setImageList(imageList);
 		
