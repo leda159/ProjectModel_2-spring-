@@ -2,6 +2,7 @@ package org.bigdata.service;
 
 import java.util.List;
 
+import org.bigdata.domain.AttachImageVO;
 import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.PantsVO;
@@ -63,16 +64,34 @@ public class AdminServiceImpl implements AdminService {
 	//상의 수정
 	@Override
 	public int productCoatUpdate(CoatVO coat) {
-		log.info("productCoatUpdate메서드 실행");
-		return adminMapper.productCoatUpdate(coat);
+		
+		int result = adminMapper.productCoatUpdate(coat);
+		
+		if(result == 1 && coat.getImageList() != null && coat.getImageList().size() > 0) {
+			adminMapper.deleteImageAll(coat.getCoatNumber());
+			
+			coat.getImageList().forEach(attach -> {
+				attach.setCoatNumber(coat.getCoatNumber());
+				adminMapper.productCoatImage(attach);
+			});
+		}
+		return result;
 	}
 	
 	//상의 삭제
 	@Override
 	public int productCoatDelete(int coatNumber) {
 		log.info("productCoatDelete메서드 실행");
+		adminMapper.deleteImageAll(coatNumber);
 		return adminMapper.productCoatDelete(coatNumber);
 	}
+	
+	//지정 상의 이미지 정보 얻기
+	@Override
+	public List<AttachImageVO> getAttachInfo(int coatNumber) {
+		log.info("getAttachInfo메서드 실행");
+		return adminMapper.getAttachInfo(coatNumber);
+	}	
 	
 	
 	
@@ -168,7 +187,9 @@ public class AdminServiceImpl implements AdminService {
 	public int productShoesDelete(int shoesNumber) {
 		log.info("productShoesDelete메서드 실행");
 		return adminMapper.productShoesDelete(shoesNumber);
-	}	
+	}
+
+
 
 
 

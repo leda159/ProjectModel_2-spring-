@@ -3,7 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
 <%@ include file="../adminIncludes/header.jsp" %>
-
+<style type="text/css">
+	#result_card img{
+		max-width: 100%;
+	    height: auto;
+	    display: block;
+	    padding: 5px;
+	    margin-top: 10px;
+	    margin: auto;	
+	}
+</style>
 <!-- 상의 조회 페이지 -->
 
 
@@ -47,6 +56,12 @@
 						<label>상의 수정일</label>
 						<input type="text" name="updateDate" class="form-control" value='<fmt:formatDate value="${productInfo.updateDate}" pattern="yyyy-MM-dd" />' readonly>
 					</div>
+					<div class="form-group">
+						<label>상의 이미지</label>
+						<div class="form_section_content">
+							<div id="uploadResult"></div>
+						</div>
+					</div>
 					 <button class="btn btn-outline-dark CoatUpdate_btn" id="CoatUpdateBtn">수정</button>
 					 <button class="btn btn-outline-dark CoatList_btn" id="CoatListBtn">상의 목록</button>
 					                
@@ -64,29 +79,61 @@
 
 <script>
 $(document).ready(function(){
-		
+
 	//할인율 값 삽입
 	let coatDiscount = '<c:out value="${productInfo.coatDiscount}"/>' * 100;
 	$("#coat_Discount").attr("value", coatDiscount + " %");
 	
+	//이미지 정보 호출
+	let coatNumber = '<c:out value="${productInfo.coatNumber}"/>';
+	let uploadResult = $("#uploadResult");
 	
-	//목록 이동 버튼
-	$("#CoatListBtn").on("click", function(e){
+	$.getJSON("/getAttachList", {coatNumber : coatNumber}, function(arr){
 		
-		e.preventDefault();
-		$("#actionForm").submit();
+		//이미지가 없는 경우
+		if(arr.length === 0){
+			
+			let str = "";
+			str += "<div id='result_card'>";
+			str += "<img src='/resources/images/No_Image.png'>";
+			str += "</div>";
+			
+			uploadResult.html(str);				
+			
+			return;
+		}
+		
+		let str = "";
+		let obj = arr[0];
+		
+		let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+		str += "<div id='result_card'";
+		str += "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
+		str += ">";
+		str += "<img src='/display?fileName=" + fileCallPath +"'>";
+		str += "</div>";		
+		
+		uploadResult.html(str);
 	});
+});	//$(document).ready
+
+
+//목록 이동 버튼
+$("#CoatListBtn").on("click", function(e){
 	
-	//수정 페이지 이동 버튼 
-	$("#CoatUpdateBtn").on("click" ,function(e){
-		
-		e.preventDefault();
-		
-		let addInput = '<input type="hidden" name="coatNumber" value="${productInfo.coatNumber}">';
-		$("#actionForm").append(addInput);
-		$("#actionForm").attr("action" , "/admin/productCoatUpdate");
-		$("#actionForm").submit();
-	});	
+	e.preventDefault();
+	$("#actionForm").submit();
+});
+
+//수정 페이지 이동 버튼 
+$("#CoatUpdateBtn").on("click" ,function(e){
+	
+	e.preventDefault();
+	
+	let addInput = '<input type="hidden" name="coatNumber" value="${productInfo.coatNumber}">';
+	$("#actionForm").append(addInput);
+	$("#actionForm").attr("action" , "/admin/productCoatUpdate");
+	$("#actionForm").submit();
 });	
 </script>
 

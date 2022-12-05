@@ -2,6 +2,7 @@ package org.bigdata.service;
 
 import java.util.List;
 
+import org.bigdata.domain.AttachImageVO;
 import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.PantsVO;
@@ -26,6 +27,9 @@ public interface AdminService {
 	
 	//상의 삭제
 	public int productCoatDelete(int coatNumber); 
+	
+	//지정 상의 이미지 정보 얻기
+	public List<AttachImageVO> getAttachInfo(int coatNumber);
 	
 	
 	

@@ -26,6 +26,16 @@
     	insert into shopping_Image(coatNumber,fileName,uploadPath,uuid)
     		values(#{coatNumber},#{fileName},#{uploadPath},#{uuid})
     </insert>
+    
+    <!-- 지정 상의 이미지 전체 삭제 -->
+    <delete id="deleteImageAll">
+    	delete from shopping_image where coatNumber = #{coatNumber}
+    </delete>
+    
+    <!-- 지정 상의 이미지 정보 얻기 -->
+    <select id="getAttachInfo" resultType="org.bigdata.domain.AttachImageVO">
+    	select * from shopping_image where coatNumber = #{coatNumber}
+    </select>
  
  	<!-- 상의 상품 상세보기 -->
  	<select id="productCoatGetDetail" resultType="org.bigdata.domain.CoatVO">

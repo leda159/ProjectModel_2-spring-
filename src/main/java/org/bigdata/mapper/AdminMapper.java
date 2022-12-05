@@ -82,8 +82,23 @@ public interface AdminMapper {
 	
 	/////////// 이미지 ////////////////	
 	
-	//이미지 등록
+	//상의 이미지 등록
 	public void productCoatImage(AttachImageVO vo);
+	
+	//지정 상의 이미지 전체 삭제
+	public void deleteImageAll(int coatNumber);
+	
+	// 지정 상의 이미지 정보 얻기
+	public List<AttachImageVO> getAttachInfo(int coatNumber);
 	
 
 }
+
+
+
+
+
+
+
+
+

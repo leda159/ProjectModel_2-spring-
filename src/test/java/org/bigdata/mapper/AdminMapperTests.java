@@ -1,11 +1,12 @@
 package org.bigdata.mapper;
 
+import java.util.List;
+
 import org.bigdata.domain.AttachImageVO;
 import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.PantsVO;
 import org.bigdata.domain.ShoesVO;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,6 +150,24 @@ public class AdminMapperTests {
 			vo.setUuid("test30002");
 			
 			mapper.productCoatImage(vo);
+		}
+		
+		//지정 상의 이미지 삭제
+		@Test
+		public void deleteImageAllTest() {
+			int coatNumber = 313;
+			
+			mapper.deleteImageAll(coatNumber);
+		}
+		
+		@Test
+		public void getAttachInfoTest() {
+			
+			int coatNumber = 313;
+			
+			List<AttachImageVO> list = mapper.getAttachInfo(coatNumber);
+			
+			log.info("list : " + list);
 		}
 
 }
