@@ -23,6 +23,8 @@
 		<!-- 매개변수가 있는 생성자를 호출하여 초기화  -->
 		<constructor-arg ref="hikariConfig"/>
 	</bean>
+
+	
 	
 	<bean id="sqlSessionFactory"
 	      class="org.mybatis.spring.SqlSessionFactoryBean">

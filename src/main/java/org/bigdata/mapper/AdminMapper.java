@@ -91,6 +91,9 @@ public interface AdminMapper {
 	// 지정 상의 이미지 정보 얻기
 	public List<AttachImageVO> getAttachInfo(int coatNumber);
 	
+	//어제 날짜 이미지 리스트
+	public List<AttachImageVO> checkFileList();
+	
 
 }
 

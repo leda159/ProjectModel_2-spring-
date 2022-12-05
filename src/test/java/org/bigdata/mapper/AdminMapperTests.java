@@ -28,7 +28,7 @@ public class AdminMapperTests {
 	public void productCoatTest() throws Exception{
 		CoatVO coat = new CoatVO();
 		
-		coat.setCoatKey(4);
+		coat.setCoatKey(400);
 		coat.setCoatName("상의 이름");
 		coat.setCoatPrice(10000);
 		coat.setCoatStock(10);
@@ -169,6 +169,15 @@ public class AdminMapperTests {
 			
 			log.info("list : " + list);
 		}
+
+		
+		// 어제 날짜 이미지 리스트 
+		@Test
+		public void checkImageListTest() {
+			
+			mapper.checkFileList();
+			
+		}		
 
 }
 

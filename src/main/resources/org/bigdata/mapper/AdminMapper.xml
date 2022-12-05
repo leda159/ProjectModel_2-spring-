@@ -251,6 +251,16 @@
 	      	where shoesName like '%' || #{keyword} || '%'
 	      </if>
 	</select>    
+    
+    
+    
+    
+	<!-- 어제자 날자 이미지 리스트 -->
+	<select id="checkFileList" resultType="org.bigdata.domain.AttachImageVO">
+	
+		select * from shopping_image where uploadpath = to_char(sysdate -1, 'yyyy\mm\dd')	
+	
+	</select>    
     						  
     
     </mapper>

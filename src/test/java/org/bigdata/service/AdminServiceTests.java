@@ -45,13 +45,13 @@ public class AdminServiceTests {
 		AttachImageVO image2 = new AttachImageVO();
 
 		
-		image1.setFileName("testImage1");
-		image1.setUploadPath("testImage1");
-		image1.setUuid("test11114");
+		image1.setFileName("testImage11");
+		image1.setUploadPath("testImage11");
+		image1.setUuid("test1");
 		
-		image2.setFileName("testImage222");
-		image2.setUploadPath("testmage2223");
-		image2.setUuid("test22224");
+		image2.setFileName("testImage22222");
+		image2.setUploadPath("testmage22222");
+		image2.setUuid("test2");
 		
 		
 		imageList.add(image1);
