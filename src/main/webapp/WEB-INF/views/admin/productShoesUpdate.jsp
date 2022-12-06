@@ -335,28 +335,7 @@ $(document).ready(function(){
  	//파일 삭제 메서드
 	function deleteFile(){
 		
-		let targetFile = $(".imgDeleteBtn").data("file");
-		
-		let targetDiv = $("#result_card");
-		
-		$.ajax({
-			url: '/admin/deleteFile',
-			data : {fileName : targetFile},
-			dataType : 'text',
-			type : 'POST',
-			success : function(result){
-				console.log(result);
-				
-				targetDiv.remove();
-				$("input[type='file']").val("");
-				
-			},
-			error : function(result){
-				console.log(result);
-				
-				alert("파일을 삭제하지 못하였습니다.")
-			}
-		});
+		$("#result_card").remove();
 	}	
 </script>
 
