@@ -86,10 +86,31 @@ public interface AdminMapper {
 	public void productCoatImage(AttachImageVO vo);
 	
 	//지정 상의 이미지 전체 삭제
-	public void deleteImageAll(int coatNumber);
+	public void deleteCoatImageAll(int coatNumber);
 	
 	// 지정 상의 이미지 정보 얻기
-	public List<AttachImageVO> getAttachInfo(int coatNumber);
+	public List<AttachImageVO> getAttachCoatInfo(int coatNumber);
+	
+	
+	//하의 이미지 등록
+	public void productPantsImage(AttachImageVO vo);
+	
+	//지정 하의 이미지 전체 삭제
+	public void deletePantsImageAll(int pantsNumber);
+	
+	// 지정 하의 이미지 정보 얻기
+	public List<AttachImageVO> getAttachPantsInfo(int pantsNumber);	
+
+	
+	//신발 이미지 등록
+	public void productShoesImage(AttachImageVO vo);
+	
+	//지정 신발 이미지 전체 삭제
+	public void deleteShoesImageAll(int shoesNumber);
+	
+	// 지정 신발 이미지 정보 얻기
+	public List<AttachImageVO> getAttachShoesInfo(int shoesNumber);		
+	
 	
 	//어제 날짜 이미지 리스트
 	public List<AttachImageVO> checkFileList();

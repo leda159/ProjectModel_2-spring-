@@ -51,7 +51,7 @@
 
 
 </style>
-
+<!-- 하의 등록 페이지 -->
 
 <div class="container">
 		<div class="col-lg-4" style="float: none; margin:100 auto;">
@@ -92,6 +92,17 @@
 						<!-- 할인율 정수를 입력할 input -->
 						<input id="pantsDiscount_interface" class="id_input form-control" maxlength="2" placeholder="할인율을 입력해 주세요."  >
 						<span class="step_val text-secondary">&nbsp; 할인 가격 : <span class="span_discount"></span></span>
+					</div>
+					<label for="formFile" style="margin-top: 20px;">
+							<div class="btn-upload">이미지 등록</div>
+						</label>
+						<input type="file" id="formFile" name="uploadFile">
+						
+					<div class="filebox" id="uploadResult">
+				  		<!-- <div id="result_card">
+							<div class="imgDeleteBtn">x</div>
+							<img src="/display?fileName=test.jpg">
+						</div> -->
 					</div>
 					<input type="button" id="register_button" class="btn btn-dark" value="등록" >
 					<input type="button" id="cancel_button" class="btn btn-dark" value="취소" >
@@ -317,8 +328,8 @@
 		str += "<img src='/display?fileName="+ fileCallPath +"'>";
 		str += "<div class='imgDeleteBtn' data-file='"+ fileCallPath +"'>x</div>";
 		str +="<input type='hidden' name='imageList[0].fileName' value='"+ obj.fileName +"'>";
-		str +="<input type='hidden' name='imageList[0].uuid' value='"+ obj.fileName +"'>";
-		str +="<input type='hidden' name='imageList[0].uploadPath' value='"+ obj.fileName +"'>";
+		str +="<input type='hidden' name='imageList[0].uuid' value='"+ obj.uuid +"'>";
+		str +="<input type='hidden' name='imageList[0].uploadPath' value='"+ obj.uploadPath +"'>";
 		str += "</div>";		
 		
 		uploadResult.append(str);

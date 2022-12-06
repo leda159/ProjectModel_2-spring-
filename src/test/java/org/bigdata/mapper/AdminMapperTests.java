@@ -152,20 +152,34 @@ public class AdminMapperTests {
 			mapper.productCoatImage(vo);
 		}
 		
+		//하의 이미지 등록
+		@Test
+		public void productImagePantsTest() {
+					
+			AttachImageVO vo = new AttachImageVO();
+					
+			vo.setPantsNumber(274);
+			vo.setFileName("test300");
+			vo.setUploadPath("test3000");
+			vo.setUuid("test30002");
+					
+			mapper.productPantsImage(vo);
+		}		
+		
 		//지정 상의 이미지 삭제
 		@Test
-		public void deleteImageAllTest() {
-			int coatNumber = 313;
+		public void deleteCoatImageAllTest() {
+			int coatNumber = 330;
 			
-			mapper.deleteImageAll(coatNumber);
+			mapper.deleteCoatImageAll(coatNumber);
 		}
 		
 		@Test
-		public void getAttachInfoTest() {
+		public void getAttachCoatInfoTest() {
 			
 			int coatNumber = 313;
 			
-			List<AttachImageVO> list = mapper.getAttachInfo(coatNumber);
+			List<AttachImageVO> list = mapper.getAttachCoatInfo(coatNumber);
 			
 			log.info("list : " + list);
 		}

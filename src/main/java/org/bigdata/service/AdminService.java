@@ -29,7 +29,7 @@ public interface AdminService {
 	public int productCoatDelete(int coatNumber); 
 	
 	//지정 상의 이미지 정보 얻기
-	public List<AttachImageVO> getAttachInfo(int coatNumber);
+	public List<AttachImageVO> getAttachCoatInfo(int coatNumber);
 	
 	
 	
@@ -51,7 +51,8 @@ public interface AdminService {
 	//하의 삭제
 	public int productPantsDelete(int pantsNumber); 	
 	
-	
+	//지정 하의 이미지 정보 얻기
+	public List<AttachImageVO> getAttachPantsInfo(int pantsNumber);
 	
 	
 	
@@ -73,6 +74,8 @@ public interface AdminService {
 	//신발 삭제
 	public int productShoesDelete(int shoesNumber); 	
 	
+	//지정 신발 이미지 정보 얻기
+	public List<AttachImageVO> getAttachShoesInfo(int shoesNumber);	
 }
 
 

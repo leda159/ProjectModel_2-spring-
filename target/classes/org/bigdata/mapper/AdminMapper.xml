@@ -20,7 +20,7 @@
     				values(seq_coatkey.nextval,#{coatKey},#{coatName},#{coatPrice},#{coatStock},#{coatDiscount},#{coatContents},sysdate)
     </insert>
     
-    <!--  이미지 등록 -->
+    <!--  상의 이미지 등록 -->
     <insert id="productCoatImage">
         
     	insert into shopping_Image(coatNumber,fileName,uploadPath,uuid)
@@ -28,12 +28,12 @@
     </insert>
     
     <!-- 지정 상의 이미지 전체 삭제 -->
-    <delete id="deleteImageAll">
+    <delete id="deleteCoatImageAll">
     	delete from shopping_image where coatNumber = #{coatNumber}
     </delete>
     
     <!-- 지정 상의 이미지 정보 얻기 -->
-    <select id="getAttachInfo" resultType="org.bigdata.domain.AttachImageVO">
+    <select id="getAttachCoatInfo" resultType="org.bigdata.domain.AttachImageVO">
     	select * from shopping_image where coatNumber = #{coatNumber}
     </select>
  
@@ -106,10 +106,36 @@
     
     <!-- 하의 등록 -->
     <insert id="productPants">
+    	
+    	<!-- 하의가 등록된 후 pantsNumber가 가장 큰 값을 찾는다 -->
+    	<selectKey resultType="int" keyProperty="pantsNumber" order="AFTER">
+    	
+    		select SEQ_PANTSKEY.currval from dual
+    		
+    	</selectKey>    
+    
+    
     	insert into shopping_pants(pantsNumber,pantsKey,pantsName,pantsPrice,pantsStock,pantsDiscount,pantsContents,regDate)
     				values(seq_pantskey.nextval,#{pantsKey},#{pantsName},#{pantsPrice},#{pantsStock},#{pantsDiscount},#{pantsContents},sysdate)
     </insert>
     
+ 
+    <!--  하의 이미지 등록 -->
+    <insert id="productPantsImage">
+        
+    	insert into shopping_Image(pantsNumber,fileName,uploadPath,uuid)
+    		values(#{pantsNumber},#{fileName},#{uploadPath},#{uuid})
+    </insert>
+    
+    <!-- 지정 하의 이미지 전체 삭제 -->
+    <delete id="deletePantsImageAll">
+    	delete from shopping_image where pantsNumber = #{pantsNumber}
+    </delete>
+    
+    <!-- 지정 하의 이미지 정보 얻기 -->
+    <select id="getAttachPantsInfo" resultType="org.bigdata.domain.AttachImageVO">
+    	select * from shopping_image where pantsNumber = #{pantsNumber}
+    </select> 
     
  
  	<!-- 하의 상품 상세보기 -->
@@ -184,15 +210,34 @@
     
     <!-- 신발 등록 -->
     <insert id="productShoes">
+    
+    
+    	<selectKey resultType="int" keyProperty="shoesNumber" order="AFTER">
+    	
+    		select SEQ_SHOESKEY.currval from dual
+    		
+    	</selectKey>      
+    
     	insert into shopping_shoes(shoesNumber,shoesKey,shoesName,shoesPrice,shoesStock,shoesDiscount,shoesContents,regDate)
     				values(seq_shoesKey.nextval,#{shoesKey},#{shoesName},#{shoesPrice},#{shoesStock},#{shoesDiscount},#{shoesContents},sysdate)
     </insert>
     
-<!--       신발 이미지 등록
+    <!--  신발 이미지 등록 -->
     <insert id="productShoesImage">
-    	insert into shopping_shoesImage(shoesNumber,fileName,uploadPath,uuid)
+        
+    	insert into shopping_Image(shoesNumber,fileName,uploadPath,uuid)
     		values(#{shoesNumber},#{fileName},#{uploadPath},#{uuid})
-    </insert> -->
+    </insert>
+    
+    <!-- 지정 신발 이미지 전체 삭제 -->
+    <delete id="deleteShoesImageAll">
+    	delete from shopping_image where shoesNumber = #{shoesNumber}
+    </delete>
+    
+    <!-- 지정 신발 이미지 정보 얻기 -->
+    <select id="getAttachShoesInfo" resultType="org.bigdata.domain.AttachImageVO">
+    	select * from shopping_image where shoesNumber = #{shoesNumber}
+    </select> 
  
  	<!-- 신발 상품 상세보기 -->
  	<select id="productShoesGetDetail" resultType="org.bigdata.domain.ShoesVO">

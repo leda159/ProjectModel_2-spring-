@@ -93,8 +93,8 @@ public class AdminController {
 	  }
 	  
 	  //상의 등록
-	  @PostMapping("/productCoat") public String productCoatPOST(CoatVO
-	  coat,RedirectAttributes rttr) {
+	  @PostMapping("/productCoat") 
+	  public String productCoatPOST(CoatVO coat,RedirectAttributes rttr) {
 	  
 	  log.info("productCoatPOST" + coat);
 	  
@@ -138,7 +138,7 @@ public class AdminController {
 		  
 		  log.info("productCoatDeletePost메서드 실행" + coatNumber);
 		  
-		  List<AttachImageVO> fileList = adminService.getAttachInfo(coatNumber);
+		  List<AttachImageVO> fileList = adminService.getAttachCoatInfo(coatNumber);
 		  
 		  if(fileList != null) {
 			  
@@ -168,143 +168,7 @@ public class AdminController {
 		  return"redirect:/admin/productCoatManage";
 	  }
 	  
-	  //파일 업로드
-	  @PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	  public ResponseEntity<List<AttachImageVO>> uploadAjaxActionPost(MultipartFile[] uploadFile) {
-		  
-		  log.info("uploadAjaxActionPost메서드 실행");
-		  
-		  //이미지 파일 체크
-		  for(MultipartFile multipartFile : uploadFile) {
-			  
-			  File checkfile = new File(multipartFile.getOriginalFilename());
-			  String type = null;
-			  
-			  try {
-				  
-				type = Files.probeContentType(checkfile.toPath()); 
-				
-				log.info("MIME TYPE : " + type);
-				
-			  }catch(IOException e) {
-				  
-				  e.printStackTrace();
-			  }
-			  
-			  if(!type.startsWith("image")) {
-				  
-				  List<AttachImageVO> list = null;
-				  
-				  return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
-			  }
-		  }
-		  
-		  
-		  String uploadFolder = "C:\\upload";
-		  
-		  
-		  //날짜 폴더 경로
-		  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		  
-		  Date date = new Date();
-		  
-		  String str = sdf.format(date);
-		  
-		  String datePath = str.replace("-",File.separator);
-		  
-		  
-		  //폴더 생성
-		  // C:\ upload\2022\11\30
-		  File uploadPath = new File(uploadFolder, datePath);
-		  
-		  if(uploadPath.exists() == false) {
-			  uploadPath.mkdirs();
-		  }
-		  
-		  
-		  //이미지 정보를 담는 객체
-		  List<AttachImageVO> list = new ArrayList();
-		  
-		  for(MultipartFile multipartFile : uploadFile) {
-			  
-			  //이미지 정보 객체
-			  AttachImageVO vo = new AttachImageVO();
-			  
-			  //파일 이름
-			  String uploadFileName = multipartFile.getOriginalFilename();
-			  vo.setFileName(uploadFileName);
-			  vo.setUploadPath(datePath);
-			  
-			  //uuid(고유 번호) 적용 파일 이름
-			  String uuid = UUID.randomUUID().toString();
-			  vo.setUuid(uuid);
-			  
-			  uploadFileName = uuid + "_" + uploadFileName;
-			  
-			  //파일 위치, 파일 이름을 합친 File 객체
-			  File saveFile = new File(uploadPath, uploadFileName);
-			  
-			  //파일 저장
-			  try {
-				  multipartFile.transferTo(saveFile);
-				  
-				  //썸네일 생성(ImageIO)
-				  File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
-				  
-				  BufferedImage bo_image = ImageIO.read(saveFile);
-				  
-				  double ratio = 3;
-				  
-				  //넓이 높이 
-				  int width = (int)(bo_image.getWidth() / ratio); 
-				  int height = (int)(bo_image.getHeight() / ratio);
-				  
-				  Thumbnails.of(saveFile)
-				  .size(300, 400)
-				  .toFile(thumbnailFile);
-				  
-			  }catch(Exception e){
-				  e.printStackTrace();
-			  }
-			  list.add(vo);
-			  
-		  }//for
-		  
-		  ResponseEntity<List<AttachImageVO>> result = new ResponseEntity<List<AttachImageVO>>(list,HttpStatus.OK);
-		  
-		  return result;
-	  }
-	  
-	  //이미지 파일 삭제
-	  @PostMapping("/deleteFile")
-	  public ResponseEntity<String> deleteFile(String fileName){
-		  log.info("deleteFile 메서드 실행" +fileName);
-		  
-		  File file = null;
-		  
-		  try{
-			  //썸네일 파일 삭제
-			  file = new File("c:\\upload\\" + URLDecoder.decode(fileName,"UTF-8"));
-			  file.delete();
-			  
-			  
-			  //원본 파일 삭제
-			  String originFileName = file.getAbsolutePath().replace("s_","");
-			  
-			  log.info("originFileName :" +originFileName);
-			  
-			  file = new File(originFileName);
-			  file.delete();
-			  
-		  }catch(Exception e) {
-			  
-			  e.printStackTrace();
-			  return new ResponseEntity<String>("fali", HttpStatus.NOT_IMPLEMENTED);
-			  
-		  }//catch
-		  
-		  return new ResponseEntity<String>("success", HttpStatus.OK);
-	  }
+
 	  
 
 	  
@@ -342,8 +206,8 @@ public class AdminController {
 	  }
 	  
 	  //하의 등록
-	  @PostMapping("/productPants") public String productPantsPOST(PantsVO
-	  pants,RedirectAttributes rttr) {
+	  @PostMapping("/productPants")
+	  public String productPantsPOST(PantsVO pants,RedirectAttributes rttr) {
 	  
 	  log.info("productPantsPOST" + pants);
 	  
@@ -482,6 +346,149 @@ public class AdminController {
 		  
 		  return"redirect:/admin/productShoesManage";
 	  }	
+	  
+	  
+	  
+/////////////////////////////// 이미지 ///////////////////////////////////////	  
+	  
+	  
+	  //파일 업로드
+	  @PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	  public ResponseEntity<List<AttachImageVO>> uploadAjaxActionPost(MultipartFile[] uploadFile) {
+		  
+		  log.info("uploadAjaxActionPost메서드 실행");
+		  
+		  //이미지 파일 체크
+		  for(MultipartFile multipartFile : uploadFile) {
+			  
+			  File checkfile = new File(multipartFile.getOriginalFilename());
+			  String type = null;
+			  
+			  try {
+				  
+				type = Files.probeContentType(checkfile.toPath()); 
+				
+				log.info("MIME TYPE : " + type);
+				
+			  }catch(IOException e) {
+				  
+				  e.printStackTrace();
+			  }
+			  
+			  if(!type.startsWith("image")) {
+				  
+				  List<AttachImageVO> list = null;
+				  
+				  return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+			  }
+		  }
+		  
+		  
+		  String uploadFolder = "C:\\upload";
+		  
+		  
+		  //날짜 폴더 경로
+		  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		  
+		  Date date = new Date();
+		  
+		  String str = sdf.format(date);
+		  
+		  String datePath = str.replace("-",File.separator);
+		  
+		  
+		  //폴더 생성
+		  // C:\ upload\2022\11\30
+		  File uploadPath = new File(uploadFolder, datePath);
+		  
+		  if(uploadPath.exists() == false) {
+			  uploadPath.mkdirs();
+		  }
+		  
+		  
+		  //이미지 정보를 담는 객체
+		  List<AttachImageVO> list = new ArrayList();
+		  
+		  for(MultipartFile multipartFile : uploadFile) {
+			  
+			  //이미지 정보 객체
+			  AttachImageVO vo = new AttachImageVO();
+			  
+			  //파일 이름
+			  String uploadFileName = multipartFile.getOriginalFilename();
+			  vo.setFileName(uploadFileName);
+			  vo.setUploadPath(datePath);
+			  
+			  //uuid(고유 번호) 적용 파일 이름
+			  String uuid = UUID.randomUUID().toString();
+			  vo.setUuid(uuid);
+			  
+			  uploadFileName = uuid + "_" + uploadFileName;
+			  
+			  //파일 위치, 파일 이름을 합친 File 객체
+			  File saveFile = new File(uploadPath, uploadFileName);
+			  
+			  //파일 저장
+			  try {
+				  multipartFile.transferTo(saveFile);
+				  
+				  //썸네일 생성(ImageIO)
+				  File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
+				  
+				  BufferedImage bo_image = ImageIO.read(saveFile);
+				  
+				  double ratio = 3;
+				  
+				  //넓이 높이 
+				  int width = (int)(bo_image.getWidth() / ratio); 
+				  int height = (int)(bo_image.getHeight() / ratio);
+				  
+				  Thumbnails.of(saveFile)
+				  .size(300, 400)
+				  .toFile(thumbnailFile);
+				  
+			  }catch(Exception e){
+				  e.printStackTrace();
+			  }
+			  list.add(vo);
+			  
+		  }//for
+		  
+		  ResponseEntity<List<AttachImageVO>> result = new ResponseEntity<List<AttachImageVO>>(list,HttpStatus.OK);
+		  
+		  return result;
+	  }
+	  
+	  //이미지 파일 삭제
+	  @PostMapping("/deleteFile")
+	  public ResponseEntity<String> deleteFile(String fileName){
+		  log.info("deleteFile 메서드 실행" +fileName);
+		  
+		  File file = null;
+		  
+		  try{
+			  //썸네일 파일 삭제
+			  file = new File("c:\\upload\\" + URLDecoder.decode(fileName,"UTF-8"));
+			  file.delete();
+			  
+			  
+			  //원본 파일 삭제
+			  String originFileName = file.getAbsolutePath().replace("s_","");
+			  
+			  log.info("originFileName :" +originFileName);
+			  
+			  file = new File(originFileName);
+			  file.delete();
+			  
+		  }catch(Exception e) {
+			  
+			  e.printStackTrace();
+			  return new ResponseEntity<String>("fali", HttpStatus.NOT_IMPLEMENTED);
+			  
+		  }//catch
+		  
+		  return new ResponseEntity<String>("success", HttpStatus.OK);
+	  }
 }
 
 

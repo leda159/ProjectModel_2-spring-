@@ -15,10 +15,26 @@ public class AttachServiceImpl implements AttachService {
 	private AttachMapper attachMapper;
 
 	@Override
-	public List<AttachImageVO> getAttachList(int coatNumber) {
+	public List<AttachImageVO> getAttachCoatList(int coatNumber) {
 		
 		log.info("getAttachList......");
 		
-		return attachMapper.getAttachList(coatNumber);
+		return attachMapper.getAttachCoatList(coatNumber);
+	}
+	
+	@Override
+	public List<AttachImageVO> getAttachPantsList(int pantsNumber) {
+		
+		log.info("getAttachList......");
+		
+		return attachMapper.getAttachPantsList(pantsNumber);
+	}
+	
+	@Override
+	public List<AttachImageVO> getAttachShoesList(int shoesNumber) {
+		
+		log.info("getAttachList......");
+		
+		return attachMapper.getAttachShoesList(shoesNumber);
 	}
 }

@@ -69,7 +69,7 @@ public class AdminServiceImpl implements AdminService {
 		int result = adminMapper.productCoatUpdate(coat);
 		
 		if(result == 1 && coat.getImageList() != null && coat.getImageList().size() > 0) {
-			adminMapper.deleteImageAll(coat.getCoatNumber());
+			adminMapper.deleteCoatImageAll(coat.getCoatNumber());
 			
 			coat.getImageList().forEach(attach -> {
 				attach.setCoatNumber(coat.getCoatNumber());
@@ -83,15 +83,15 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int productCoatDelete(int coatNumber) {
 		log.info("productCoatDelete메서드 실행");
-		adminMapper.deleteImageAll(coatNumber);
+		adminMapper.deleteCoatImageAll(coatNumber);
 		return adminMapper.productCoatDelete(coatNumber);
 	}
 	
 	//지정 상의 이미지 정보 얻기
 	@Override
-	public List<AttachImageVO> getAttachInfo(int coatNumber) {
-		log.info("getAttachInfo메서드 실행");
-		return adminMapper.getAttachInfo(coatNumber);
+	public List<AttachImageVO> getAttachCoatInfo(int coatNumber) {
+		log.info("getAttachCoatInfo메서드 실행");
+		return adminMapper.getAttachCoatInfo(coatNumber);
 	}	
 	
 	
@@ -106,6 +106,16 @@ public class AdminServiceImpl implements AdminService {
 		
 		log.info("Service productPants");
 		adminMapper.productPants(pants);
+		
+		if(pants.getImageList() == null || pants.getImageList().size() <= 0) {
+			return;
+		}
+		
+		pants.getImageList().forEach(attach ->{
+			
+			attach.setPantsNumber(pants.getPantsNumber());
+			adminMapper.productPantsImage(attach);
+		});
 	}
 	
 	//하의 리스트
@@ -132,16 +142,43 @@ public class AdminServiceImpl implements AdminService {
 	//하의 수정
 	@Override
 	public int productPantsUpdate(PantsVO pants) {
-		log.info("productPantsUpdate메서드 실행");
-		return adminMapper.productPantsUpdate(pants);
+		
+		int result = adminMapper.productPantsUpdate(pants);
+		
+		if(result == 1 && pants.getImageList() != null && pants.getImageList().size() > 0) {
+			adminMapper.deletePantsImageAll(pants.getPantsNumber());
+			
+			pants.getImageList().forEach(attach -> {
+				attach.setPantsNumber(pants.getPantsNumber());
+				adminMapper.productPantsImage(attach);
+			});
+		}
+		return result;
 	}
 	
 	//하의 삭제
 	@Override
 	public int productPantsDelete(int pantsNumber) {
 		log.info("productPantsDelete메서드 실행");
+		adminMapper.deletePantsImageAll(pantsNumber);
 		return adminMapper.productPantsDelete(pantsNumber);
 	}	
+	
+	//지정 하의 이미지 정보 얻기
+	@Override
+	public List<AttachImageVO> getAttachPantsInfo(int pantsNumber) {
+		log.info("getAttachPantsInfo메서드 실행");
+		return adminMapper.getAttachPantsInfo(pantsNumber);
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -151,10 +188,19 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void ProductShoes(ShoesVO shoes) {
 		
-		log.info("Service ProductShoes");
+		log.info("Service productShoes");
 		adminMapper.productShoes(shoes);
+		
+		if(shoes.getImageList() == null || shoes.getImageList().size() <= 0) {
+			return;
+		}
+		
+		shoes.getImageList().forEach(attach ->{
+			
+			attach.setShoesNumber(shoes.getShoesNumber());
+			adminMapper.productShoesImage(attach);
+		});
 	}
-
 	//신발 리스트
 	@Override
 	public List<ShoesVO> productShoesGetList(Criteria cri) {
@@ -179,8 +225,17 @@ public class AdminServiceImpl implements AdminService {
 	//신발 수정
 	@Override
 	public int productShoesUpdate(ShoesVO shoes) {
-		log.info("productShoesUpdate메서드 실행");
-		return adminMapper.productShoesUpdate(shoes);
+		int result = adminMapper.productShoesUpdate(shoes);
+		
+		if(result == 1 && shoes.getImageList() != null && shoes.getImageList().size() > 0) {
+			adminMapper.deleteShoesImageAll(shoes.getShoesNumber());
+			
+			shoes.getImageList().forEach(attach -> {
+				attach.setShoesNumber(shoes.getShoesNumber());
+				adminMapper.productShoesImage(attach);
+			});
+		}
+		return result;
 	}
 	
 	//신발 삭제
@@ -190,7 +245,12 @@ public class AdminServiceImpl implements AdminService {
 		return adminMapper.productShoesDelete(shoesNumber);
 	}
 
-
+	//지정 신발 이미지 정보 얻기
+	@Override
+	public List<AttachImageVO> getAttachShoesInfo(int shoesNumber) {
+		log.info("getAttachShoesInfo메서드 실행");
+		return adminMapper.getAttachShoesInfo(shoesNumber);
+	}	
 
 
 

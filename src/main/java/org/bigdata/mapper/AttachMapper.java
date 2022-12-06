@@ -6,5 +6,12 @@ import org.bigdata.domain.AttachImageVO;
 
 public interface AttachMapper {
 
-	public List<AttachImageVO> getAttachList(int coatNumber);
+	//상의
+	public List<AttachImageVO> getAttachCoatList(int coatNumber);
+	
+	//하의
+	public List<AttachImageVO> getAttachPantsList(int pantsNumber);
+		
+	//신발
+	public List<AttachImageVO> getAttachShoesList(int shoesNumber);	
 }

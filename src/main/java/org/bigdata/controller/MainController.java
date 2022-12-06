@@ -38,7 +38,7 @@ public class MainController {
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getImage(String fileName){
 		
-		log.info("getImage메서드 실행 " + fileName);
+		log.info("getImage메서드 실행  : " + fileName);
 		File file = new File("c:\\upload\\" + fileName);
 		
 		ResponseEntity<byte[]> result = null;
@@ -56,14 +56,34 @@ public class MainController {
 		return result;
 	}
 	
-	//이미지 전보 반환
-	@GetMapping(value="/getAttachList" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<AttachImageVO>>getAttachList(int coatNumber){
+	//상의 이미지 정보 반환
+	@GetMapping(value="/getAttachCoatList" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<AttachImageVO>>getAttachCoatList(int coatNumber){
 		
-		log.info("getAttachList....." + coatNumber);
+		log.info("getAttachCoatList....." + coatNumber);
 		
-		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachList(coatNumber),HttpStatus.OK);
+		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachCoatList(coatNumber),HttpStatus.OK);
 	}
+	
+	//하의 이미지 정보 반환
+	@GetMapping(value="/getAttachPantsList" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<AttachImageVO>>getAttachPantsList(int pantsNumber){
+		
+		log.info("getAttachPantsList....." + pantsNumber);
+		
+		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachPantsList(pantsNumber),HttpStatus.OK);
+	}
+	
+	
+	//신발 이미지 정보 반환
+	@GetMapping(value="/getAttachShoesList" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<AttachImageVO>>getAttachShoesList(int shoesNumber){
+		
+		log.info("getAttachShoesList....." + shoesNumber);
+		
+		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachShoesList(shoesNumber),HttpStatus.OK);
+	}
+	
 	
 }
 

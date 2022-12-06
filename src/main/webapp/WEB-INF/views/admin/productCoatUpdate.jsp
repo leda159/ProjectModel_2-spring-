@@ -140,7 +140,7 @@ $(document).ready(function(){
 	let coatNumber = '<c:out value="${productInfo.coatNumber}"/>';
 	let uploadResult = $("#uploadResult");
 	
-	$.getJSON("/getAttachList", {coatNumber : coatNumber}, function(arr){
+	$.getJSON("/getAttachCoatList", {coatNumber : coatNumber}, function(arr){
 		
 		//이미지가 없는 경우
 		if(arr.length === 0){

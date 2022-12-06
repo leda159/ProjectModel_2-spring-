@@ -47,6 +47,12 @@
 						<label>하의 수정일</label>
 						<input type="text" name="updateDate" class="form-control" value='<fmt:formatDate value="${productInfo.updateDate}" pattern="yyyy-MM-dd" />' readonly>
 					</div>
+					<div class="form-group">
+						<label>하의 이미지</label>
+						<div class="form_section_content">
+							<div id="uploadResult"></div>
+						</div>
+					</div>					
 					 <button class="btn btn-outline-dark PantsUpdate_btn" id="PantsUpdateBtn">수정</button>
 					 <button class="btn btn-outline-dark PantsList_btn" id="PantsListBtn">상의 목록</button>
 					                
@@ -68,25 +74,57 @@ $(document).ready(function(){
 	//할인율 값 삽입
 	let pantsDiscount = '<c:out value="${productInfo.pantsDiscount}"/>' * 100;
 	$("#pants_Discount").attr("value", pantsDiscount + " %");
+
+	//이미지 정보 호출
+	let pantsNumber = '<c:out value="${productInfo.pantsNumber}"/>';
+	let uploadResult = $("#uploadResult");
 	
-	
-	//목록 이동 버튼
-	$("#PantsListBtn").on("click", function(e){
+	$.getJSON("/getAttachPantsList", {pantsNumber : pantsNumber}, function(arr){
 		
-		e.preventDefault();
-		$("#actionForm").submit();
-	});
-	
-	//수정 페이지 이동 버튼 
-	$("#PantsUpdateBtn").on("click" ,function(e){
+		//이미지가 없는 경우
+		if(arr.length === 0){
+			
+			let str = "";
+			str += "<div id='result_card'>";
+			str += "<img src='/resources/images/No_Image.png'>";
+			str += "</div>";
+			
+			uploadResult.html(str);				
+			
+			return;
+		}
 		
-		e.preventDefault();
+		let str = "";
+		let obj = arr[0];
 		
-		let addInput = '<input type="hidden" name="pantsNumber" value="${productInfo.pantsNumber}">';
-		$("#actionForm").append(addInput);
-		$("#actionForm").attr("action" , "/admin/productPantsUpdate");
-		$("#actionForm").submit();
+		let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+		str += "<div id='result_card'";
+		str += "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
+		str += ">";
+		str += "<img src='/display?fileName=" + fileCallPath +"'>";
+		str += "</div>";		
+		
+		uploadResult.html(str);
 	});	
+});//$(document).ready
+
+
+//목록 이동 버튼
+$("#PantsListBtn").on("click", function(e){
+	
+	e.preventDefault();
+	$("#actionForm").submit();
+});
+
+//수정 페이지 이동 버튼 
+$("#PantsUpdateBtn").on("click" ,function(e){
+	
+	e.preventDefault();
+	
+	let addInput = '<input type="hidden" name="pantsNumber" value="${productInfo.pantsNumber}">';
+	$("#actionForm").append(addInput);
+	$("#actionForm").attr("action" , "/admin/productPantsUpdate");
+	$("#actionForm").submit();
 });	
 </script>
 

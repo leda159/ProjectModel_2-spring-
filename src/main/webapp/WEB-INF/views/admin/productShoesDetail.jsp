@@ -47,6 +47,12 @@
 						<label>신발 수정일</label>
 						<input type="text" name="updateDate" class="form-control" value='<fmt:formatDate value="${productInfo.updateDate}" pattern="yyyy-MM-dd" />' readonly>
 					</div>
+					<div class="form-group">
+						<label>신발 이미지</label>
+						<div class="form_section_content">
+							<div id="uploadResult"></div>
+						</div>
+					</div>						
 					 <button class="btn btn-outline-dark ShoesUpdate_btn" id="ShoesUpdateBtn">수정</button>
 					 <button class="btn btn-outline-dark ShoesList_btn" id="ShoesListBtn">신발 목록</button>
 					                
@@ -69,6 +75,40 @@ $(document).ready(function(){
 	let shoesDiscount = '<c:out value="${productInfo.shoesDiscount}"/>' * 100;
 	$("#shoes_Discount").attr("value", shoesDiscount + " %");
 	
+
+	//이미지 정보 호출
+	let shoesNumber = '<c:out value="${productInfo.shoesNumber}"/>';
+	let uploadResult = $("#uploadResult");
+	
+	$.getJSON("/getAttachShoesList", {shoesNumber : shoesNumber}, function(arr){
+		
+		//이미지가 없는 경우
+		if(arr.length === 0){
+			
+			let str = "";
+			str += "<div id='result_card'>";
+			str += "<img src='/resources/images/No_Image.png'>";
+			str += "</div>";
+			
+			uploadResult.html(str);				
+			
+			return;
+		}
+		
+		let str = "";
+		let obj = arr[0];
+		
+		let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+		str += "<div id='result_card'";
+		str += "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
+		str += ">";
+		str += "<img src='/display?fileName=" + fileCallPath +"'>";
+		str += "</div>";		
+		
+		uploadResult.html(str);
+	});	
+});//$(document).ready
+	
 	
 	//목록 이동 버튼
 	$("#ShoesListBtn").on("click", function(e){
@@ -86,7 +126,6 @@ $(document).ready(function(){
 		$("#actionForm").append(addInput);
 		$("#actionForm").attr("action" , "/admin/productShoesUpdate");
 		$("#actionForm").submit();
-	});	
 });	
 </script>
 

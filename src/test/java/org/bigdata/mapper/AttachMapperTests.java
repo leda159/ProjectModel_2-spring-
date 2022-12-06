@@ -19,8 +19,8 @@ public class AttachMapperTests {
 	//이미지 정보 전환
 	@Test
 	public void getAttachListTests() {
-		int coatNumber = 313;
+		int coatNumber = 325;
 		
-		log.info("이미지 정보 : " + attachMapper.getAttachList(coatNumber));
+		log.info("이미지 정보 : " + attachMapper.getAttachCoatList(coatNumber));
 	}
 }

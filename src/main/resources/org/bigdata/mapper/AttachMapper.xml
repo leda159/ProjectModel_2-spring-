@@ -5,8 +5,16 @@
     
     <mapper namespace="org.bigdata.mapper.AttachMapper">
     
-    	<select id="getAttachList" resultType="org.bigdata.domain.AttachImageVO">
+    	<select id="getAttachCoatList" resultType="org.bigdata.domain.AttachImageVO">
     		select * from shopping_image where coatNumber = #{coatNumber}
+    	</select>
+    	
+    	<select id="getAttachPantsList" resultType="org.bigdata.domain.AttachImageVO">
+    		select * from shopping_image where pantsNumber = #{pantsNumber}
+    	</select>
+    	
+    	<select id="getAttachShoesList" resultType="org.bigdata.domain.AttachImageVO">
+    		select * from shopping_image where shoesNumber = #{shoesNumber}
     	</select>
     
     </mapper>
