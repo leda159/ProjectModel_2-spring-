@@ -194,16 +194,7 @@
      			</li>
 			</ul>
 		</div>
-		<div class="collapse navbar-collapse justify-content-end" id="navbarMenuList">
-			<ul class="navbar-nav order-md-last ">
-				<li class="nav-item mr-3 ">
-					<form class="form-inline my-2">
-						<input class="form-control mr-sm-2" type="search" placeholder="찾아보세요!" aria-label="Search">
-						<button class="btn btn-outline-dark mr-5" type="submit">검색</button>
-					</form>
-				</li>
-			</ul>
-		</div>
+
 		
 		<div class="collapse navbar-collapse justify-content-end" id="navbarMenuList">	
 			<!-- 로그인 하지 않은 상태 --> 

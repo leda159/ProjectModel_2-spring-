@@ -66,6 +66,10 @@ public class MainController {
 		return result;
 	}
 	
+	
+///////////////////////////// 상의 /////////////////////////	
+	
+
 	//상의 이미지 정보 반환
 	@GetMapping(value="/getAttachCoatList" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<AttachImageVO>>getAttachCoatList(int coatNumber){
@@ -75,24 +79,6 @@ public class MainController {
 		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachCoatList(coatNumber),HttpStatus.OK);
 	}
 	
-	//하의 이미지 정보 반환
-	@GetMapping(value="/getAttachPantsList" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<AttachImageVO>>getAttachPantsList(int pantsNumber){
-		
-		log.info("getAttachPantsList....." + pantsNumber);
-		
-		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachPantsList(pantsNumber),HttpStatus.OK);
-	}
-	
-	
-	//신발 이미지 정보 반환
-	@GetMapping(value="/getAttachShoesList" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<AttachImageVO>>getAttachShoesList(int shoesNumber){
-		
-		log.info("getAttachShoesList....." + shoesNumber);
-		
-		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachShoesList(shoesNumber),HttpStatus.OK);
-	}
 	
 	//상의 상품 검색
 	@GetMapping("product/coat")
@@ -100,16 +86,16 @@ public class MainController {
 			
 		log.info("cri : " + cri);
 		
-		List<CoatVO> list = productService.getProductCoatList(cri);
-		log.info("CoatList : " + list);
+		List<CoatVO> coatList = productService.getProductCoatList(cri);
+		log.info("CoatList : " + coatList);
 		
-		if(!list.isEmpty()) {
+		if(!coatList.isEmpty()) {
 			
-			model.addAttribute("list",list);
-			log.info("list : " + list);
+			model.addAttribute("coatList",coatList);
+			log.info("coatList : " + coatList);
 			
 		}else {
-			model.addAttribute("listcheck","empty");
+			model.addAttribute("coatListcheck","empty");
 			
 			return "product/coat";
 		}
@@ -121,22 +107,25 @@ public class MainController {
 	
 	
 
+	
+///////////////////////////// 하의 /////////////////////////	
+	
 	//하의 상품 검색
 	@GetMapping("product/pants")
 	public String PantsSearchProductGet(Criteria cri, Model model) {
 			
 		log.info("cri : " + cri);
 		
-		List<PantsVO> list = productService.getProductPantsList(cri);
-		log.info("PantsList : " + list);
+		List<PantsVO> pantsList = productService.getProductPantsList(cri);
+		log.info("pantsList : " + pantsList);
 		
-		if(!list.isEmpty()) {
+		if(!pantsList.isEmpty()) {
 			
-			model.addAttribute("list",list);
-			log.info("list : " + list);
+			model.addAttribute("pantsList",pantsList);
+			log.info("pantsList : " + pantsList);
 			
 		}else {
-			model.addAttribute("listcheck","empty");
+			model.addAttribute("pantsListcheck","empty");
 			
 			return "product/pants";
 		}
@@ -146,7 +135,18 @@ public class MainController {
 		return "product/pants";
 	}	
 	
+	//하의 이미지 정보 반환
+	@GetMapping(value="/getAttachPantsList" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<AttachImageVO>>getAttachPantsList(int pantsNumber){
+		
+		log.info("getAttachPantsList....." + pantsNumber);
+		
+		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachPantsList(pantsNumber),HttpStatus.OK);
+	}
 	
+	
+
+///////////////////////////// 신발 /////////////////////////	
 	
 	
 	//신발 상품 검색
@@ -155,16 +155,16 @@ public class MainController {
 			
 		log.info("cri : " + cri);
 		
-		List<ShoesVO> list = productService.getProductShoesList(cri);
-		log.info("ShoesList : " + list);
+		List<ShoesVO> shoesList = productService.getProductShoesList(cri);
+		log.info("shoesList : " + shoesList);
 		
-		if(!list.isEmpty()) {
+		if(!shoesList.isEmpty()) {
 			
-			model.addAttribute("list",list);
-			log.info("list : " + list);
+			model.addAttribute("shoesList",shoesList);
+			log.info("shoesList : " + shoesList);
 			
 		}else {
-			model.addAttribute("listcheck","empty");
+			model.addAttribute("shoesListcheck","empty");
 			
 			return "product/shoes";
 		}
@@ -172,6 +172,15 @@ public class MainController {
 		model.addAttribute("pageMaker", new PageDTO(cri, productService.shoesProductGetTotal(cri)));
 		
 		return "product/shoes";
+	}
+	
+	//신발 이미지 정보 반환
+	@GetMapping(value="/getAttachShoesList" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<AttachImageVO>>getAttachShoesList(int shoesNumber){
+		
+		log.info("getAttachShoesList....." + shoesNumber);
+		
+		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachShoesList(shoesNumber),HttpStatus.OK);
 	}
 	
 	

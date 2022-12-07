@@ -99,9 +99,9 @@
 						상품 목록
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">상의</a>
-						<a class="dropdown-item" href="#">하의</a>
-						<a class="dropdown-item" href="#">신발</a>
+						<a class="dropdown-item" href="/product/coat">상의</a>
+						<a class="dropdown-item" href="/product/pants">하의</a>
+						<a class="dropdown-item" href="/product/shoes">신발</a>
 					</div>
 				</li>
 				<li class="nav-item dropdown ">
@@ -138,12 +138,12 @@
 		<div class="collapse navbar-collapse justify-content-end" id="navbarMenuList">
 			<ul class="navbar-nav order-md-last ">
 				<li class="nav-item mr-3 ">
-					<form class="form-inline my-2" id="searchForm"  method="get">
-					<select class="form-control mr-1" name="select">
-     					<option value="C">상의</option><!-- action="/product/coat"  -->
-      					<option value="P">하의</option><!-- action="/product/pants"  -->
-      					<option value="S">신발</option><!-- action="/product/shoes"  -->
-    				</select>
+					<form class="form-inline my-2" id="searchForm"  method="get" onsubmit="search()">
+						<select class="form-control mr-1" name="searchSelect" id="searchSelect">
+     						<option value="C">상의</option><!-- action="/product/coat"  -->
+      						<option value="P">하의</option><!-- action="/product/pants"  -->
+      						<option value="S">신발</option><!-- action="/product/shoes"  -->
+    					</select>
 						<input class="form-control mr-sm-2" type="search" name="keyword" placeholder="찾아보세요!" aria-label="Search">
 						<button class="btn btn-outline-dark mr-5" type="submit">검색</button>
 					</form>
@@ -212,14 +212,24 @@
 	});//로그아웃 버튼 작동 끝
 	
 	
+
+	function search(e){
+		
+		var target = document.getElementById("searchSelect");
+		
+		if(target.options[target.selectedIndex].value == 'C'){
+			
+			$("form").attr("action","/product/coat")
+			
+		}else if(target.options[target.selectedIndex].value == 'P'){
+			
+			$("form").attr("action","/product/pants")
+			
+		}else if(target.options[target.selectedIndex].value == 'S'){
 	
-	
-	//상의 하의 신발검색
-	//option value="C" 일때 action="/product/coat"
-	//option value="P" 일때 action="/product/pants" 
-	//option value="S" 일때 action="/product/shoes" 
-	
-	let searchForm = $("#searchForm");
+			$("form").attr("action","/product/shoes")
+		}
+	}
 	
 
 	

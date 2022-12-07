@@ -6,7 +6,7 @@
 	<h1>검색결과</h1>
 	
 	<div>
-		${list}
+		${shoesList}
 	</div>
 	
 	<div>
