@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="org.bigdata.mapper.ProductMapper">  
+ 
+ <!--////////////////// 상의 /////////////////// -->
+    
+    <!--페이징 처리 적용 상의 리스트 -->
+    <select id="getProductCoatList"
+			resultType="org.bigdata.domain.CoatVO">
+		<![CDATA[
+			select coatNumber,coatKey,coatName,coatPrice,coatStock,coatDiscount,coatContents,regdate,updatedate
+			  from (select /*+ INDEX_DESC(shopping_coat pk_coat) */
+			               rownum rn,coatNumber,coatKey,coatName,coatPrice,coatStock,coatDiscount,coatContents,regdate,updatedate
+			     from shopping_coat
+			     where 
+			
+		]]> 
+		 		<if test="keyword != null">
+	      			 coatName like '%' || #{keyword} || '%' and
+	      		</if>
+	      
+	    <![CDATA[	
+	   			 rownum <= #{pageNum} * #{amount}
+			     )
+			 where rn > (#{pageNum} -1) * #{amount}
+	               
+		]]>
+	</select>
+	
+	<!-- 상의 총 개수 -->
+	<select id="coatProductGetTotal" resultType="int">
+		select count(*) 
+	      from shopping_coat
+	      
+	      <if test="keyword != null">
+	      	where coatName like '%' || #{keyword} || '%'
+	      </if>
+	</select>	
+	
+	
+	
+<!--////////////////// 하의 /////////////////// -->
+
+
+    <!--페이징 처리 적용 하의 리스트 -->
+    <select id="getProductPantsList"
+			resultType="org.bigdata.domain.PantsVO">
+		<![CDATA[
+			select pantsNumber,pantsKey,pantsName,pantsPrice,pantsStock,pantsDiscount,pantsContents,regdate,updatedate
+			  from (select /*+ INDEX_DESC(shopping_pants pk_pants) */
+			               rownum rn,pantsNumber,pantsKey,pantsName,pantsPrice,pantsStock,pantsDiscount,pantsContents,regdate,updatedate
+			     from shopping_pants
+			     where 
+			
+		]]> 
+		 		<if test="keyword != null">
+	      			 pantsName like '%' || #{keyword} || '%' and
+	      		</if>
+	      
+	    <![CDATA[	
+	   			 rownum <= #{pageNum} * #{amount}
+			     )
+			 where rn > (#{pageNum} -1) * #{amount}
+	               
+		]]>
+	</select>
+	
+	<!-- 하의 총 개수 -->
+	<select id="pantsProductGetTotal" resultType="int">
+		select count(*) 
+	      from shopping_pants
+	      
+	      <if test="keyword != null">
+	      	where pantsName like '%' || #{keyword} || '%'
+	      </if>
+	</select>	
+
+
+
+
+<!--////////////////// 신발 ////////////////// -->	
+
+    <!--페이징 처리 적용 신발 리스트 -->
+    <select id="getProductShoesList"
+			resultType="org.bigdata.domain.ShoesVO">
+		<![CDATA[
+			select shoesNumber,shoesKey,shoesName,shoesPrice,shoesStock,shoesDiscount,shoesContents,regdate,updatedate
+			  from (select /*+ INDEX_DESC(shopping_shoes pk_shoes) */
+			               rownum rn,shoesNumber,shoesKey,shoesName,shoesPrice,shoesStock,shoesDiscount,shoesContents,regdate,updatedate
+			     from shopping_shoes
+			     where 
+			
+		]]> 
+		 		<if test="keyword != null">
+	      			 shoesName like '%' || #{keyword} || '%' and
+	      		</if>
+	      
+	    <![CDATA[	
+	   			 rownum <= #{pageNum} * #{amount}
+			     )
+			 where rn > (#{pageNum} -1) * #{amount}
+	               
+		]]>
+	</select>
+	
+	<!-- 신발 총 개수 -->
+	<select id="shoesProductGetTotal" resultType="int">
+		select count(*) 
+	      from shopping_shoes
+	      
+	      <if test="keyword != null">
+	      	where shoesName like '%' || #{keyword} || '%'
+	      </if>
+	</select>	
+
+
+
+
+
+
+
+
+
+
+
+
+	
+</mapper>	    

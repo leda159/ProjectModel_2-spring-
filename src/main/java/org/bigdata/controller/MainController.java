@@ -6,13 +6,20 @@ import java.nio.file.Files;
 import java.util.List;
 
 import org.bigdata.domain.AttachImageVO;
+import org.bigdata.domain.CoatVO;
+import org.bigdata.domain.Criteria;
+import org.bigdata.domain.PageDTO;
+import org.bigdata.domain.PantsVO;
+import org.bigdata.domain.ShoesVO;
 import org.bigdata.mapper.AttachMapper;
+import org.bigdata.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +34,9 @@ public class MainController {
 
 	@Autowired
 	private AttachMapper attachMapper;
+	
+	@Autowired
+	private ProductService productService;
 	
 	//로그인 페이지 이동
 	@RequestMapping(value = "/main",method = RequestMethod.GET)
@@ -82,6 +92,86 @@ public class MainController {
 		log.info("getAttachShoesList....." + shoesNumber);
 		
 		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachShoesList(shoesNumber),HttpStatus.OK);
+	}
+	
+	//상의 상품 검색
+	@GetMapping("product/coat")
+	public String CoatSearchProductGet(Criteria cri, Model model) {
+			
+		log.info("cri : " + cri);
+		
+		List<CoatVO> list = productService.getProductCoatList(cri);
+		log.info("CoatList : " + list);
+		
+		if(!list.isEmpty()) {
+			
+			model.addAttribute("list",list);
+			log.info("list : " + list);
+			
+		}else {
+			model.addAttribute("listcheck","empty");
+			
+			return "product/coat";
+		}
+		
+		model.addAttribute("pageMaker", new PageDTO(cri, productService.coatProductGetTotal(cri)));
+		
+		return "product/coat";
+	}
+	
+	
+
+	//하의 상품 검색
+	@GetMapping("product/pants")
+	public String PantsSearchProductGet(Criteria cri, Model model) {
+			
+		log.info("cri : " + cri);
+		
+		List<PantsVO> list = productService.getProductPantsList(cri);
+		log.info("PantsList : " + list);
+		
+		if(!list.isEmpty()) {
+			
+			model.addAttribute("list",list);
+			log.info("list : " + list);
+			
+		}else {
+			model.addAttribute("listcheck","empty");
+			
+			return "product/pants";
+		}
+		
+		model.addAttribute("pageMaker", new PageDTO(cri, productService.pantsProductGetTotal(cri)));
+		
+		return "product/pants";
+	}	
+	
+	
+	
+	
+	//신발 상품 검색
+	@GetMapping("product/shoes")
+	public String ShoesSearchProductGet(Criteria cri, Model model) {
+			
+		log.info("cri : " + cri);
+		
+		List<ShoesVO> list = productService.getProductShoesList(cri);
+		log.info("ShoesList : " + list);
+		
+		if(!list.isEmpty()) {
+			
+			model.addAttribute("list",list);
+			log.info("list : " + list);
+			
+		}else {
+			model.addAttribute("listcheck","empty");
+			
+			return "product/shoes";
+		}
+		
+		model.addAttribute("pageMaker", new PageDTO(cri, productService.shoesProductGetTotal(cri)));
+		
+		return "product/shoes";
 	}
 	
 	

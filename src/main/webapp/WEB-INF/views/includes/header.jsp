@@ -138,8 +138,13 @@
 		<div class="collapse navbar-collapse justify-content-end" id="navbarMenuList">
 			<ul class="navbar-nav order-md-last ">
 				<li class="nav-item mr-3 ">
-					<form class="form-inline my-2">
-						<input class="form-control mr-sm-2" type="search" placeholder="찾아보세요!" aria-label="Search">
+					<form class="form-inline my-2" id="searchForm"  method="get">
+					<select class="form-control mr-1" name="select">
+     					<option value="C">상의</option><!-- action="/product/coat"  -->
+      					<option value="P">하의</option><!-- action="/product/pants"  -->
+      					<option value="S">신발</option><!-- action="/product/shoes"  -->
+    				</select>
+						<input class="form-control mr-sm-2" type="search" name="keyword" placeholder="찾아보세요!" aria-label="Search">
 						<button class="btn btn-outline-dark mr-5" type="submit">검색</button>
 					</form>
 				</li>
@@ -205,6 +210,19 @@
 			}
 		});//ajax
 	});//로그아웃 버튼 작동 끝
+	
+	
+	
+	
+	//상의 하의 신발검색
+	//option value="C" 일때 action="/product/coat"
+	//option value="P" 일때 action="/product/pants" 
+	//option value="S" 일때 action="/product/shoes" 
+	
+	let searchForm = $("#searchForm");
+	
+
+	
 </script>	
 	
 	

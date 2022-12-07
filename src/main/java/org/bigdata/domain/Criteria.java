@@ -1,6 +1,6 @@
 package org.bigdata.domain;
 
-import org.springframework.web.util.UriComponentsBuilder;
+
 
 import lombok.Data;
 
