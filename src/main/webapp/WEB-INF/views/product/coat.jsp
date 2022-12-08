@@ -7,6 +7,9 @@
 <!-- 바디 시작 -->
 <style>
  /* 상품 표 */
+ 
+ 
+ 
 .list_search_result{
 	width: 90%;
 	margin: auto;	
@@ -35,13 +38,10 @@
 
 .title{
 	font-size: 24px;
-	color: #3a60df;
+	color: black;
 	font-weight: 700;
 }
 
-.author{
-	font-size: 14px;
-}
 
 .info{
 	text-align: center;
@@ -102,7 +102,9 @@
 						</td>
 						<td class="detail">
 							<div class="title">
-								${coatList.coatName}
+								<a href="/product/coatDetail/${coatList.coatNumber}" style=" text-decoration-line: none; color:black" >
+									${coatList.coatName}
+								</a>
 							</div>						
 							<div class="contents" style="margin-top: 20px;">
 								${coatList.coatContents}

@@ -7,6 +7,7 @@ import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.PantsVO;
 import org.bigdata.domain.ShoesVO;
+import org.bigdata.mapper.AdminMapper;
 import org.bigdata.mapper.AttachMapper;
 import org.bigdata.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,16 @@ import lombok.extern.log4j.Log4j;
 public class ProductServiceImple implements ProductService {
 
 	@Autowired
+	private AdminMapper adminMapper;
+	
+	@Autowired
 	private AttachMapper attachMapper;
 	
 	@Autowired
 	private ProductMapper productMapper;
+
 	
+/////////////////// 상의	/////////////////////////////////
 	//상의 검색
 	@Override
 	public List<CoatVO> getProductCoatList(Criteria cri) {
@@ -49,7 +55,20 @@ public class ProductServiceImple implements ProductService {
 		log.info("coatProductGetTotal 메서드 ");
 		return productMapper.coatProductGetTotal(cri);
 	}
+	
+	//상의 정보
+	@Override
+	public CoatVO getProductCoatInfo(int coatNumber) {
+		CoatVO productCoatInfo = productMapper.getProductCoatInfo(coatNumber);
+		productCoatInfo.setImageList(adminMapper.getAttachCoatInfo(coatNumber));
+		
+		return productCoatInfo;
+	}
 
+	
+/////////////////////////// 하의 /////////////////////////////////////
+	
+	
 	//하의 검색
 	@Override
 	public List<PantsVO> getProductPantsList(Criteria cri) {
@@ -67,6 +86,15 @@ public class ProductServiceImple implements ProductService {
 		});
 		return list;
 	}
+	
+	//하의 정보
+	@Override
+	public PantsVO getProductPantsInfo(int pantsNumber) {
+		PantsVO productPantsInfo = productMapper.getProductPantsInfo(pantsNumber);
+		productPantsInfo.setImageList(adminMapper.getAttachPantsInfo(pantsNumber));
+		
+		return productPantsInfo;
+	}
 
 	//하의 총 갯수
 	@Override
@@ -75,6 +103,11 @@ public class ProductServiceImple implements ProductService {
 		return productMapper.pantsProductGetTotal(cri);
 	}
 
+	
+/////////////////////////// 신발 /////////////////////////////////////////	
+	
+	
+	
 	//신발 검색
 	@Override
 	public List<ShoesVO> getProductShoesList(Criteria cri) {
@@ -92,6 +125,16 @@ public class ProductServiceImple implements ProductService {
 		});
 		return list;
 	}
+	
+
+	//신발 정보
+	@Override
+	public ShoesVO getProductShoesInfo(int shoesNumber) {
+		ShoesVO productShoesInfo = productMapper.getProductShoesInfo(shoesNumber);
+		productShoesInfo.setImageList(adminMapper.getAttachShoesInfo(shoesNumber));
+		
+		return productShoesInfo;
+	}
 
 	//신발 총 갯수
 	@Override
@@ -99,5 +142,6 @@ public class ProductServiceImple implements ProductService {
 		log.info("shoesProductGetTotal 메서드 ");
 		return productMapper.shoesProductGetTotal(cri);
 	}
+
 
 }

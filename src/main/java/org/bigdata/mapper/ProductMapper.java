@@ -15,6 +15,9 @@ public interface ProductMapper {
 	//상의 총 갯수
 	public int coatProductGetTotal(Criteria cri);
 	
+	//상의 정보
+	public CoatVO getProductCoatInfo(int coatNumber);
+	
 	
 	//하의 검색
 	public List<PantsVO> getProductPantsList(Criteria cri);
@@ -22,10 +25,18 @@ public interface ProductMapper {
 	//하의 총 갯수
 	public int pantsProductGetTotal(Criteria cri);
 	
+	//하의 정보
+	public PantsVO getProductPantsInfo(int pantsNumber);
+	
 	
 	//신발 검색
 	public List<ShoesVO> getProductShoesList(Criteria cri);
 	
 	//신발 총 갯수
-	public int shoesProductGetTotal(Criteria cri);	
+	public int shoesProductGetTotal(Criteria cri);
+	
+	//신발 정보
+	public ShoesVO getProductShoesInfo(int shoesNumber);
+
+	
 }

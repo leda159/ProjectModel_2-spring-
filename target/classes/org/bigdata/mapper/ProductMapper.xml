@@ -38,7 +38,12 @@
 	      <if test="keyword != null">
 	      	where coatName like '%' || #{keyword} || '%'
 	      </if>
-	</select>	
+	</select>
+	
+	<!-- 상의 상품 상세보기 -->
+ 	<select id="getProductCoatInfo" resultType="org.bigdata.domain.CoatVO">
+ 		select * from shopping_coat where coatNumber = #{coatNumber}
+ 	</select>	
 	
 	
 	
@@ -76,7 +81,12 @@
 	      <if test="keyword != null">
 	      	where pantsName like '%' || #{keyword} || '%'
 	      </if>
-	</select>	
+	</select>
+	
+	<!-- 하의 상품 상세보기 -->
+ 	<select id="getProductPantsInfo" resultType="org.bigdata.domain.PantsVO">
+ 		select * from shopping_pants where pantsNumber = #{pantsNumber}
+ 	</select>		
 
 
 
@@ -117,7 +127,10 @@
 	</select>	
 
 
-
+	<!-- 신발 상품 상세보기 -->
+ 	<select id="getProductShoesInfo" resultType="org.bigdata.domain.ShoesVO">
+ 		select * from shopping_shoes where shoesNumber = #{shoesNumber}
+ 	</select>
 
 
 

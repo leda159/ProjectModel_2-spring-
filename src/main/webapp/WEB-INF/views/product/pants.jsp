@@ -39,10 +39,6 @@
 	font-weight: 700;
 }
 
-.author{
-	font-size: 14px;
-}
-
 .info{
 	text-align: center;
 }
@@ -102,7 +98,9 @@
 						</td>
 						<td class="detail">
 							<div class="title">
-								${pantsList.pantsName}
+								<a href="/product/pantsDetail/${pantsList.pantsNumber}" style=" text-decoration-line: none; color:black" >
+									${pantsList.pantsName}
+								</a>
 							</div>						
 							<div class="contents" style="margin-top: 20px;">
 								${pantsList.pantsContents}

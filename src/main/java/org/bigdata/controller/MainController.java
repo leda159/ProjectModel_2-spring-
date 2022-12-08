@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -105,6 +106,17 @@ public class MainController {
 		return "product/coat";
 	}
 	
+	//상의 상품 상세
+	@GetMapping("product/coatDetail/{coatNumber}")
+	public String productCoatDetail(@PathVariable("coatNumber") int coatNumber, Model model) {
+		
+		log.info("productCoatDetail().....");
+		
+		model.addAttribute("productCoatInfo",productService.getProductCoatInfo(coatNumber));
+		
+		return "product/coatDetail";
+	}
+	
 	
 
 	
@@ -144,6 +156,17 @@ public class MainController {
 		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachPantsList(pantsNumber),HttpStatus.OK);
 	}
 	
+	//하의 상품 상세
+	@GetMapping("product//pantsDetail/{pantsNumber}")
+	public String productPantsDetail(@PathVariable("pantsNumber") int pantsNumber, Model model) {
+		
+		log.info("productPantsDetail().....");
+		
+		model.addAttribute("productPantsInfo",productService.getProductPantsInfo(pantsNumber));
+		
+		return "product//pantsDetail";
+	}
+	
 	
 
 ///////////////////////////// 신발 /////////////////////////	
@@ -181,6 +204,17 @@ public class MainController {
 		log.info("getAttachShoesList....." + shoesNumber);
 		
 		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachShoesList(shoesNumber),HttpStatus.OK);
+	}
+	
+	//신발 상품 상세
+	@GetMapping("product//shoesDetail/{shoesNumber}")
+	public String productShoesDetail(@PathVariable("shoesNumber") int shoesNumber, Model model) {
+		
+		log.info("productShoesDetail().....");
+		
+		model.addAttribute("productShoesInfo",productService.getProductShoesInfo(shoesNumber));
+		
+		return "product//shoesDetail";
 	}
 	
 	
