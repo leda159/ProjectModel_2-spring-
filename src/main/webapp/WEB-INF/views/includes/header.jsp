@@ -61,6 +61,34 @@
       width: 60%;
       margin: auto;
   }
+  
+  
+/* 페이지 버튼 인터페이스 */ 
+.pageMaker_wrap{
+	text-align: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+.pageMaker{
+    list-style: none;
+    display: inline-block;
+}	
+.pageMaker_button {
+    float: left;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 10px;
+}
+
+
+.pageMaker_button a:link {color: black;}
+.pageMaker_button a:visited {color: black;}
+.pageMaker_button a:active {color: black;}
+.pageMaker_button a:hover {color: black;}
+	{
+    color: #ccc;
+}  
 
 </style>
 

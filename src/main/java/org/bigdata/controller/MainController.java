@@ -92,7 +92,7 @@ public class MainController {
 		if(!coatList.isEmpty()) {
 			
 			model.addAttribute("coatList",coatList);
-			log.info("coatList : " + coatList);
+			log.info("CoatList : " + coatList);
 			
 		}else {
 			model.addAttribute("coatListcheck","empty");

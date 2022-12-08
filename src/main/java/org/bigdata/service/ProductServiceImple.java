@@ -2,10 +2,12 @@ package org.bigdata.service;
 
 import java.util.List;
 
+import org.bigdata.domain.AttachImageVO;
 import org.bigdata.domain.CoatVO;
 import org.bigdata.domain.Criteria;
 import org.bigdata.domain.PantsVO;
 import org.bigdata.domain.ShoesVO;
+import org.bigdata.mapper.AttachMapper;
 import org.bigdata.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +19,28 @@ import lombok.extern.log4j.Log4j;
 public class ProductServiceImple implements ProductService {
 
 	@Autowired
+	private AttachMapper attachMapper;
+	
+	@Autowired
 	private ProductMapper productMapper;
 	
 	//상의 검색
 	@Override
 	public List<CoatVO> getProductCoatList(Criteria cri) {
 		log.info("getProductCoatList 메서드 ");
-		return productMapper.getProductCoatList(cri);
+		
+		List<CoatVO> list = productMapper.getProductCoatList(cri);
+		
+		list.forEach(coat -> {
+			
+			int coatNumber = coat.getCoatNumber();
+			
+			List<AttachImageVO> imageList = attachMapper.getAttachCoatList(coatNumber);
+			
+			coat.setImageList(imageList);	
+		});
+		
+		return list;
 	}
 
 	//상의 총 갯수
@@ -37,7 +54,18 @@ public class ProductServiceImple implements ProductService {
 	@Override
 	public List<PantsVO> getProductPantsList(Criteria cri) {
 		log.info("getProductPantsList 메서드 ");
-		return productMapper.getProductPantsList(cri);
+		
+		List<PantsVO> list = productMapper.getProductPantsList(cri);
+		
+		list.forEach(coat -> {
+			
+			int pantsNumber = coat.getPantsNumber();
+			
+			List<AttachImageVO> imageList = attachMapper.getAttachPantsList(pantsNumber);
+			
+			coat.setImageList(imageList);	
+		});
+		return list;
 	}
 
 	//하의 총 갯수
@@ -51,7 +79,18 @@ public class ProductServiceImple implements ProductService {
 	@Override
 	public List<ShoesVO> getProductShoesList(Criteria cri) {
 		log.info("getProductShoesList 메서드 ");
-		return productMapper.getProductShoesList(cri);
+		
+		List<ShoesVO> list = productMapper.getProductShoesList(cri);
+		
+		list.forEach(coat -> {
+			
+			int shoesNumber = coat.getShoesNumber();
+			
+			List<AttachImageVO> imageList = attachMapper.getAttachShoesList(shoesNumber);
+			
+			coat.setImageList(imageList);	
+		});
+		return list;
 	}
 
 	//신발 총 갯수

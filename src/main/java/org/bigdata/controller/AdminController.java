@@ -78,7 +78,7 @@ public class AdminController {
 			  model.addAttribute("coatList",coatList);
 		  }else{
 			  model.addAttribute("coatListCheck","empty");
-			  return;
+			  return ;
 		  }
 	  
 		  //페이지 이동 인터페이스 데이터
