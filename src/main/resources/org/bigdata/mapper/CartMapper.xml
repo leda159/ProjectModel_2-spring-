@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="org.bigdata.mapper.CartMapper">
+    
+    <!-- 상의 카트 추가 -->
+    <insert id="addCartCoat">
+    
+    	insert into shopping_cart(cartId,memberId, coatNumber, coatCount)
+    	values(SEQ_CART.nextval,#{memberId}, #{coatNumber}, #{coatCount})
+    	
+    </insert>
+    
+    <!-- 상의 카트 삭제 -->
+    <delete id="deleteCartCoat">
+    
+    	delete from shopping_cart where cartId = #{cartId}
+    	
+    </delete>
+    
+    <!-- 상의 카트 수량 수정 -->
+    <update id="modifyCountCoat">
+    
+    	update shopping_cart set coatCount =#{coatCount} where cartId =#{cartId}
+    	
+    </update>
+    
+    <!-- 상의 카트 목록 -->
+    <select id="getCartCoat" resultType="org.bigdata.domain.CartDTO">
+    
+    	select a.cartId, a.memberId, a.coatNumber, a.coatCount, b.coatName, b.coatPrice, b.coatDiscount
+    	from shopping_cart a left outer join shopping_coat b on a.coatNumber = b.coatNumber
+    	where memberId = #{memberId}
+    
+    </select>
+    
+    <!-- 상의 카트 확인 -->
+    <select id="checkCartCoat" resultType="org.bigdata.domain.CartDTO">
+    
+    	select * from shopping_cart
+    	where memberId = #{memberId} and coatNumber = #{coatNumber}
+    
+    </select>
+    
+    
+
+
+    
+    <!-- 하의 카트 추가 -->
+    <insert id="addCartPants">
+    
+    	insert into shopping_cart(cartId,memberId, pantsNumber, pantsCount)
+    	values(SEQ_CART.nextval,#{memberId}, #{pantsNumber}, #{pantsCount})
+    	
+    </insert>
+    
+    <!-- 하의 카트 삭제 -->
+    <delete id="deleteCartPants">
+    
+    	delete from shopping_cart where cartId = #{cartId}
+    	
+    </delete>
+    
+    <!-- 하의 카트 수량 수정 -->
+    <update id="modifyCountPants">
+    
+    	update shopping_cart set pantsCount =#{pantsCount} where cartId =#{cartId}
+    	
+    </update>
+    
+    <!-- 하의 카트 목록 -->
+    <select id="getCartPants" resultType="org.bigdata.domain.CartDTO">
+    
+    	select a.cartId, a.memberId, a.pantsNumber, a.pantsCount, b.pantsName, b.pantsPrice, b.pantsDiscount
+    	from shopping_cart a left outer join shopping_pants b on a.pantsNumber = b.pantsNumber
+    	where memberId = #{memberId}
+    
+    </select>
+    
+    <!-- 하의 카트 확인 -->
+    <select id="checkCartPants" resultType="org.bigdata.domain.CartDTO">
+    
+    	select * from shopping_cart
+    	where memberId = #{memberId} and pantsNumber = #{pantsNumber}
+    
+    </select>
+    
+    
+    
+    
+
+    
+    
+
+    <!-- 신발 카트 추가 -->
+    <insert id="addCartShoes">
+    
+    	insert into shopping_cart(cartId,memberId, shoesNumber, shoesCount)
+    	values(SEQ_CART.nextval,#{memberId}, #{shoesNumber}, #{shoesCount})
+    	
+    </insert>
+    
+    <!-- 신발 카트 삭제 -->
+    <delete id="deleteCartShoes">
+    
+    	delete from shopping_cart where cartId = #{cartId}
+    	
+    </delete>
+    
+    <!-- 신발 카트 수량 수정 -->
+    <update id="modifyCountShoes">
+    
+    	update shopping_cart set shoesCount =#{shoesCount} where cartId =#{cartId}
+    	
+    </update>
+    
+    <!-- 신발 카트 목록 -->
+    <select id="getCartShoes" resultType="org.bigdata.domain.CartDTO">
+    
+    	select a.cartId, a.memberId, a.shoesNumber, a.shoesCount, b.shoesName, b.shoesPrice, b.shoesDiscount
+    	from shopping_cart a left outer join shopping_shoes b on a.shoesNumber = b.shoesNumber
+    	where memberId = #{memberId}
+    
+    </select>
+    
+    <!-- 신발 카트 확인 -->
+    <select id="checkCartShoes" resultType="org.bigdata.domain.CartDTO">
+    
+    	select * from shopping_cart
+    	where memberId = #{memberId} and shoesNumber = #{shoesNumber}
+    
+    </select>    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </mapper>
