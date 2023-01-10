@@ -27,7 +27,7 @@
 				<a class="text-secondary font-weight-light font-italic" href="#">이용약관</a>
 			</div>
 			<div class="col-lg-3 text-left mt-3">
-				<p class="text-black ml-5">&copy; Copyright 2022</p>
+				<p class="text-black ml-5">&copy; Copyright 2023</p>
 			</div>
 			<div class="col-lg-3 text-center mt-2">
 					<a href="#"><i class="bi bi-facebook text-primary mr-3"></i></a>

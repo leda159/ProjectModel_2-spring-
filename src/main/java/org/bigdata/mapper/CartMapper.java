@@ -10,7 +10,7 @@ public interface CartMapper {
 	
 	//카트 추가
 	//row 반환 성공 : 1 ,  반환 실패 : 0 
-	public int addCartCoat(CartDTO cart);
+	public int addCartCoat(CartDTO cart) throws Exception;
 	
 	//카트 삭제
 	public int deleteCartCoat(int cartId);

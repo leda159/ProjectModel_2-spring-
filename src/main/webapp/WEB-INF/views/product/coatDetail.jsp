@@ -122,7 +122,7 @@
 
 .product_content{
 	width: 80%;
-	margin-left:25px;	
+	margin-left:17px;	
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
