@@ -4,6 +4,12 @@ import org.bigdata.domain.CartDTO;
 
 public interface CartService {
 
-	//장바구니 추가
-	public int addCart(CartDTO cart);
+	//상의 장바구니 추가
+	public int addCartCoat(CartDTO cart);
+	
+	//하의 장바구니 추가
+	public int addCartPants(CartDTO cart);
+		
+	//신발 장바구니 추가
+	public int addCartShoes(CartDTO cart);
 }

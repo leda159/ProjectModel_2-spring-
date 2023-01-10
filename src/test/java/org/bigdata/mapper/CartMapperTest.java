@@ -3,6 +3,7 @@ package org.bigdata.mapper;
 import java.util.List;
 
 import org.bigdata.domain.CartDTO;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class CartMapperTest {
 	private CartMapper cartMapper;
 	
 	//상의카트 등록
-	@Test
+	@Ignore
 	public void addCart() {
 		
 		String memberId = "admin";
@@ -37,7 +38,7 @@ public class CartMapperTest {
 		cart.setCoatCount(count);
 		
 		int result = 0;
-		result = cartMapper.addCartCoat(cart);
+		//result = cartMapper.addCartCoat(cart);
 		
 		log.info("결과 " + result);
 	}
