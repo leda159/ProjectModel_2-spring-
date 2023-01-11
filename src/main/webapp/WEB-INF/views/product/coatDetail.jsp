@@ -155,6 +155,9 @@
 					판매가 : <span class="discount_price_number"><fmt:formatNumber value="${productCoatInfo.coatPrice - (productCoatInfo.coatPrice*productCoatInfo.coatDiscount)}" pattern="#,### 원" /></span> 
 						[ <fmt:formatNumber value="${productCoatInfo.coatDiscount*100}" pattern="###" />%
 				 		 &nbsp;<fmt:formatNumber value="${productCoatInfo.coatPrice*productCoatInfo.coatDiscount}" pattern="#,### 원" /> 할인]
+				</div>
+				<div>
+					적립 포인트 : <span class="point_span"></span>원
 				</div>							
 			</div>			
 			<div class="product_content">
@@ -202,6 +205,12 @@ $(document).ready(function(){
 			$(this).find("img").attr('src', '/resources/images/No_Image.png');
 		}
 	});
+	
+	//포인트 삽입
+	let salePrice = "${productCoatInfo.coatPrice-(productCoatInfo.coatPrice * productCoatInfo.coatDiscount)}"
+	let point = salePrice * 0.05;
+	point = Math.floor(point);
+	$(".point_span").text(point);
 });
 
 //수량 버튼 조작

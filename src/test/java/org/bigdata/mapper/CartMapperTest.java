@@ -78,7 +78,7 @@ public class CartMapperTest {
 		
 		for(CartDTO cart : list) {
 			log.info(cart);
-			cart.intiSaleTotal();
+			cart.coatSaleTotal();
 			log.info("init cart :" +cart);
 		}
 	}

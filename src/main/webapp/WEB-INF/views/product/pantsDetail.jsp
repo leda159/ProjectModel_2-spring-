@@ -154,7 +154,10 @@
 					판매가 : <span class="discount_price_number"><fmt:formatNumber value="${productPantsInfo.pantsPrice - (productPantsInfo.pantsPrice*productPantsInfo.pantsDiscount)}" pattern="#,### 원" /></span> 
 						[ <fmt:formatNumber value="${productPantsInfo.pantsDiscount*100}" pattern="###" />%
 				 		 &nbsp;<fmt:formatNumber value="${productPantsInfo.pantsPrice*productPantsInfo.pantsDiscount}" pattern="#,### 원" /> 할인]
-				</div>							
+				</div>
+				<div>
+					적립 포인트 : <span class="point_span"></span>원
+				</div>												
 			</div>			
 			<div class="product_content">
 				상품내용 : ${productPantsInfo.pantsContents }
@@ -201,6 +204,12 @@ $(document).ready(function(){
 			$(this).find("img").attr('src', '/resources/images/No_Image.png');
 		}
 	});
+	
+	//포인트 삽입
+	let salePrice = "${productPantsInfo.pantsPrice-(productPantsInfo.pantsPrice * productPantsInfo.pantsDiscount)}"
+	let point = salePrice * 0.05;
+	point = Math.floor(point);
+	$(".point_span").text(point);	
 });
 
 //수량 버튼 조작

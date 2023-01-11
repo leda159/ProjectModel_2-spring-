@@ -1,5 +1,7 @@
 package org.bigdata.service;
 
+import java.util.List;
+
 import org.bigdata.domain.CartDTO;
 import org.bigdata.mapper.CartMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,5 +68,38 @@ public class CartServiceImpl implements CartService {
 		} catch (Exception e) {
 			return 0;		
 		}
+	}
+
+	@Override
+	public List<CartDTO> getCoatCartList(String memberId) {
+		
+		List<CartDTO> cart = cartMapper.getCartCoat(memberId);
+		
+		for(CartDTO dto : cart) {
+			dto.coatSaleTotal();
+		}
+		return cart;
+	}
+
+	@Override
+	public List<CartDTO> getPantsCartList(String memberId) {
+		
+		List<CartDTO> cart = cartMapper.getCartCoat(memberId);
+		
+		for(CartDTO dto : cart) {
+			dto.pantsSaleTotal();
+		}
+		return cart;
+	}
+
+	@Override
+	public List<CartDTO> getShoesCartList(String memberId) {
+		
+		List<CartDTO> cart = cartMapper.getCartCoat(memberId);
+		
+		for(CartDTO dto : cart) {
+			dto.shoesSaleTotal();
+		}
+		return cart;
 	}
 }

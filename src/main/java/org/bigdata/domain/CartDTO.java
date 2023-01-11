@@ -66,21 +66,40 @@ public class CartDTO {
 	private int shoesTotalPrice;
 	
 	
+	//포인트 관련
+	private int coatPoint;
+	private int coatTotalPoint;
+	
+	private int pantsPoint;
+	private int pantsTotalPoint;
+	
+	private int shoesPoint;
+	private int shoesTotalPoint;
+	
+
 	
 	
-	public void intiSaleTotal() {
+	
+	
+	public void coatSaleTotal() {
 		this.coatSalePrice = (int) (this.coatPrice * (1-this.coatDiscount));
 		this.coatTotalPrice = this.coatSalePrice * this.coatCount;
+		this.coatPoint = (int)(Math.floor(this.coatSalePrice * 0.05));
+		this.coatTotalPrice = this.coatPoint * this.coatCount;
 	}
 	
-	public void pantsTotalPrice() {
+	public void pantsSaleTotal() {
 		this.pantsSalePrice = (int) (this.pantsPrice * (1-this.pantsDiscount));
 		this.pantsTotalPrice = this.pantsSalePrice * this.coatCount;
+		this.pantsPoint = (int)(Math.floor(this.pantsSalePrice * 0.05));
+		this.pantsTotalPrice = this.pantsPoint * this.pantsCount;
 	}
 	
-	public void shoesTotalPrice() {
+	public void shoesSaleTotal() {
 		this.shoesSalePrice = (int) (this.shoesPrice * (1-this.shoesDiscount));
 		this.shoesTotalPrice = this.shoesSalePrice * this.shoesCount;
+		this.shoesPoint = (int)(Math.floor(this.shoesSalePrice * 0.05));
+		this.shoesTotalPrice = this.shoesPoint * this.shoesCount;
 	}
 	
 }
