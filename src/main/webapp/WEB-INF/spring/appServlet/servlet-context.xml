@@ -35,9 +35,9 @@
 		</interceptor>
 		<interceptor>
 			<mapping path="/cart/**"/>
-			<exclude-mapping path="/cart/Coatadd"/>
-			<exclude-mapping path="/cart/Pantsadd"/>
-			<exclude-mapping path="/cart/Shoesadd"/>
+			<exclude-mapping path="/cart/CoatAdd"/>
+			<exclude-mapping path="/cart/PantsAdd"/>
+			<exclude-mapping path="/cart/ShoesAdd"/>
 			<beans:bean id="CartIntreceptor" class="org.bigdata.interceptor.CartIntreceptor"></beans:bean>
 		</interceptor>
 	</interceptors>

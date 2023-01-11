@@ -17,7 +17,7 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 
-	@PostMapping("/cart/Coatadd")
+	@PostMapping("/cart/CoatAdd")
 	@ResponseBody
 	//상의
 	public String addCartCoatPOST(CartDTO cart, HttpServletRequest request) {
@@ -35,7 +35,7 @@ public class CartController {
 		return result + "";
 	}
 	
-	@PostMapping("/cart/Pantsadd")
+	@PostMapping("/cart/PantsAdd")
 	@ResponseBody
 	//하의
 	public String addCartPantsPOST(CartDTO cart, HttpServletRequest request) {
@@ -53,7 +53,7 @@ public class CartController {
 		return result + "";
 	}
 	
-	@PostMapping("/cart/Shoesadd")
+	@PostMapping("/cart/ShoesAdd")
 	@ResponseBody
 	//신발
 	public String addCartShoesPOST(CartDTO cart, HttpServletRequest request) {
