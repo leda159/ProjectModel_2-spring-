@@ -157,7 +157,7 @@
 			<ul class="navbar-nav mr-auto">
 				<li>
 					<a class="" href="#"><i class="bi bi-suit-heart-fill mr-4 text-danger"></i></a>
-					<a class="" href="#"><i class="bi bi-cart mr-4 text-dark"></i></a>
+					<a class="" href="/cart/${member.memberId}"><i class="bi bi-cart mr-4 text-dark"></i></a>
 					<a class="" href="#"><i class="bi bi-truck text-dark"></i></a>
 					
 				</li>

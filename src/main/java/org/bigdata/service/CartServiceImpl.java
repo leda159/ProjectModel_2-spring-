@@ -84,7 +84,7 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public List<CartDTO> getPantsCartList(String memberId) {
 		
-		List<CartDTO> cart = cartMapper.getCartCoat(memberId);
+		List<CartDTO> cart = cartMapper.getCartPants(memberId);
 		
 		for(CartDTO dto : cart) {
 			dto.pantsSaleTotal();
@@ -95,7 +95,7 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public List<CartDTO> getShoesCartList(String memberId) {
 		
-		List<CartDTO> cart = cartMapper.getCartCoat(memberId);
+		List<CartDTO> cart = cartMapper.getCartShoes(memberId);
 		
 		for(CartDTO dto : cart) {
 			dto.shoesSaleTotal();

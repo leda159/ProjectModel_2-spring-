@@ -8,6 +8,9 @@ import org.bigdata.domain.MemberVO;
 import org.bigdata.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,6 +37,7 @@ public class CartController {
 		
 		return result + "";
 	}
+	
 	
 	@PostMapping("/cart/PantsAdd")
 	@ResponseBody
@@ -69,5 +73,15 @@ public class CartController {
 		int result = cartService.addCartShoes(cart);
 		
 		return result + "";
+	}
+	
+	@GetMapping("/cart/{memberId}")
+	public String cartPageGET(@PathVariable("memberId") String memberId, Model model) {
+		
+		model.addAttribute("cartCoatInfo", cartService.getCoatCartList(memberId));
+		model.addAttribute("cartPantsInfo", cartService.getPantsCartList(memberId));
+		model.addAttribute("cartShoesInfo", cartService.getShoesCartList(memberId));
+		
+		return "/cart";
 	}		
 }
